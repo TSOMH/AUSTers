@@ -17,10 +17,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+
         NavController navController = Navigation.findNavController(this,R.id.fragment);
-        AppBarConfiguration configuration = new AppBarConfiguration.Builder(bottomNavigationView.getMenu()).build();
-        NavigationUI.setupActionBarWithNavController(this,navController,configuration);
+        AppBarConfiguration configuration = new AppBarConfiguration.Builder(bottomNavigationView.getMenu()).build(); //此处注销依然可以正常显示navigation?
+        //NavigationUI.setupActionBarWithNavController(this,navController,configuration);
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
+
 
     }
 }

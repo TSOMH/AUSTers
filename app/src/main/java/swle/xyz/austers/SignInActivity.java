@@ -22,6 +22,7 @@ public class SignInActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signin);
 
+
         button_sigin = findViewById(R.id.button_sign_in);
 
 
@@ -29,8 +30,9 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
+                intent.setClass(SignInActivity.this,MainActivity.class);
                 startActivity(intent);
-
             }
         });
     }

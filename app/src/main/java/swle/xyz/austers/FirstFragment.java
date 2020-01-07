@@ -3,28 +3,30 @@ package swle.xyz.austers;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 public class FirstFragment extends Fragment {
 
     private FirstViewModel mViewModel;
+
+
+
+
+
 
     public static FirstFragment newInstance() {
         return new FirstFragment();
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.first_fragment, null);
 
-        return inflater.inflate(R.layout.first_fragment, container, false);
+        return view;
     }
 
     @Override
@@ -33,5 +35,9 @@ public class FirstFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(FirstViewModel.class);
         // TODO: Use the ViewModel
     }
+
+
+
+
 
 }

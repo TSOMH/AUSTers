@@ -1,4 +1,4 @@
-package swle.xyz.austers;
+package swle.xyz.austers.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import swle.xyz.austers.viewmodel.LoseAndFoundViewModel;
+import swle.xyz.austers.R;
+
 public class LoseAndFoundFragment extends Fragment {
 
     private LoseAndFoundViewModel mViewModel;
@@ -23,7 +26,8 @@ public class LoseAndFoundFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.lose_and_found_fragment, container, false);
+        View view = inflater.inflate(R.layout.lose_and_found_fragment, container, false);
+        return view;
     }
 
     @Override

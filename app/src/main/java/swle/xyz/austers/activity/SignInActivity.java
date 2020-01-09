@@ -1,4 +1,4 @@
-package swle.xyz.austers;
+package swle.xyz.austers.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import swle.xyz.austers.R;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class SignInActivity extends AppCompatActivity {
         button_sigin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
                 intent.setClass(SignInActivity.this,MainActivity.class);
                 startActivity(intent);

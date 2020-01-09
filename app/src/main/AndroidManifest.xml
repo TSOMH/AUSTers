@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="swle.xyz.austers">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SignInActivity"
-            >
-
+        <activity android:name=".activity.BannerThirdViewActivity"></activity>
+        <activity android:name=".activity.BannerScondViewActivity" />
+        <activity android:name=".activity.BannerFirstViewActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

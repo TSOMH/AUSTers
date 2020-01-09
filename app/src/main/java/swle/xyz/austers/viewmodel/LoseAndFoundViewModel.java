@@ -1,4 +1,4 @@
-package swle.xyz.austers;
+package swle.xyz.austers.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 

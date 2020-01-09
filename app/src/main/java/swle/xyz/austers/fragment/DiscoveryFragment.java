@@ -1,4 +1,4 @@
-package swle.xyz.austers;
+package swle.xyz.austers.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,24 +12,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SettingFragment extends Fragment {
+import swle.xyz.austers.viewmodel.DiscoveryViewModel;
+import swle.xyz.austers.R;
 
-    private SettingViewModel mViewModel;
+public class DiscoveryFragment extends Fragment {
 
-    public static SettingFragment newInstance() {
-        return new SettingFragment();
+    private DiscoveryViewModel mViewModel;
+
+    public static DiscoveryFragment newInstance() {
+        return new DiscoveryFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.setting_fragment, container, false);
+        View view = inflater.inflate(R.layout.discovery_fragment, container, false);
+        return view;
+
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(SettingViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(DiscoveryViewModel.class);
         // TODO: Use the ViewModel
     }
 

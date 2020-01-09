@@ -89,26 +89,7 @@
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/button_firstbanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center"
-        android:text="FirstBannerview" />
 
-    <Button
-        android:id="@+id/button_scondbanenrview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center"
-        android:text="ScondBannerView" />
-
-    <Button
-        android:id="@+id/button_thirdbannerview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ThirdBannerView"
-        android:layout_gravity="bottom"/>
 
 
 

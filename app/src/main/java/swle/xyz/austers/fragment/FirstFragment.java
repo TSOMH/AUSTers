@@ -65,9 +65,7 @@ public class FirstFragment extends Fragment {
     private int currentItem;
     //记录上一次点的位置
     private int oldPosition = 0;
-    private Button button1;
-    private Button button2;
-    private Button button3;
+
 
     private ClickableViewPager viewpager;
 
@@ -94,9 +92,7 @@ public class FirstFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.first_fragment, container,false);
-        button1=view.findViewById(R.id.button_firstbanner);
-        button2=view.findViewById(R.id.button_scondbanenrview);
-        button3=view.findViewById(R.id.button_thirdbannerview);
+
         bnv=view.findViewById(R.id.bottomNavigationView);
 
 
@@ -113,35 +109,6 @@ public class FirstFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(FirstViewModel.class);
         // TODO: Use the ViewModel
-
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),BannerFirstViewActivity.class);
-                startActivity(intent);
-
-
-
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), BannerScondViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-//        banner.setOnItemClickListener(new ClickableViewPager.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                Intent intent = new Intent(getActivity(), BannerScondViewActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
         banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,7 +204,6 @@ public class FirstFragment extends Fragment {
 
         adapter = new ViewPagerAdapter();
         banner.setAdapter(adapter);
-
         banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Nullable
@@ -347,11 +313,6 @@ public class FirstFragment extends Fragment {
 
 
     }
-
-
-
-
-
 
 
 }

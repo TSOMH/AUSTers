@@ -129,11 +129,7 @@ public class FirstFragment extends Fragment {
                             if (item == 0) {
 //                                Intent intent = new Intent(getActivity(), BannerFirstViewActivity.class);
 //                                startActivity(intent);
-                                Log.d(TAG,"999");
-
                                 fl.removeAllViewsInLayout();
-
-
                                 getActivity().getSupportFragmentManager()
                                         .beginTransaction()
                                         .replace(R.id.root, new BannerFirstViewFragment(),null)

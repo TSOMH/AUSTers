@@ -2,8 +2,6 @@ package swle.xyz.austers.fragment;
 
 import androidx.annotation.NonNull;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
@@ -21,17 +19,16 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -42,11 +39,9 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import swle.xyz.austers.activity.BannerFirstViewActivity;
 import swle.xyz.austers.activity.BannerScondViewActivity;
 import swle.xyz.austers.activity.BannerThirdViewActivity;
-import swle.xyz.austers.activity.MainActivity;
-import swle.xyz.austers.myinterface.RegisterTrigger;
+import swle.xyz.austers.activity.ScoreActivity;
 import swle.xyz.austers.viewmodel.FirstViewModel;
 import swle.xyz.austers.R;
-import swle.xyz.austers.viewpager.ClickableViewPager;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
@@ -55,34 +50,33 @@ public class FirstFragment extends Fragment {
 
     private FirstViewModel mViewModel;
     private View view;
-    private TextView title;
     private ViewPagerAdapter adapter;
     private ScheduledExecutorService scheduledExecutorService;
-    private ViewPager banner;
+    private ViewPager bannerViewPager;
 //    private ClickableViewPager banner;
     private List<ImageView> images;
     private List<View> dots;
     private int currentItem;
     //记录上一次点的位置
     private int oldPosition = 0;
+    private ImageButton button_score;
+    private  Calendar time;
+
+    private BottomNavigationView bnv;
+    public Date dt;
+    private int day;
 
 
-    private ClickableViewPager viewpager;
-
-    private FrameLayout fl;
-    public BottomNavigationView bnv;
 
 
-
-
-    public String[] imageurl = new String[]{
+    private String[] imageurl = new String[]{
             "https://api.dujin.org/bing/1920.php",
             "https://api.dujin.org/bing/1920.php",
             "https://api.dujin.org/bing/1920.php"
     };
 
 
-    public static FirstFragment newInstance() {
+    private static FirstFragment newInstance() {
         return new FirstFragment();
     }
 
@@ -94,10 +88,11 @@ public class FirstFragment extends Fragment {
         view = inflater.inflate(R.layout.first_fragment, container,false);
 
         bnv=view.findViewById(R.id.bottomNavigationView);
+        button_score=view.findViewById(R.id.imageButtonScore);
+        bannerViewPager=view.findViewById(R.id.bannerview);
 
 
-        fl = view.findViewById(R.id.root);
-        setView();
+
         return view;
     }
 
@@ -107,34 +102,31 @@ public class FirstFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        setView();
+        time = Calendar.getInstance();
         mViewModel = ViewModelProviders.of(this).get(FirstViewModel.class);
         // TODO: Use the ViewModel
-        banner.setOnClickListener(new View.OnClickListener() {
+        bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
+            int flag = 0 ;
             @Override
-            public void onClick(View v) {
-                int item = banner.getCurrentItem();
-                if(item==0){
-                    Log.d(TAG,"111");
-                }
-            }
-        });
-
-
-
-            banner.setOnTouchListener(new View.OnTouchListener(){
-                @Override
-                  public boolean onTouch(View v, MotionEvent event) {
-                    if(event.getAction()==MotionEvent.ACTION_DOWN){
-                        int item = banner.getCurrentItem();
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        flag = 0 ;
+                        Log.d(TAG,"ACTION_down");
+                        break ;
+                    case MotionEvent.ACTION_MOVE:
+                        flag = 1 ;
+                        Log.d(TAG,"ACTION_move");
+                        break ;
+                    case  MotionEvent.ACTION_UP :
+                        Log.d(TAG,"ACTION_up");
+                        if (flag == 0) {
+                            int item = bannerViewPager.getCurrentItem();
                             if (item == 0) {
-//                                Intent intent = new Intent(getActivity(), BannerFirstViewActivity.class);
-//                                startActivity(intent);
-                                fl.removeAllViewsInLayout();
-                                getActivity().getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.root, new BannerFirstViewFragment(),null)
-                                        .addToBackStack(null)
-                                        .commit();
+                                Intent intent = new Intent(getActivity(), BannerFirstViewActivity.class);
+                                startActivity(intent);
                             } else if (item == 1) {
                                 Intent intent = new Intent(getActivity(), BannerScondViewActivity.class);
                                 startActivity(intent);
@@ -142,29 +134,30 @@ public class FirstFragment extends Fragment {
                                 Intent intent = new Intent(getActivity(), BannerThirdViewActivity.class);
                                 startActivity(intent);
                             }
-                    }
-                    return false;
+                        }
+                        break ;
+
+
+                }
+                return false;
             }
-            });
+        });
+
+        button_score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ScoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
-
-
-
-
-
-
-
     private void setView() {
-          banner=view.findViewById(R.id.bannerview);
 
         MultiTransformation<android.graphics.Bitmap> multi = new MultiTransformation<>(
 //                new BlurTransformation(25),
                 new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
-
-
-
-
 
         //        //显示的图片
         images = new ArrayList<>();
@@ -172,6 +165,18 @@ public class FirstFragment extends Fragment {
             ImageView imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 //            imageView.setBackgroundResource(imageIds[i]);
+            time = Calendar.getInstance();
+            day=time.get(Calendar.DAY_OF_MONTH);
+
+            if(day!=time.get(Calendar.DAY_OF_MONTH)){
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Glide.get(getActivity()).clearDiskCache();
+                    }
+                }).start();
+            }
+
             Glide.with(this)
                     .load(imageurl[i])
                     .apply(bitmapTransform(multi))
@@ -190,8 +195,6 @@ public class FirstFragment extends Fragment {
         dots.add(view.findViewById(R.id.dot_1));
         dots.add(view.findViewById(R.id.dot_2));
 //
-
-
 //        dots.add(view.findViewById(R.id.dot_3));
 //        dots.add(view.findViewById(R.id.dot_4));
 
@@ -199,8 +202,8 @@ public class FirstFragment extends Fragment {
 //        title.setText(titles[0]);
 
         adapter = new ViewPagerAdapter();
-        banner.setAdapter(adapter);
-        banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        bannerViewPager.setAdapter(adapter);
+        bannerViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Nullable
             @Override
@@ -292,10 +295,8 @@ public class FirstFragment extends Fragment {
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            banner.setCurrentItem(currentItem);
+            bannerViewPager.setCurrentItem(currentItem);
         }
-
-        ;
     };
 
     @Override

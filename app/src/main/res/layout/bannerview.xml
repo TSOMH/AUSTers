@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:layout_marginTop="3dip"
     android:orientation="horizontal">
-
-
     <ImageView
         android:id="@+id/no"
         android:layout_width="10dp"

@@ -52,7 +52,7 @@ public class ScoreActivity extends AppCompatActivity {
     final OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .cookieJar(new CookieJar() {
                 @Override
-                public void saveFromResponse(HttpUrl httpUrl, List<Cookie> list) {
+                public void saveFromResponse(@NotNull HttpUrl httpUrl, List<Cookie> list) {
                     cookieStore.put(httpUrl.host(), list);
                 }
 

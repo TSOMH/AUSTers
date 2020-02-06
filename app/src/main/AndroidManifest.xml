@@ -21,7 +21,7 @@
         <activity android:name=".activity.BannerFirstViewActivity"
             android:parentActivityName=".activity.MainActivity">
 
-        </activity>>
+        </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignInActivity">
             <intent-filter>

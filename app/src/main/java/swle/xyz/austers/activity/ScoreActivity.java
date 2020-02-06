@@ -42,11 +42,28 @@ public class ScoreActivity extends AppCompatActivity {
     private Button button_login;
 
     public String string_yan;
-    public String html1;
+    public String html1,html2;
     private String password_encrypted;
     String url="http://jwgl.aust.edu.cn/eams/login.action";
 
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+
+    //生产okHttp客户端
+    final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .cookieJar(new CookieJar() {
+                @Override
+                public void saveFromResponse(HttpUrl httpUrl, List<Cookie> list) {
+                    cookieStore.put(httpUrl.host(), list);
+                }
+
+                @Override
+                public List<Cookie> loadForRequest(HttpUrl httpUrl) {
+                    List<Cookie> cookies = cookieStore.get(httpUrl.host());
+                    return cookies != null ? cookies : new ArrayList<Cookie>();
+                }
+            })
+            .build();
+
 
 
 
@@ -68,30 +85,18 @@ public class ScoreActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+
+
+
+
+
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
 
-
-                OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                        .cookieJar(new CookieJar() {
-                            @Override
-                            public void saveFromResponse(HttpUrl httpUrl, List<Cookie> list) {
-                                cookieStore.put(httpUrl.host(), list);
-                            }
-
-                            @Override
-                            public List<Cookie> loadForRequest(HttpUrl httpUrl) {
-                                List<Cookie> cookies = cookieStore.get(httpUrl.host());
-                                return cookies != null ? cookies : new ArrayList<Cookie>();
-                            }
-                        })
-                        .build();
-
-
-                //获取加密部分
+                //获取"盐"
                 Request request = new Request.Builder()
                         .url(url)
                         .build();
@@ -109,8 +114,39 @@ public class ScoreActivity extends AppCompatActivity {
                         getYan();
 //                        password_encrypted = new SHA1().encode(string_yan+editText_password.getText().toString());
                         password_encrypted = new SHA1().encode(string_yan+"122274");
-                        System.out.println(string_yan);
-                        System.out.println(password_encrypted);
+//                        System.out.println(string_yan);
+//                        System.out.println(password_encrypted);
+
+                        requests2();
+
+
+//                        //提交密码部分
+//                        RequestBody body = new FormBody.Builder()
+//                                .add("username","2018304008")
+//                                .add("password",password_encrypted)
+//                                .add("encodedPassword","")
+//                                .add("session_locale","zh_CN")
+//                                .build();
+//                        Request request1 = new Request.Builder()
+//                                .url(url)
+//                                .post(body)
+//                                .build();
+//                        Call call1 = okHttpClient.newCall(request1);
+//                        call1.enqueue(new Callback() {
+//                            @Override
+//                            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                                Log.d(" "," onFailure");
+//                            }
+//
+//                            @Override
+//                            public void onResponse(@NotNull Call call, @NotNull Response response1) throws IOException {
+//
+//                                ResponseBody responseBody = response1.body();
+//                                html2 = responseBody.string();
+//                                System.out.println(html2);
+//
+//                            }
+//                        });
 
 
                     }
@@ -118,41 +154,43 @@ public class ScoreActivity extends AppCompatActivity {
 
 
 
-
-
-
-//                getYan();
-                System.out.println(string_yan);
-
-
-
-                //提交密码部分
-                RequestBody body = new FormBody.Builder()
-                        .add("username","2018304008")
-                        .add("password","c85ac10270ca8f026082444f60304bb5f1f5ef09")
-                        .add("encodedPassword","")
-                        .add("session_locale","zh_CN")
-                        .build();
-                Request request1 = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Call call1 = okHttpClient.newCall(request1);
-                call1.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        Log.d(" "," onFailure");
-                    }
-
-                    @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                        System.out.println(response.body().string());
-
-                    }
-                });
 
             }
         });
+    }
+
+    public void requests2(){
+
+
+        //提交密码部分
+        RequestBody body = new FormBody.Builder()
+                .add("username","2018304008")
+                .add("password",password_encrypted)
+                .add("encodedPassword","")
+                .add("session_locale","zh_CN")
+                .build();
+        Request request1 = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Call call1 = okHttpClient.newCall(request1);
+        call1.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d(" "," onFailure");
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response1) throws IOException {
+
+                ResponseBody responseBody = response1.body();
+                html2 = responseBody.string();
+//                System.out.println(html2);
+                Log.d("html2",html2);
+
+            }
+        });
+
     }
 
     // 初始化Python环境
@@ -170,14 +208,14 @@ public class ScoreActivity extends AppCompatActivity {
     }
 
 
+
     public void getYan(){
         String regFormat = "\\s*|\t|\r|\n";
         String regTag = "<[^>]*>";
         String result;
         result = html1.replaceAll(regFormat,"").replaceAll(regTag,"");
-//        System.out.println(result);
         string_yan = result.substring(result.indexOf("CryptoJS.SHA1('")+15,result.indexOf("'+form['password'].value)"));
-//        System.out.println(result1);
+
     }
 
 

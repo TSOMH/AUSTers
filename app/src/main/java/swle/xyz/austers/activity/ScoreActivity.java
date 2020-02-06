@@ -64,9 +64,6 @@ public class ScoreActivity extends AppCompatActivity {
             })
             .build();
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,52 +113,14 @@ public class ScoreActivity extends AppCompatActivity {
                         password_encrypted = new SHA1().encode(string_yan+"122274");
 //                        System.out.println(string_yan);
 //                        System.out.println(password_encrypted);
-
                         requests2();
-
-
-//                        //提交密码部分
-//                        RequestBody body = new FormBody.Builder()
-//                                .add("username","2018304008")
-//                                .add("password",password_encrypted)
-//                                .add("encodedPassword","")
-//                                .add("session_locale","zh_CN")
-//                                .build();
-//                        Request request1 = new Request.Builder()
-//                                .url(url)
-//                                .post(body)
-//                                .build();
-//                        Call call1 = okHttpClient.newCall(request1);
-//                        call1.enqueue(new Callback() {
-//                            @Override
-//                            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                                Log.d(" "," onFailure");
-//                            }
-//
-//                            @Override
-//                            public void onResponse(@NotNull Call call, @NotNull Response response1) throws IOException {
-//
-//                                ResponseBody responseBody = response1.body();
-//                                html2 = responseBody.string();
-//                                System.out.println(html2);
-//
-//                            }
-//                        });
-
-
                     }
                 });
-
-
-
-
             }
         });
     }
 
     public void requests2(){
-
-
         //提交密码部分
         RequestBody body = new FormBody.Builder()
                 .add("username","2018304008")
@@ -206,7 +165,6 @@ public class ScoreActivity extends AppCompatActivity {
         PyObject obj1 = py.getModule("getStringOfPlaintext").callAttr("get_http",url);
         return obj1.toJava(String.class);
     }
-
 
 
     public void getYan(){

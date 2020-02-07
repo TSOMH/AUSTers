@@ -14,14 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.NewsActivity"></activity>
-        <activity android:name=".activity.ScoreActivity" />
+        <activity android:name=".activity.ScoreActivity"></activity>
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.NewsActivity" />
+        <activity android:name=".activity.IdentityAuthenticateActivity" />
         <activity android:name=".activity.BannerThirdViewActivity" />
         <activity android:name=".activity.BannerScondViewActivity" />
-        <activity android:name=".activity.BannerFirstViewActivity"
-            android:parentActivityName=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.BannerFirstViewActivity" /> <!-- android:parentActivityName=".activity.MainActivity" -->
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignInActivity">
             <intent-filter>

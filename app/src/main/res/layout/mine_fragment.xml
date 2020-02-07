@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.SettingFragment">
+    tools:context=".fragment.MineFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/transparent"
+
+
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
         <ImageButton
-            android:id="@+id/settings"
+            android:id="@+id/imageButton_settings"
             android:layout_width="wrap_content"
             android:layout_gravity="right"
             android:layout_marginRight="20sp"

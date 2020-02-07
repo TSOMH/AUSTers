@@ -6,42 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".activity.ScoreActivity">
 
-    <EditText
-        android:id="@+id/editText_intranet_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="学号"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
-
-    <EditText
-        android:id="@+id/editText_intranet_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="密码"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278" />
-
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="登陆"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_intranet_password"
-        app:layout_constraintVertical_bias="0.131" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,6 +26,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,6 +41,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import swle.xyz.austers.activity.BannerFirstViewActivity;
 import swle.xyz.austers.activity.BannerScondViewActivity;
 import swle.xyz.austers.activity.BannerThirdViewActivity;
+import swle.xyz.austers.activity.IdentityAuthenticateActivity;
 import swle.xyz.austers.activity.ScoreActivity;
 import swle.xyz.austers.viewmodel.FirstViewModel;
 import swle.xyz.austers.R;
@@ -237,7 +240,7 @@ public class FirstFragment extends Fragment {
         }
 
         @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
+        public boolean isViewFromObject(@NotNull View arg0, @NotNull Object arg1) {
             return arg0 == arg1;
         }
 
@@ -294,7 +297,7 @@ public class FirstFragment extends Fragment {
      */
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(@NotNull android.os.Message msg) {
             bannerViewPager.setCurrentItem(currentItem);
         }
     };

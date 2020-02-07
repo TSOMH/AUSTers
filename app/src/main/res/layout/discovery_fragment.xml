@@ -8,6 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="discoveryFragment" />
+        android:text="discoveryFragment"
+        android:textSize="25sp"/>
 
 </FrameLayout>

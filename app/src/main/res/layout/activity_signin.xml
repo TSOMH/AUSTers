@@ -66,7 +66,6 @@
             android:shadowColor="#4A148C"
             android:text="登录(当前为测试版本，请直接登录)"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FF6F00"
             app:layout_constraintEnd_toStartOf="@+id/guideline10"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline9"

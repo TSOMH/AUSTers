@@ -11,7 +11,8 @@
         android:id="@+id/firstFragment"
         android:name="swle.xyz.austers.fragment.FirstFragment"
         android:label="first_fragment"
-        tools:layout="@layout/first_fragment" />
+        tools:layout="@layout/first_fragment"/>
+
     <fragment
         android:id="@+id/loseandfoundFragment"
         android:name="swle.xyz.austers.fragment.LoseAndFoundFragment"
@@ -23,8 +24,8 @@
         android:label="discovery_fragment"
         tools:layout="@layout/discovery_fragment" />
     <fragment
-        android:id="@+id/settingFragment"
-        android:name="swle.xyz.austers.fragment.SettingFragment"
-        android:label="setting_fragment"
-        tools:layout="@layout/setting_fragment" />
+        android:id="@+id/mineFragment"
+        android:name="swle.xyz.austers.fragment.MineFragment"
+        android:label="mine_fragment"
+        tools:layout="@layout/mine_fragment"/>
 </navigation>

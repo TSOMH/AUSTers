@@ -48,7 +48,7 @@ public class ScoreActivity extends AppCompatActivity {
 
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
 
-    //生产okHttp客户端
+    //生成okHttp客户端
     final OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .cookieJar(new CookieJar() {
                 @Override

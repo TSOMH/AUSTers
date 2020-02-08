@@ -4,31 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.Objects;
+import android.widget.Toast;
 
 import swle.xyz.austers.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private Button button_identity_authenticate;
-    private Button button_about;
+    private Button button_version;
+    private Button button_oslicenses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_about);
         initView();
-        initEvent();
+        intiEvent();
     }
     private void initView(){
+        button_version = findViewById(R.id.button_version);
+        button_oslicenses = findViewById(R.id.button_oos_licenses);
 
-        toolbar = findViewById(R.id.toolbar_settingsActivity);
+        toolbar = findViewById(R.id.toolbar_about_activity);
         setSupportActionBar(toolbar); //将toolbar设置为当前activity的操作栏
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -41,25 +40,19 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
         getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏toolbar默认显示的label
 
-        button_identity_authenticate = findViewById(R.id.button_identity_authenticate);
-        button_about = findViewById(R.id.button_about);
-
     }
-
-    private void initEvent(){
-
-        button_identity_authenticate.setOnClickListener(new View.OnClickListener() {
+    private void intiEvent(){
+        button_version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this,IdentityAuthenticateActivity.class);
-                startActivity(intent);
+                Toast.makeText(AboutActivity.this,"当前已是最新版本",Toast.LENGTH_SHORT).show();
             }
         });
 
-        button_about.setOnClickListener(new View.OnClickListener() {
+        button_oslicenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this,AboutActivity.class);
+                Intent intent = new Intent(AboutActivity.this,OSLicensesActivity.class);
                 startActivity(intent);
             }
         });

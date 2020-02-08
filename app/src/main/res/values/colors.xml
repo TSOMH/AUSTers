@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#004593</color>
-    <color name="colorPrimaryDark">#044494</color>
+    <color name="colorPrimaryDark">#2861a4</color>
     <color name="colorAccent">#D81B60</color>
     <color name="transparent">#00000000</color>
-    <color name="aust">#004593</color>
+    <color name="aust">#2861A4</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="淡蓝色">#84a4cc</color>
+    <color name="WhiteSmoke">#F5F5F5</color>>
 
 </resources>

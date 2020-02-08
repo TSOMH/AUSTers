@@ -43,14 +43,17 @@ import swle.xyz.austers.myclass.SHA1;
 
 public class IdentityAuthenticateActivity extends AppCompatActivity {
 
-    private EditText editText_username;
+    private EditText editText_student_number;
     private EditText editText_password;
     private Button button_login;
+    private String student_numeber;
 
     public String string_yan;
+    private String name;
     public String html1,html2;
     private String password_encrypted;
     private Toolbar toolbar;
+    private int count = 0;
     String url_login = "http://jwgl.aust.edu.cn/eams/login.action";
     String url_home = "http://jwgl.aust.edu.cn/eams/home!submenus.action?menu.id=&_=1581064462212";
     String url_detail = "http://jwgl.aust.edu.cn/eams/stdDetail.action";
@@ -84,7 +87,7 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
     }
 
     private void initView(){
-        editText_username=findViewById(R.id.editText_intranet_user);
+        editText_student_number=findViewById(R.id.editText_student_number);
         editText_password=findViewById(R.id.editText_intranet_password);
         button_login=findViewById(R.id.button_identity);
         toolbar = findViewById(R.id.toolbar_identity_authenticate);
@@ -107,17 +110,12 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
-
-
-
-
-
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                button_login.setBackgroundColor(Color.parseColor("#84a4cc"));
 
 
+                student_numeber = editText_student_number.getText().toString();
 
                 //获取"盐"
                 Request request = new Request.Builder()
@@ -140,7 +138,7 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
                         html1 = responseBody.string();
                         getYan();
 //                        password_encrypted = new SHA1().encode(string_yan+editText_password.getText().toString());
-                        password_encrypted = new SHA1().encode(string_yan+"122274");
+                        password_encrypted = new SHA1().encode(string_yan+editText_password.getText().toString());
 //                        System.out.println(string_yan);
 //                        System.out.println(password_encrypted);
                         request2();
@@ -152,8 +150,9 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
 
     public void request2(){
         //提交密码部分
+        count += 1;
         RequestBody body = new FormBody.Builder()
-                .add("username","2018304008")
+                .add("username",student_numeber)
                 .add("password",password_encrypted)
                 .add("encodedPassword","")
                 .add("session_locale","zh_CN")
@@ -189,11 +188,12 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
 //                    System.out.println(html2);
                     request3();
 
-                    System.out.println(getName());
+                    name = getName();
+                    System.out.println(name+"同学，你好!");
 
                     System.out.println("response2_codee:"+response.code());
                     Looper.prepare();
-                    Toast.makeText(IdentityAuthenticateActivity.this, "绑定成功!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IdentityAuthenticateActivity.this, name+"同学，你好!", Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
             }
@@ -247,13 +247,15 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
 
     }
 
+
+
     public String getName(){
         String regFormat = "\\s*|\t|\r|\n";
         String regTag = "<[^>]*>";
         String result;
         result = html2.replaceAll(regFormat,"").replaceAll(regTag,"");
 
-        return result.substring(result.indexOf("退出")+2,result.indexOf("(2018304008"));
+        return result.substring(result.indexOf("退出")+2,result.indexOf("("+student_numeber));
     }
 
 

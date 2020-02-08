@@ -18,49 +18,86 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <EditText
-        android:id="@+id/editText_intranet_user"
-        android:layout_width="match_parent"
+        android:id="@+id/editText_student_number"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingStart="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint="学号"
-        android:inputType="textPersonName"
-        android:textCursorDrawable="@null"
-
-        app:layout_constraintTop_toBottomOf="@id/toolbar_identity_authenticate"
-         />
-
-    <EditText
-        android:id="@+id/editText_intranet_password"
-        android:layout_width="match_parent"
-        android:paddingStart="20dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="密码"
-        android:inputType="textPassword"
+        android:inputType="number"
         android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_intranet_user" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_identity_authenticate" />
+
+    <EditText
+        android:id="@+id/editText_intranet_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="教务管理系统密码(默认为身份证后6位)"
+        android:inputType="textPassword"
+
+        android:textCursorDrawable="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_student_number" />
 
     <Button
         android:id="@+id/button_identity"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/btn_signin"
-
+        android:backgroundTint="#2861a4"
         android:text="验证"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_captcha" />
+
+    <EditText
+        android:id="@+id/editText_captcha"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:hint="验证码/无则不填"
+
+
+        android:textCursorDrawable="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_captcha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_intranet_password" />
 
+    <ImageView
+
+        android:id="@+id/imageView_captcha"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText_captcha"
+        app:layout_constraintTop_toBottomOf="@+id/editText_intranet_password"
+        app:srcCompat="@color/WhiteSmoke" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录前请确保已打开VPN或使用校园网连接"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_identity" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

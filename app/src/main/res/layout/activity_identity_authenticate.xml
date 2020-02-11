@@ -26,6 +26,7 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint="学号"
+        android:backgroundTint="#808080"
         android:inputType="number"
         android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,12 +42,13 @@
         android:ems="10"
         android:hint="教务管理系统密码(默认为身份证后6位)"
         android:inputType="textPassword"
-
+        android:backgroundTint="#808080"
         android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_student_number" />
+
 
     <Button
         android:id="@+id/button_identity"
@@ -62,39 +64,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editText_captcha" />
-
-    <EditText
-        android:id="@+id/editText_captcha"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="1dp"
-        android:ems="10"
-        android:hint="验证码/无则不填"
-
-
-        android:textCursorDrawable="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_captcha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_intranet_password" />
-
-    <ImageView
-
-        android:id="@+id/imageView_captcha"
-        android:layout_width="135dp"
-        android:layout_height="45dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText_captcha"
-        app:layout_constraintTop_toBottomOf="@+id/editText_intranet_password"
-        app:srcCompat="@color/WhiteSmoke" />
+        app:layout_constraintTop_toBottomOf="@id/editText_intranet_password" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="登录前请确保已打开VPN或使用校园网连接"
+        android:text="提示:登录前请确保已打开VPN或使用校园网连接"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_identity" />

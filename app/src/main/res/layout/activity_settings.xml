@@ -11,7 +11,7 @@
         android:id="@+id/toolbar_settingsActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/white"
 
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -45,31 +45,87 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_settingsActivity"
         style="?android:attr/borderlessButtonStyle"/>
 
+
+
     <Button
-        android:id="@+id/button_about"
+        android:id="@+id/button_account_bound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_selector"
-        android:layout_marginTop="0.1dp"
+        android:gravity="start|center"
+        android:paddingStart="20dp"
+        android:text="账号绑定"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_identity_authenticate"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <Button
+        android:id="@+id/button_user_information"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:gravity="start|center"
+        android:paddingStart="20dp"
+        android:text="个人资料"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_account_bound" />
+
+
+    <Button
+        android:id="@+id/button_about"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_selector"
         android:gravity="start|center"
         android:paddingStart="20dp"
         android:text="关于"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/button_identity_authenticate" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_user_information" />
 
+    <Button
+        android:id="@+id/button_exit_account"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="380dp"
+        android:background="@drawable/button_selector"
+        android:gravity="start|center"
+        android:paddingStart="20dp"
+        android:text="退出当前账号"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/button_about"
+
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlSymmetry" />
 
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_exit_app"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/button_selector"
-        android:text="退出账号"
-        android:textColor="#FF3030"
+        android:gravity="start|center"
+        android:paddingStart="20dp"
+        android:text="退出应用"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        style="?android:attr/borderlessButtonStyle"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_exit_account"
+        tools:ignore="RtlSymmetry" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

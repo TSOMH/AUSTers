@@ -70,9 +70,10 @@
         android:background="@drawable/button_selector"
         android:gravity="center|start"
         android:paddingStart="20dp"
-        android:text="检查更新"
+        android:text="版本更新"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/text_version" />
+        app:layout_constraintTop_toBottomOf="@+id/text_version"
+        tools:ignore="RtlSymmetry" />
     <Button
         android:id="@+id/button_oos_licenses"
         android:layout_width="match_parent"
@@ -87,13 +88,28 @@
         style="?android:attr/borderlessButtonStyle"
         />
 
+
+    <Button
+        android:id="@+id/button_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/button_oos_licenses"
+        android:background="@drawable/button_selector"
+        android:text="反馈"
+        android:textSize="16sp"
+        android:gravity="center|start"
+        android:paddingStart="20dp"
+
+        style="?android:attr/borderlessButtonStyle"
+        />
+
     <TextView
         android:id="@+id/text_copyright"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="本项目采取MIT开源协议\n开源地址:github.com/TSOMH/AUSTers\nCopyright © 2020 swle.xyz All Rights Reserved"
+        android:text="本项目遵循MIT开源协议\n开源地址:github.com/TSOMH/AUSTers"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

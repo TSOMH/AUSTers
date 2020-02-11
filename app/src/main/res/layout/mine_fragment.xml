@@ -6,23 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MineFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/constraintlayout_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent">
 
 
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/imageButton_settings"
-            android:layout_width="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="20sp"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            app:srcCompat="@drawable/ic_settings_black_24dp" />
-    </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageButton
+                    android:id="@+id/imageButton_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/ic_settting"
+                    tools:layout_editor_absoluteX="376dp" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/imageView_user_image"
+                android:layout_width="63dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/userpicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="许跃杰"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView_user_image"
+                app:layout_constraintTop_toTopOf="@+id/imageView_user_image" />
+
+            <TextView
+                android:id="@+id/textView_college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="计算机科学与工程学院"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/button_my_trip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/button_selector"
+            android:text="我的行程"
+            android:textSize="16sp"
+            android:gravity="start|center"
+            android:paddingStart="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <Button
+            android:id="@+id/button_my_release"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector"
+            android:text="我的发布"
+            android:gravity="start|center"
+            android:paddingStart="20dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_my_trip"
+            tools:ignore="RtlSymmetry" />
+
+        <Button
+            android:id="@+id/button_my_dynamic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我的帖子"
+            android:textSize="16sp"
+            android:background="@drawable/button_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="start|center"
+            android:paddingStart="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/button_my_release"
+            tools:ignore="RtlSymmetry" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

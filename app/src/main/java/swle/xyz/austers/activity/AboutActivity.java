@@ -1,13 +1,13 @@
 package swle.xyz.austers.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import swle.xyz.austers.R;
 
@@ -15,6 +15,7 @@ public class AboutActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Button button_version;
     private Button button_oslicenses;
+    private Button button_feedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class AboutActivity extends AppCompatActivity {
     private void initView(){
         button_version = findViewById(R.id.button_version);
         button_oslicenses = findViewById(R.id.button_oos_licenses);
+        button_feedback = findViewById(R.id.button_feedback);
 
         toolbar = findViewById(R.id.toolbar_about_activity);
         setSupportActionBar(toolbar); //将toolbar设置为当前activity的操作栏
@@ -54,6 +56,13 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutActivity.this,OSLicensesActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        button_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

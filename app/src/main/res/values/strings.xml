@@ -16,5 +16,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="change">修改</string>
+    <string name="isshow">是否展示</string>
 
 </resources>

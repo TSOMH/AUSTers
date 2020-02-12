@@ -14,7 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MyTripActivity"></activity>
+        <activity android:name=".activity.PersonalInfoActivity"></activity>
+        <activity android:name=".activity.AcountBoundActivity" />
+        <activity android:name=".activity.MyReleseActivity" />
+        <activity android:name=".activity.MyDynamicActivity" />
+        <activity android:name=".activity.MyTripActivity" />
         <activity android:name=".activity.OSLicensesActivity" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.ScoreActivity" />

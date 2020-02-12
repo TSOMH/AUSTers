@@ -59,6 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_identity_authenticate"
+        android:thumbTint="@color/aust"
+        android:trackTint="@color/aust"
         style="?android:attr/borderlessButtonStyle"/>
 
     <Button
@@ -73,7 +75,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_account_bound" />
+        app:layout_constraintTop_toBottomOf="@+id/button_account_bound"
+        />
 
 
     <Button
@@ -97,7 +100,6 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="380dp"
         android:background="@drawable/button_selector"
         android:gravity="start|center"
         android:paddingStart="20dp"
@@ -106,7 +108,6 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/button_about"
-
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="RtlSymmetry" />
 

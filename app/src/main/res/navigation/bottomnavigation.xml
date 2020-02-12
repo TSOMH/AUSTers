@@ -13,17 +13,17 @@
         android:name="swle.xyz.austers.fragment.FirstFragment"
         android:label="first_fragment"
         tools:layout="@layout/first_fragment"/>
-
-    <fragment
-        android:id="@+id/loseandfoundFragment"
-        android:name="swle.xyz.austers.fragment.LoseAndFoundFragment"
-        android:label="lose_and_found_fragment"
-        tools:layout="@layout/lose_and_found_fragment" />
     <fragment
         android:id="@+id/discoveryFragment"
         android:name="swle.xyz.austers.fragment.DiscoveryFragment"
         android:label="discovery_fragment"
         tools:layout="@layout/discovery_fragment" />
+
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="swle.xyz.austers.fragment.MessageFragment"
+        android:label="lose_and_found_fragment"
+        tools:layout="@layout/message_fragment" />
     <fragment
         android:id="@+id/mineFragment"
         android:name="swle.xyz.austers.fragment.MineFragment"

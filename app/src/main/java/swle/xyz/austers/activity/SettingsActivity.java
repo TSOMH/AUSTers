@@ -63,14 +63,16 @@ public class SettingsActivity extends AppCompatActivity {
         button_account_bound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SettingsActivity.this,AcountBoundActivity.class);
+                startActivity(intent);
             }
         });
 
         button_user_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SettingsActivity.this,PersonalInfoActivity.class);
+                startActivity(intent);
             }
         });
 

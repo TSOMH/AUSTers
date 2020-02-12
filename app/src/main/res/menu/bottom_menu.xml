@@ -7,19 +7,21 @@
     <item
         android:id="@+id/firstFragment"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title=""
+        android:title="首页"
         />
-    <item
-        android:id="@+id/loseandfoundFragment"
-        android:icon="@drawable/ic_lose_found_black"
-        android:title="" />
+
     <item
         android:id="@+id/discoveryFragment"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="" />
+        android:title="发现" />
+
+    <item
+        android:id="@+id/messageFragment"
+        android:icon="@drawable/ic_message"
+        android:title="消息" />
     <item
         android:id="@+id/mineFragment"
         android:icon="@drawable/ic_mine"
 
-        android:title="" />
+        android:title="我的" />
 </menu>

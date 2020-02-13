@@ -74,18 +74,6 @@ public class MessageFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return strings[position];
         }
-
-        /**
-         * 避免fragment销毁
-         * @param container
-         * @param position
-         * @param object
-         */
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            // super.destroyItem(container, position, object);
-        }
     }
 
 

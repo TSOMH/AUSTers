@@ -7,12 +7,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import swle.xyz.austers.R;
+import swle.xyz.austers.myclass.OnMultiClickListener;
 
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends BaseActivity {
     Button button_sign_in;
 
 
@@ -22,10 +21,20 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signin);
+        initView();
+        initEvent();
+    }
+
+    @Override
+    public void initView() {
         button_sign_in = findViewById(R.id.button_sign_in);
-        button_sign_in.setOnClickListener(new View.OnClickListener() {
+    }
+
+    @Override
+    public void initEvent() {
+        button_sign_in.setOnClickListener(new OnMultiClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onMultiClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, Main2Activity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
                 intent.setClass(SignInActivity.this,Main2Activity.class);

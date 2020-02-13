@@ -1,19 +1,17 @@
 package swle.xyz.austers.fragment;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import swle.xyz.austers.viewmodel.DiscoveryViewModel;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import swle.xyz.austers.R;
+import swle.xyz.austers.viewmodel.DiscoveryViewModel;
 
 public class DiscoveryFragment extends Fragment {
 

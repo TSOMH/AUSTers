@@ -1,18 +1,8 @@
 package swle.xyz.austers.fragment;
 
-import androidx.annotation.NonNull;
-
-import androidx.lifecycle.ViewModelProviders;
-
 import android.annotation.SuppressLint;
-
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
@@ -37,14 +34,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-
+import swle.xyz.austers.R;
 import swle.xyz.austers.activity.BannerFirstViewActivity;
 import swle.xyz.austers.activity.BannerScondViewActivity;
 import swle.xyz.austers.activity.BannerThirdViewActivity;
-import swle.xyz.austers.activity.IdentityAuthenticateActivity;
 import swle.xyz.austers.activity.ScoreActivity;
 import swle.xyz.austers.viewmodel.FirstViewModel;
-import swle.xyz.austers.R;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
@@ -97,6 +92,11 @@ public class FirstFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
 

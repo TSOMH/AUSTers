@@ -17,34 +17,27 @@ import swle.xyz.austers.fragment.FirstFragment;
 import swle.xyz.austers.fragment.MessageFragment;
 import swle.xyz.austers.fragment.MineFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FirstFragment firstFragment;
     private DiscoveryFragment discoveryFragment;
     private MessageFragment messageFragment;
     private MineFragment mineFragment;
+
     private Fragment isFragment;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-//        NavController navController = Navigation.findNavController(this,R.id.fragment);
-//        //AppBarConfiguration configuration = new AppBarConfiguration.Builder(bottomNavigationView.getMenu()).build(); //此处注销依然可以正常显示navigation?
-//        //NavigationUI.setupActionBarWithNavController(this,navController,configuration);
-//        NavigationUI.setupWithNavController(bottomNavigationView,navController);
+        setContentView(R.layout.activity_main2);
 
         initFragment(savedInstanceState);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView2);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
 
     public void initFragment(Bundle savedInstanceState){
         if (savedInstanceState == null){
@@ -54,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 firstFragment = new FirstFragment();
             }
             isFragment = firstFragment;
-            ft.replace(R.id.container,firstFragment).commit();
+            ft.replace(R.id.container_2,firstFragment).commit();
         }
     }
 
@@ -100,13 +93,12 @@ public class MainActivity extends AppCompatActivity {
             //添加渐隐渐现的动画
             FragmentTransaction ft = fm.beginTransaction();
             if (!to.isAdded()) {    // 先判断是否被add过
-                ft.hide(from).add(R.id.container, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+                ft.hide(from).add(R.id.container_2, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
             } else {
                 ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
             }
         }
     }
-
 
 
 }

@@ -14,10 +14,13 @@ public class MyDynamicActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_dynamic);
+        initView();
+        initEvent();
     }
 
     @Override
     public void initView() {
+        toolbar = findViewById(R.id.toolbar_my_dynamic_activity);
         setToolbar(toolbar,"我的帖子");
     }
 

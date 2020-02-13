@@ -34,9 +34,12 @@ public class PersonalMessageFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mViewModel = ViewModelProviders.of(this).get(PersonalMessageViewModel.class);
         // TODO: Use the ViewModel
     }
+
+
 
 
 

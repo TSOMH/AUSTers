@@ -1,6 +1,7 @@
 package swle.xyz.austers.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class SystemMessageFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d("system","successful");
         mViewModel = ViewModelProviders.of(this).get(SystemMessageViewModel.class);
         // TODO: Use the ViewModel
     }

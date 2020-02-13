@@ -33,7 +33,6 @@ public class MessageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.message_fragment, container, false);
-
         fragmentList.add(new SystemMessageFragment());
         fragmentList.add(new PersonalMessageFragment());
         initView(view);
@@ -43,6 +42,7 @@ public class MessageFragment extends Fragment {
     private void initView(View view){
         TabLayout tab_layout = view.findViewById(R.id.tab_layout);
         ViewPager viewPager = view.findViewById(R.id.viewpager_message);
+
         MyAdapter fragmentAdapter = new  MyAdapter(getChildFragmentManager());//此处必须为getChildFragmentManger()
         viewPager.setAdapter(fragmentAdapter);
         tab_layout.setupWithViewPager(viewPager);
@@ -73,6 +73,18 @@ public class MessageFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return strings[position];
+        }
+
+        /**
+         * 避免fragment销毁
+         * @param container
+         * @param position
+         * @param object
+         */
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            // super.destroyItem(container, position, object);
         }
     }
 

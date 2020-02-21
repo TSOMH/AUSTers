@@ -40,10 +40,6 @@
         android:layout_height="0dp"
         android:background="@color/white"
         android:textColor="@color/black"
-        android:paddingStart="20dp"
-        android:paddingBottom="5dp"
-        android:text="glide: github.com/bumptech/glide\n\nokhttp: github.com/square/okhttp\n\nglide-transformations: github.com/wasabeef/glide-transformations"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_oslicenses_activity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

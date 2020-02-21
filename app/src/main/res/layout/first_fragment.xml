@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/root"
     android:layout_height="match_parent"
     tools:context=".fragment.FirstFragment">
 
@@ -14,19 +13,11 @@
         android:layout_height="match_parent"
         tools:ignore="ExtraText">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.30"/>
-
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/bannerview"
+            android:id="@+id/bannerviewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="fill_vertical"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,60 +27,17 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_gravity="bottom"
             android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/guideline1">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/bannerviewpager"/>
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dip"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/dot_0"
-                    android:layout_width="10dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@drawable/banner_checked" />
-
-                <ImageView
-                    android:id="@+id/dot_1"
-                    android:layout_width="10dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@drawable/banner_unchecked" />
-
-                <ImageView
-                    android:id="@+id/dot_2"
-                    android:layout_width="10dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@drawable/banner_unchecked" />
-
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/dot_3"-->
-                <!--                    android:layout_width="10dp"-->
-                <!--                    android:layout_height="2dp"-->
-                <!--                    android:layout_marginLeft="2dip"-->
-                <!--                    android:layout_marginRight="2dip"-->
-                <!--                    android:background="@drawable/banner_unchecked" />-->
-
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/dot_4"-->
-                <!--                    android:layout_width="10dp"-->
-                <!--                    android:layout_height="2dp"-->
-                <!--                    android:layout_marginLeft="2dip"-->
-                <!--                    android:layout_marginRight="2dip"-->
-                <!--                    android:background="@drawable/banner_unchecked" />-->
-
-            </LinearLayout>
-        </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.30"/>
 
         <ImageButton
             android:id="@+id/imageButtonNews"
@@ -100,7 +48,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
+            app:layout_constraintTop_toTopOf="@+id/guideline20"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline17"
@@ -150,10 +102,12 @@
             android:src="@drawable/ic_class_schedle"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageButtonNews"
+            app:layout_constraintStart_toStartOf="@+id/guideline17"
             app:layout_constraintTop_toTopOf="@+id/guideline20"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <ImageButton
             android:id="@+id/imageButton5"
@@ -164,7 +118,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
+            app:layout_constraintTop_toTopOf="@+id/guideline20"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <ImageButton
             android:id="@+id/imageButton6"
@@ -175,7 +133,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
+            app:layout_constraintTop_toTopOf="@+id/guideline20"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline22"
@@ -194,7 +156,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <ImageButton
             android:id="@+id/imageButton8"
@@ -205,7 +171,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintStart_toStartOf="@+id/guideline17"
-            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <ImageButton
             android:id="@+id/imageButtonTaxi"
@@ -216,7 +186,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
-            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <ImageButton
             android:id="@+id/imageButtonContactWay"
@@ -227,24 +201,12 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
-
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="1dp"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/guideline21"-->
-<!--            android:background="@color/aust"/>-->
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="1dp"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/guideline20"-->
-<!--            android:background="@color/aust"/>-->
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="1dp"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/guideline22"-->
-<!--            android:background="@color/aust"/>-->
         <ImageButton
             android:id="@+id/imageButtonScore"
             android:layout_width="0dp"
@@ -254,7 +216,11 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline23"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+            app:layout_constraintTop_toTopOf="@+id/guideline22"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline23"

@@ -22,36 +22,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/imageButton_settings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/ic_settting"
-                    tools:layout_editor_absoluteX="376dp" />
-            </androidx.appcompat.widget.Toolbar>
-
             <ImageView
                 android:id="@+id/imageView_user_image"
                 android:layout_width="63dp"
                 android:layout_height="72dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="36dp"
                 android:src="@drawable/userpicture"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -121,6 +100,22 @@
             android:paddingStart="20dp"
             style="?android:attr/borderlessButtonStyle"
             app:layout_constraintTop_toBottomOf="@+id/button_my_release"
+            tools:ignore="RtlSymmetry" />
+
+
+        <Button
+            android:id="@+id/button_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:textSize="16sp"
+            android:background="@drawable/button_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="start|center"
+            android:paddingStart="20dp"
+            style="?android:attr/borderlessButtonStyle"
+            app:layout_constraintTop_toBottomOf="@+id/button_my_dynamic"
             tools:ignore="RtlSymmetry" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

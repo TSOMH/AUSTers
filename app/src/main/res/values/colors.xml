@@ -8,6 +8,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="淡蓝色">#84a4cc</color>
-    <color name="WhiteSmoke">#F5F5F5</color>>
+    <color name="WhiteSmoke">#F5F5F5</color>
+    <color name="lowblack">#2c2c2c</color>
 
 </resources>

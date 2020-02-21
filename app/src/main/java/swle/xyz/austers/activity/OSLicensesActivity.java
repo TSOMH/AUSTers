@@ -1,17 +1,21 @@
 package swle.xyz.austers.activity;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import com.zzhoujay.richtext.RichText;
 
 import swle.xyz.austers.R;
 
 public class OSLicensesActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private TextView textView;
+    private String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +24,8 @@ public class OSLicensesActivity extends AppCompatActivity {
         initView();
         initEvent();
     }
-    private void initView(){
+
+    private void initView() {
 
 
         toolbar = findViewById(R.id.toolbar_oslicenses_activity);
@@ -36,9 +41,17 @@ public class OSLicensesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("开源项目");
         getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
         getSupportActionBar().setDisplayShowTitleEnabled(true);//隐藏toolbar默认显示的label
+
+        textView = findViewById(R.id.textView5);
     }
 
-    private void initEvent(){
-
+    private void initEvent() {
+        text="* [glide](https://github.com/bumptech/glide)\n" +
+                "* [okhttp](https://github.com/square/okhttp)\n" +
+                "* [glide-transformations](https://github.com/wasabeef/glide-transformations)\n" +
+                "* [RichText](https://github.com/zzhoujay/RichText)\n"+
+                "* [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)";
+        RichText.fromMarkdown(text).into(textView);
     }
 }
+

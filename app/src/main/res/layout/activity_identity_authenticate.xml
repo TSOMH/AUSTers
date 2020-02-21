@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editText_student_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,6 +26,7 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint="学号"
+        app:met_floatingLabel="normal"
         android:backgroundTint="#808080"
         android:inputType="number"
         android:textCursorDrawable="@null"
@@ -33,13 +34,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_identity_authenticate" />
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editText_intranet_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
+        app:met_floatingLabel="normal"
         android:hint="教务管理系统密码(默认为身份证后6位)"
         android:inputType="textPassword"
         android:backgroundTint="#808080"

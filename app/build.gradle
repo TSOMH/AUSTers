@@ -64,11 +64,22 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.3.1")
 
+    implementation 'com.bigkoo:convenientbanner:2.1.5'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    def room_version = "2.2.3"
+    //edit_text库
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    //markdown编辑器
+    implementation 'com.zzhoujay.richtext:richtext:3.0.8'
+
+
+
+    def room_version = "2.2.4"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-guava:$room_version"
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+
 
 }

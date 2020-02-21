@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 /**
  * 防抖事件
  * 用法setOnClickListener(new EventListener(obj));
- * obj类，必须得有clickMethod(View)方法。默认是onClick(View)方法。
+ * obj类，必须有clickMethod(View)方法。默认是onClick(View)方法。
  */
 public class EventListener implements View.OnClickListener,
         View.OnLongClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemLongClickListener {

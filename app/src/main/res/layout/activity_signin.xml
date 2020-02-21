@@ -23,52 +23,77 @@
             app:layout_constraintTop_toTopOf="@+id/guideline3"
             app:srcCompat="@drawable/schoolbadge" />
 
-        <EditText
-            android:id="@+id/editText_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:hint="学号/手机号/昵称"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:maxLines="1"
-            android:textColorLink="#FFFFFF"
-            android:textCursorDrawable="@null"
-            app:layout_constraintTop_toTopOf="@+id/guideline7" />
+<!--        <EditText-->
+<!--            android:id="@+id/editText_id"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ems="10"-->
+<!--            android:layout_marginStart="40dp"-->
+<!--            android:layout_marginEnd="40dp"-->
+<!--            android:hint="学号/手机号/昵称"-->
+<!--            android:importantForAutofill="no"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:maxLines="1"-->
+<!--            android:textColorLink="#FFFFFF"-->
+<!--            android:textCursorDrawable="@null"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline7" />-->
 
-        <EditText
-            android:id="@+id/editText_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:hint="密码"
+<!--        <EditText-->
+<!--            android:id="@+id/editText_password"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:ems="10"-->
+<!--            android:layout_marginStart="40dp"-->
+<!--            android:layout_marginEnd="40dp"-->
+<!--            android:hint="密码"-->
 
-            android:inputType="textPassword"
-            android:textCursorDrawable="@null"
-            app:layout_constraintTop_toBottomOf="@+id/editText_id" />
+<!--            android:inputType="textPassword"-->
+<!--            android:textCursorDrawable="@null"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/editText_id" />-->
 
-        <Button
-            android:id="@+id/button_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:backgroundTint="@color/aust"
-            android:shadowColor="#4A148C"
-            android:text="登陆"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/editText_password" />
+    <Button
+        android:id="@+id/button_sign_in"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/aust"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:shadowColor="#4A148C"
+        android:text="登陆"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/materialEditText"
+        app:layout_constraintStart_toStartOf="@+id/materialEditText"
+        app:layout_constraintTop_toBottomOf="@+id/materialEditText" />
 
-        <androidx.constraintlayout.widget.Guideline
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/user_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="手机号/学号"
+        android:ems="10"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:textCursorDrawable="@null"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:met_floatingLabel="normal" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+
+        android:id="@+id/materialEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="密码"
+        android:inputType="textPassword"
+        android:textCursorDrawable="@null"
+        app:layout_constraintEnd_toEndOf="@+id/user_id"
+        app:layout_constraintStart_toStartOf="@+id/user_id"
+        app:layout_constraintTop_toBottomOf="@+id/user_id"
+        app:met_floatingLabel="normal" />
+
+    <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -8,11 +8,18 @@
 
 
         <item name="colorAccent">@color/aust</item>
+
         <!-- AppCompatEditText默认状态状态设置底线颜色 -->
         <item name="colorControlNormal">@color/transparent</item>
+
         <!-- AppCompatEditText选择的底线颜色 -->
         <item name="colorControlActivated">@color/transparent</item>
-        <item name="android:statusBarColor">#ffffff</item>
+
+<!--        应用默认状态栏颜色-->
+        <item name="android:statusBarColor">@color/transparent</item>
+
+<!--        应用状态栏半透明-->
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
         <item name="android:windowLightStatusBar">true</item>
     </style>
 

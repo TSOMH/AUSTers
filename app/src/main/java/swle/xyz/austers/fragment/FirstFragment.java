@@ -1,151 +1,80 @@
 package swle.xyz.austers.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import swle.xyz.austers.R;
-import swle.xyz.austers.activity.BannerFirstViewActivity;
-import swle.xyz.austers.activity.BannerScondViewActivity;
-import swle.xyz.austers.activity.BannerThirdViewActivity;
 import swle.xyz.austers.activity.ScoreActivity;
+import swle.xyz.austers.adapter.BannerAdapter;
 import swle.xyz.austers.viewmodel.FirstViewModel;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class FirstFragment extends Fragment {
 
+    private ViewPager viewPager;
     private FirstViewModel mViewModel;
     private View view;
-    private ViewPagerAdapter adapter;
-    private ScheduledExecutorService scheduledExecutorService;
-    private ViewPager bannerViewPager;
-//    private ClickableViewPager banner;
-    private List<ImageView> images;
-    private List<View> dots;
-    private int currentItem;
-    //记录上一次点的位置
-    private int oldPosition = 0;
+    private LinearLayout linearLayout;
     private ImageButton button_score;
-    private  Calendar time;
-
-    private BottomNavigationView bnv;
-    public Date dt;
-    private int day;
-
-
-
-
-    private String[] imageurl = new String[]{
-            "https://api.dujin.org/bing/1920.php",
-            "https://api.dujin.org/bing/1920.php",
-            "https://api.dujin.org/bing/1920.php"
-    };
-
-
     private static FirstFragment newInstance() {
         return new FirstFragment();
     }
+    private List<ImageView> imageViewList;
+    private String[] url = new String[3];
+    private int oldPosition = 0;
+    private int currentItem = 0;
+    private BannerAdapter adapter;
+    private Handler handler;
 
-    @Nullable
     @Override
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.first_fragment, container,false);
 
-        bnv=view.findViewById(R.id.bottomNavigationView);
-        button_score=view.findViewById(R.id.imageButtonScore);
-        bannerViewPager=view.findViewById(R.id.bannerview);
-
-
-
+        initView(view);
+        initBanner(view);
+        initEvent();
         return view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        handler = new Handler();
+        handler.postDelayed(new TimerRunnable(),5000);
 
-        setView();
-        time = Calendar.getInstance();
         mViewModel = ViewModelProviders.of(this).get(FirstViewModel.class);
         // TODO: Use the ViewModel
-        bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
-            int flag = 0 ;
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        flag = 0 ;
-                        Log.d(TAG,"ACTION_down");
-                        break ;
-                    case MotionEvent.ACTION_MOVE:
-                        flag = 1 ;
-                        Log.d(TAG,"ACTION_move");
-                        break ;
-                    case  MotionEvent.ACTION_UP :
-                        Log.d(TAG,"ACTION_up");
-                        if (flag == 0) {
-                            int item = bannerViewPager.getCurrentItem();
-                            if (item == 0) {
-                                Intent intent = new Intent(getActivity(), BannerFirstViewActivity.class);
-                                startActivity(intent);
-                            } else if (item == 1) {
-                                Intent intent = new Intent(getActivity(), BannerScondViewActivity.class);
-                                startActivity(intent);
-                            } else if (item == 2) {
-                                Intent intent = new Intent(getActivity(), BannerThirdViewActivity.class);
-                                startActivity(intent);
-                            }
-                        }
-                        break ;
+    }
+    private void initView(View view){
+        button_score=view.findViewById(R.id.imageButtonScore);
+        viewPager = view.findViewById(R.id.bannerviewpager);
+        linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
 
-
-                }
-                return false;
-            }
-        });
-
+    }
+    private void initEvent(){
         button_score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,167 +82,91 @@ public class FirstFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
-    private void setView() {
 
-        MultiTransformation<android.graphics.Bitmap> multi = new MultiTransformation<>(
+
+    private void initBanner(View view){
+
+        MultiTransformation<Bitmap> multi = new MultiTransformation<>(
 //                new BlurTransformation(25),
                 new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
 
-        //        //显示的图片
-        images = new ArrayList<>();
-        for (int i = 0; i < imageurl.length; i++) {
+
+        url[0] = "https://api.dujin.org/bing/1920.php";
+        url[1] = "https://api.dujin.org/bing/1920.php";
+        url[2] = "https://api.dujin.org/bing/1920.php";
+        imageViewList = new ArrayList<>();
+
+        /**
+         * 生成背景图
+         */
+        for (int i = 0;i < 10000;i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//            imageView.setBackgroundResource(imageIds[i]);
-            time = Calendar.getInstance();
-            day=time.get(Calendar.DAY_OF_MONTH);
-
-            if(day!=time.get(Calendar.DAY_OF_MONTH)){
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.get(getActivity()).clearDiskCache();
-                    }
-                }).start();
-            }
-
             Glide.with(this)
-                    .load(imageurl[i])
+                    .load(url[i%3])
                     .apply(bitmapTransform(multi))
                     .into(imageView);
-
-            images.add(imageView);
+            imageViewList.add(imageView);
         }
 
-        //显示的小点
-        dots = new ArrayList<>();
-//        for(int i=0;i<imageurl.length;i++){
-//            dots.add(view.findViewById(R.id.dot_0));
-//        }
-//
-        dots.add(view.findViewById(R.id.dot_0));
-        dots.add(view.findViewById(R.id.dot_1));
-        dots.add(view.findViewById(R.id.dot_2));
-//
-//        dots.add(view.findViewById(R.id.dot_3));
-//        dots.add(view.findViewById(R.id.dot_4));
+        /**
+         * 生成指示器
+         */
+        for (int i = 0;i<url.length;i++){
+            ImageView dot = new ImageView(getActivity());
+            if (i == 0){
+                dot.setImageResource(R.drawable.banner_checked);
+            }else {
+                dot.setImageResource(R.drawable.banner_unchecked);
+            }
 
-//        title = view.findViewById(R.id.textView);
-//        title.setText(titles[0]);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(40,20);
+            params.setMargins(2,0,2,0);
+            linearLayout.addView(dot,params);
+        }
 
-        adapter = new ViewPagerAdapter();
-        bannerViewPager.setAdapter(adapter);
-        bannerViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        adapter = new BannerAdapter(imageViewList);
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(url.length*100);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            @Nullable
+            }
+
             @Override
             public void onPageSelected(int position) {
-//                title.setText(titles[position]);
-                dots.get(position).setBackgroundResource(R.drawable.banner_checked);
-                dots.get(oldPosition).setBackgroundResource(R.drawable.banner_unchecked);
+
+                ImageView current_indicator,old_indicator;//imageView为获取的当前指示器，imageView1为旧的指示器
+
+                current_indicator = (ImageView) linearLayout.getChildAt(position%url.length);//获取当前的指示点
+                old_indicator = (ImageView) linearLayout.getChildAt(oldPosition%url.length);//获取旧的指示点
+
+                current_indicator.setImageResource(R.drawable.banner_checked);
+                old_indicator.setImageResource(R.drawable.banner_unchecked);
 
                 oldPosition = position;
                 currentItem = position;
             }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
     }
 
-
-    public class ViewPagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return images.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(@NotNull View arg0, @NotNull Object arg1) {
-            return arg0 == arg1;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup view, int position, Object object) {
-            // TODO Auto-generated method stub
-//          super.destroyItem(container, position, object);
-//          view.removeView(view.getChildAt(position));
-//          view.removeViewAt(position);
-            view.removeView(images.get(position));
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup view, int position) {
-            // TODO Auto-generated method stub
-            view.addView(images.get(position));
-            return images.get(position);
-        }
-
-    }
-
-    /**
-     * 利用线程池定时执行动画轮播
-     */
-    @Override
-    public void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleWithFixedDelay(
-                new ViewPageTask(),
-                5,
-                5,
-                TimeUnit.SECONDS);
-    }
-
-
-    /**
-     * 图片轮播任务
-     *
-     * @author liuyazhuang
-     */
-    private class ViewPageTask implements Runnable {
-
+    private class TimerRunnable implements Runnable{
         @Override
         public void run() {
-            currentItem = (currentItem + 1) % imageurl.length;
-            mHandler.sendEmptyMessage(0);
+            int curItem = viewPager.getCurrentItem();
+            viewPager.setCurrentItem(curItem+1);
+            if (handler!=null){
+                handler.postDelayed(this,5000);
+            }
         }
     }
-
-    /**
-     * 接收子线程传递过来的数据
-     */
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        public void handleMessage(@NotNull android.os.Message msg) {
-            bannerViewPager.setCurrentItem(currentItem);
-        }
-    };
-
-    @Override
-    public void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
-        if (scheduledExecutorService != null) {
-            scheduledExecutorService.shutdown();
-            scheduledExecutorService = null;
-        }
-
-
-    }
-
-
 }
 

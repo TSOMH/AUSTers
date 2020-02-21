@@ -26,9 +26,7 @@
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.NewsActivity" />
         <activity android:name=".activity.IdentityAuthenticateActivity" />
-        <activity android:name=".activity.BannerThirdViewActivity" />
-        <activity android:name=".activity.BannerScondViewActivity" />
-        <activity android:name=".activity.BannerFirstViewActivity" /> <!-- android:parentActivityName=".activity.MainActivity" -->
+        <activity android:name=".activity.BannerFirstViewActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignInActivity">
             <intent-filter>

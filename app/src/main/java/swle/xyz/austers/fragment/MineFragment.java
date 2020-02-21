@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,11 +22,12 @@ import swle.xyz.austers.viewmodel.MineViewModel;
 public class MineFragment extends Fragment {
 
     private MineViewModel mViewModel;
-    private ImageButton imageButton;
     private View view;
     private Button button_my_trip;
     private Button button_my_release;
     private Button button_my_dynamic;
+    private Button button_setting;
+
 
 
     public static MineFragment newInstance() {
@@ -52,13 +52,6 @@ public class MineFragment extends Fragment {
     }
 
     private void initEvent(){
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         button_my_trip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,14 +76,23 @@ public class MineFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        button_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
     private void initView(View view){
-        imageButton = view.findViewById(R.id.imageButton_settings);
         button_my_trip = view.findViewById(R.id.button_my_trip);
         button_my_release = view.findViewById(R.id.button_my_release);
         button_my_dynamic = view.findViewById(R.id.button_my_dynamic);
+        button_setting = view.findViewById(R.id.button_setting);
+
+
     }
 
 }

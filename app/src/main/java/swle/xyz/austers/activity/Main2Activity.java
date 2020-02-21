@@ -1,10 +1,11 @@
 package swle.xyz.austers.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,24 +18,22 @@ import swle.xyz.austers.fragment.FirstFragment;
 import swle.xyz.austers.fragment.MessageFragment;
 import swle.xyz.austers.fragment.MineFragment;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends BaseActivity {
 
-    private BottomNavigationView bottomNavigationView;
     private FirstFragment firstFragment;
     private DiscoveryFragment discoveryFragment;
     private MessageFragment messageFragment;
     private MineFragment mineFragment;
-
     private Fragment isFragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_main2);
-
         initFragment(savedInstanceState);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView2);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -100,5 +99,29 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            //启动一个意图,回到桌面
+            Intent backHome = new Intent(Intent.ACTION_MAIN);
+            backHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            backHome.addCategory(Intent.CATEGORY_HOME);
+            startActivity(backHome);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initEvent() {
+
+
+    }
 }

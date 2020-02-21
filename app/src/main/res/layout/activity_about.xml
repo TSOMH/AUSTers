@@ -109,7 +109,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="本项目遵循MIT开源协议\n开源地址:github.com/TSOMH/AUSTers"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

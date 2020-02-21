@@ -128,6 +128,7 @@ public class FirstFragment extends Fragment {
         }
 
         adapter = new BannerAdapter(imageViewList);
+
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(url.length*100);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

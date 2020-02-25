@@ -159,6 +159,9 @@ public class FirstFragment extends Fragment {
         });
     }
 
+    /**
+     * 设定轮播时间
+     */
     private class TimerRunnable implements Runnable{
         @Override
         public void run() {

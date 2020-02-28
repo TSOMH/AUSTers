@@ -1,5 +1,7 @@
 package swle.xyz.austers.myclass;
 
+import android.util.Log;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -79,7 +81,9 @@ public class IdentityAuthenticate {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 ResponseBody responseBody = response.body();
-                html1 = responseBody.string();
+//                html1 = responseBody.string();
+                html1 = response.body().string();
+                Log.d("html1:",html1);
                 setYan();
                 password_encrypted = new SHA1().encode(string_yan+getPassword());
                 request2();

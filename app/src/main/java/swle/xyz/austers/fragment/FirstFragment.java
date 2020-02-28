@@ -1,12 +1,16 @@
 package swle.xyz.austers.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +25,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import swle.xyz.austers.R;
@@ -47,6 +53,7 @@ public class FirstFragment extends Fragment {
     private int currentItem = 0;
     private BannerAdapter adapter;
     private Handler handler;
+    private Button button_glide;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,6 +79,7 @@ public class FirstFragment extends Fragment {
         button_score=view.findViewById(R.id.imageButtonScore);
         viewPager = view.findViewById(R.id.bannerviewpager);
         linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
+        button_glide = view.findViewById(R.id.button_glide);
 
     }
     private void initEvent(){
@@ -80,6 +88,14 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ScoreActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        button_glide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
             }
         });
     }
@@ -91,8 +107,6 @@ public class FirstFragment extends Fragment {
         MultiTransformation<Bitmap> multi = new MultiTransformation<>(
 //                new BlurTransformation(25),
                 new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
-
-
         url[0] = "https://api.dujin.org/bing/1920.php";
         url[1] = "https://api.dujin.org/bing/1920.php";
         url[2] = "https://api.dujin.org/bing/1920.php";
@@ -101,6 +115,17 @@ public class FirstFragment extends Fragment {
         /**
          * 生成背景图
          */
+
+        if (DayChangedListener()){
+            new Thread(){
+                @Override
+                public void run(){
+                    Glide.get(Objects.requireNonNull(getActivity())).clearDiskCache();
+                    Log.d("day","changed");
+
+                }
+            }.start();
+        }
         for (int i = 0;i < 10000;i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -171,6 +196,35 @@ public class FirstFragment extends Fragment {
                 handler.postDelayed(this,5000);
             }
         }
+    }
+
+    private Boolean DayChangedListener(){
+        SharedPreferences sp = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Calendar calendar = Calendar.getInstance();
+        int today = calendar.get(Calendar.DAY_OF_MONTH);
+        int yesterday = sp.getInt("yesterday",0);
+        editor.putInt("yesterday",yesterday);
+        editor.apply();
+
+        if (yesterday != 0){ //不是第一次使用本应用
+            if (yesterday == today){
+                editor.commit();
+                return false;
+            }else {
+                yesterday = today;
+                editor.putInt("yesterday",yesterday);
+                editor.commit();
+                Glide.get(getActivity()).clearMemory();
+                return true;
+            }
+        }else { //第一次使用本应用
+            editor.putInt("yesterday",today);
+            editor.apply();
+            editor.commit();
+            return false;
+        }
+
     }
 }
 

@@ -93,6 +93,7 @@ public class MineFragment extends Fragment {
         button_setting = view.findViewById(R.id.button_setting);
 
 
+
     }
 
 }

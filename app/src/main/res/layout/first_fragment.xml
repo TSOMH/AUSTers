@@ -230,6 +230,14 @@
             app:layout_constraintGuide_begin="515dp"
             app:layout_constraintGuide_percent="0.54" />
 
+        <Button
+            android:id="@+id/button_glide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="清除内存缓存"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline23" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

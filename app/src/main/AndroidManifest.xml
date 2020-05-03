@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.SetPwActivity"></activity>
+        <activity android:name=".activity.SignInActivity" />
+        <activity android:name=".activity.SignInActivity" />
         <activity android:name=".activity.Main2Activity" />
         <activity android:name=".activity.PersonalInfoActivity" />
         <activity android:name=".activity.AcountBoundActivity" />
@@ -29,7 +32,7 @@
         <activity android:name=".activity.IdentityAuthenticateActivity" />
         <activity android:name=".activity.BannerFirstViewActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.SignInActivity">
+        <activity android:name=".activity.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

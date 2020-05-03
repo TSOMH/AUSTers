@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,7 +52,6 @@ public class FirstFragment extends Fragment {
     private int currentItem = 0;
     private BannerAdapter adapter;
     private Handler handler;
-    private Button button_glide;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -79,8 +77,6 @@ public class FirstFragment extends Fragment {
         button_score=view.findViewById(R.id.imageButtonScore);
         viewPager = view.findViewById(R.id.bannerviewpager);
         linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
-        button_glide = view.findViewById(R.id.button_glide);
-
     }
     private void initEvent(){
         button_score.setOnClickListener(new View.OnClickListener() {
@@ -91,13 +87,6 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        button_glide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
     }
 
 
@@ -198,6 +187,10 @@ public class FirstFragment extends Fragment {
         }
     }
 
+    /**
+     * 日期变化监听器
+     * @return
+     */
     private Boolean DayChangedListener(){
         SharedPreferences sp = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

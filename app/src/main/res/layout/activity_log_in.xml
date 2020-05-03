@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    tools:context=".activity.SignInActivity">
+    tools:context=".activity.LogInActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -53,25 +53,26 @@
 <!--            app:layout_constraintTop_toBottomOf="@+id/editText_id" />-->
 
     <Button
-        android:id="@+id/button_sign_in"
+        android:id="@+id/button_log_in"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/aust"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:shadowColor="#4A148C"
-        android:text="登陆"
+        android:text="登录"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/user_password"
         app:layout_constraintStart_toStartOf="@+id/user_password"
         app:layout_constraintTop_toBottomOf="@+id/user_password" />
 
+
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="手机号/学号"
+        android:hint="邮箱/学号"
         android:ems="10"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
@@ -158,6 +159,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="top" />
+
+    <Button
+        android:id="@+id/button_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        style="?android:borderlessButtonStyle"
+        android:text="忘记密码"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.724" />
+
+    <Button
+        android:id="@+id/button_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户注册"
+        style="?android:borderlessButtonStyle"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/button_forgot_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

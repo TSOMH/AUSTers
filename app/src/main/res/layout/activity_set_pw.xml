@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SetPwActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="密码设置"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editText_password_in_set_pw_activity"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/editText_password_in_set_pw_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="40dp"
+        android:hint="请输入密码"
+        android:maxLength="20"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:met_floatingLabel="normal" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="6-20个字符,区分大小写"
+        app:layout_constraintEnd_toEndOf="@+id/editText_password_in_set_pw_activity"
+        app:layout_constraintStart_toStartOf="@+id/editText_password_in_set_pw_activity"
+        app:layout_constraintTop_toBottomOf="@+id/editText_password_in_set_pw_activity" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/editText_password_again_in_set_pw_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:hint="密码确认"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:met_floatingLabel="normal" />
+
+    <Button
+        android:id="@+id/button_next_step_in_set_pw_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:text="完成"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/editText_password_again_in_set_pw_activity"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_password_again_in_set_pw_activity"
+        app:layout_constraintTop_toBottomOf="@+id/editText_password_again_in_set_pw_activity" />
+</androidx.constraintlayout.widget.ConstraintLayout>

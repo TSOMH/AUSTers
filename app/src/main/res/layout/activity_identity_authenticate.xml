@@ -34,23 +34,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_identity_authenticate" />
 
+
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editText_intranet_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="#808080"
         android:ems="10"
-        app:met_floatingLabel="normal"
         android:hint="教务管理系统密码(默认为身份证后6位)"
         android:inputType="textPassword"
-        android:backgroundTint="#808080"
         android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_student_number" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editText_student_number"
+        app:met_floatingLabel="normal" />
 
     <Button
         android:id="@+id/button_identity"

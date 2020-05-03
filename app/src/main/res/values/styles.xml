@@ -15,12 +15,21 @@
         <!-- AppCompatEditText选择的底线颜色 -->
         <item name="colorControlActivated">@color/transparent</item>
 
-<!--        应用默认状态栏颜色-->
+        <!--        应用默认状态栏颜色-->
         <item name="android:statusBarColor">@color/transparent</item>
 
-<!--        应用状态栏半透明-->
-<!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!--        应用状态栏半透明-->
+        <!--        <item name="android:windowTranslucentStatus">true</item>-->
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

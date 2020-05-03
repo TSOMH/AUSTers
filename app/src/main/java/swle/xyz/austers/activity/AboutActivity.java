@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.zzhoujay.richtext.RichText;
-
 import swle.xyz.austers.R;
 
 public class AboutActivity extends AppCompatActivity {
@@ -72,9 +70,9 @@ public class AboutActivity extends AppCompatActivity {
 
             }
         });
-        text="本项目采取MIT开源协议\n"
-                +"[开源地址](https://github.com/TSOMH/AUSTers)";
-        RichText.fromMarkdown(text).into(textView);
+//        text="本项目采取MIT开源协议\n"
+//                +"[开源地址](https://github.com/TSOMH/AUSTers)";
+//        RichText.fromMarkdown(text).into(textView);
 
 
     }

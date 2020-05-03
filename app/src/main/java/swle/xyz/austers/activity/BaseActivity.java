@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+
     /**
      * 初始化UI
      */

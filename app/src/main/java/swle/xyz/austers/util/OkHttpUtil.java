@@ -36,12 +36,12 @@ public class OkHttpUtil {
     private static LoginResult loginResult = new LoginResult();
     private static GetVcodeResult getVcodeResult = new GetVcodeResult();
 
-    public static void Login(String student_id, String password,final LoginResultCallBack loginResultCallBack){
+    public static void Login(String phonenumber, String password,final LoginResultCallBack loginResultCallBack){
 
 
 
 
-        User user = new User(student_id,password,null,null);
+        User user = new User(null,password,null,phonenumber);
 
         Gson gson = new Gson();
 
@@ -139,6 +139,10 @@ public class OkHttpUtil {
 
             }
         });
+    }
+
+    public static void Download(){
+
     }
 
     private static class LoginResult{

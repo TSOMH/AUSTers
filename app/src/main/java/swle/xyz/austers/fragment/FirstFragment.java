@@ -109,7 +109,7 @@ public class FirstFragment extends Fragment {
             new Thread(){
                 @Override
                 public void run(){
-                    Glide.get(Objects.requireNonNull(getActivity())).clearDiskCache();
+                    Glide.get(requireActivity()).clearDiskCache();
                     Log.d("day","changed");
 
                 }
@@ -192,7 +192,7 @@ public class FirstFragment extends Fragment {
      * @return
      */
     private Boolean DayChangedListener(){
-        SharedPreferences sp = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sp = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Calendar calendar = Calendar.getInstance();
         int today = calendar.get(Calendar.DAY_OF_MONTH);

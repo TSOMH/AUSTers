@@ -72,12 +72,12 @@
         android:id="@+id/user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="邮箱/学号"
+        android:hint="手机号/学号"
         android:ems="10"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:textCursorDrawable="@null"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintTop_toTopOf="@+id/guideline7"
         app:met_floatingLabel="normal" />
 

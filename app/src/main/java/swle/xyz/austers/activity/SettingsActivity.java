@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button button_about;
     private Button button_account_bound;
     private Button button_exit_account;
+//    private Button button_exit_app;
     private Button button_user_information;
 
     @Override
@@ -45,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         button_account_bound = findViewById(R.id.button_account_bound);
         button_exit_account = findViewById(R.id.button_exit_account);
         button_user_information = findViewById(R.id.button_user_information);
+//        button_exit_app = findViewById(R.id.button_exit_app);
 
     }
 
@@ -90,6 +92,13 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+
+//        button_exit_app.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.exit(0);
+//            }
+//        });
 
     }
 }

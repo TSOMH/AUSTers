@@ -1,17 +1,33 @@
 package swle.xyz.austers.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import swle.xyz.austers.BuildConfig;
 import swle.xyz.austers.R;
 import swle.xyz.austers.fragment.DiscoveryFragment;
 import swle.xyz.austers.fragment.FirstFragment;
@@ -34,8 +50,8 @@ public class Main2Activity extends BaseActivity {
         setContentView(R.layout.activity_main2);
         initFragment(savedInstanceState);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initEvent();
     }
 
     public void initFragment(Bundle savedInstanceState){
@@ -121,7 +137,66 @@ public class Main2Activity extends BaseActivity {
 
     @Override
     public void initEvent() {
-
-
+        checkAppVersion();
     }
+
+    public void checkAppVersion(){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://116.62.106.237:8080/update")
+                .get()
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String json = Objects.requireNonNull(response.body()).string();
+                Gson gson = new Gson();
+                new Version_info();
+                Version_info version_info;
+                version_info = gson.fromJson(json,Version_info.class);
+                System.out.println(version_info.versionCode+"");
+                System.out.println(BuildConfig.VERSION_CODE+"");
+                if (version_info.versionCode > BuildConfig.VERSION_CODE){
+                    AlertDialog.Builder builder = null;
+                    builder = new AlertDialog.Builder(Main2Activity.this);
+                    builder.setMessage("检查到有新版本,是否更新？");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent= new Intent();
+                            intent.setAction("android.intent.action.VIEW");
+                            Uri content_url = Uri.parse("http://116.62.106.237:8080/austers.apk");
+                            intent.setData(content_url);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    Looper.prepare();
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                    Looper.loop();
+                }
+
+            }
+        });
+    }
+
+    private static class Version_info{
+        public String downloadUrl;
+        public int versionCode;
+        public String versionDes;
+        public String versionName;
+    }
+
 }

@@ -74,7 +74,7 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
                     public void run(){
                         if(!editText_password.getText().toString().equals("") && !editText_student_number.getText().toString().equals("")){
                             IdentityAuthenticate ia = new IdentityAuthenticate(editText_student_number.getText().toString(),editText_password.getText().toString());
-                            SystemClock.sleep(1200);
+                            SystemClock.sleep(5200);
                             String result = ia.getResult();
                             String name = ia.getStudent_name();
                             if (result == null){

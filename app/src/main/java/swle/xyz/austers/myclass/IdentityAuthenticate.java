@@ -1,5 +1,6 @@
 package swle.xyz.austers.myclass;
 
+import android.os.SystemClock;
 import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
@@ -58,10 +59,10 @@ public class IdentityAuthenticate {
                     return cookies != null ? cookies : new ArrayList<Cookie>();
                 }
             })
-            .connectTimeout(1, TimeUnit.SECONDS)//设置连接超时时间
+            .connectTimeout(2, TimeUnit.SECONDS)//设置连接超时时间
             .build();
 
-    public IdentityAuthenticate(String student_number,  String password){
+    public IdentityAuthenticate(String student_number,String password){
 
         setStudentNumber(student_number);
         setPassword(password);
@@ -83,9 +84,11 @@ public class IdentityAuthenticate {
                 ResponseBody responseBody = response.body();
 //                html1 = responseBody.string();
                 html1 = response.body().string();
-                Log.d("html1:",html1);
+//                Log.d("html1:",html1);
                 setYan();
+                System.out.println("string_yan="+string_yan);
                 password_encrypted = new SHA1().encode(string_yan+getPassword());
+                SystemClock.sleep(2200);
                 request2();
             }
         });
@@ -118,6 +121,15 @@ public class IdentityAuthenticate {
                 .build();
         Request request2 = new Request.Builder()
                 .url(url_login)
+                .addHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+                .addHeader("Cache-Control","no-cache")
+                .addHeader("Accept-Language","zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2")
+                .addHeader("Connection","keep-alive")
+                .addHeader("Content-Length","107")
+                .addHeader("Content-Type","application/x-www-form-urlencoded")
+                .addHeader("Pragma","no-cache")
+                .addHeader("Upgrade-Insecure-Requests","1")
+                .addHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0")
                 .post(body)
                 .build();
         Call call2 = okHttpClient.newCall(request2);
@@ -125,13 +137,15 @@ public class IdentityAuthenticate {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 setResult("连接内网失败");
-
+                System.out.println("shibai");
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 ResponseBody responseBody = response.body();
                 html2 = responseBody.string();
+                Log.d("html2:",html2);
+                System.out.println("chengong");
                 String regFormat = "\\s*|\t|\r|\n";
                 String regTag = "<[^>]*>";
                 html2 = html2.replaceAll(regFormat,"").replaceAll(regTag,"");

@@ -17,7 +17,6 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
-import swle.xyz.austers.dialogfragment.ForgotPasswordDiologFragment;
 import swle.xyz.austers.myclass.OnMultiClickListener;
 import swle.xyz.austers.myinterface.LoginResultCallBack;
 import swle.xyz.austers.room.UserDao;
@@ -69,15 +68,16 @@ public class LogInActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
+
         button_log_in.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {//禁止频繁点击
 
-                String id = Objects.requireNonNull(user_id.getText()).toString();
+                String phonenumber = Objects.requireNonNull(user_id.getText()).toString();
                 String password = Objects.requireNonNull(user_password.getText()).toString();
 
-                if (!id.equals("") && !password.equals("")){
-                    OkHttpUtil.Login(id, password, new LoginResultCallBack() { //生成LoginResultCallBack接口，目的是拿到OkHttpUtil
+                if (!phonenumber.equals("") && !password.equals("")){
+                    OkHttpUtil.Login(phonenumber, password, new LoginResultCallBack() { //生成LoginResultCallBack接口，目的是拿到OkHttpUtil
                                                                                //的Response返回内容
 
                         @Override
@@ -140,8 +140,7 @@ public class LogInActivity extends BaseActivity {
         button_forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ForgotPasswordDiologFragment forgotPasswordDiologFragment = new ForgotPasswordDiologFragment();
-                forgotPasswordDiologFragment.show(getSupportFragmentManager(),null);
+
             }
         });
 

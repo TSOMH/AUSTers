@@ -41,7 +41,7 @@ public class Main2Activity extends BaseActivity {
     private MessageFragment messageFragment;
     private MineFragment mineFragment;
     private Fragment isFragment;
-
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,8 @@ public class Main2Activity extends BaseActivity {
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_main2);
         initFragment(savedInstanceState);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView2);
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initEvent();
     }
@@ -69,36 +70,53 @@ public class Main2Activity extends BaseActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            resetToDefaultIcon();
             switch (item.getItemId()) {
                 case R.id.firstFragment:
                     if (firstFragment == null) {
                         firstFragment = new FirstFragment();
                     }
+                    item.setIcon(R.drawable.ic_home);
                     switchContent(isFragment, firstFragment);
                     return true;
                 case R.id.discoveryFragment:
                     if (discoveryFragment == null) {
                         discoveryFragment = new DiscoveryFragment();
                     }
+                    item.setIcon(R.drawable.ic_search);
                     switchContent(isFragment, discoveryFragment);
                     return true;
                 case R.id.messageFragment:
                     if (messageFragment == null) {
                         messageFragment = new MessageFragment();
                     }
+                    item.setIcon(R.drawable.ic_message);
                     switchContent(isFragment, messageFragment);
                     return true;
                 case R.id.mineFragment:
                     if (mineFragment == null) {
                         mineFragment = new MineFragment();
                     }
+
                     switchContent(isFragment,mineFragment);
+                    item.setIcon(R.drawable.ic_mine);
                     return true;
             }
             return false;
         }
 
     };
+
+    private void resetToDefaultIcon() {
+        MenuItem home = bottomNavigationView.getMenu().findItem(R.id.firstFragment);
+        MenuItem search = bottomNavigationView.getMenu().findItem(R.id.discoveryFragment);
+        MenuItem message = bottomNavigationView.getMenu().findItem(R.id.messageFragment);
+        MenuItem mine = bottomNavigationView.getMenu().findItem(R.id.mineFragment);
+        home.setIcon(R.drawable.ic_home_unchecked);
+        search.setIcon(R.drawable.ic_search_unchecked);
+        message.setIcon(R.drawable.ic_message_unchecked);
+        mine.setIcon(R.drawable.ic_mine_unchecked);
+    }
 
 
     public void switchContent(Fragment from, Fragment to) {

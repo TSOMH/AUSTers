@@ -7,16 +7,16 @@
 
     <item
         android:id="@+id/discoveryFragment"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_search_unchecked"
         android:title="发现" />
 
     <item
         android:id="@+id/messageFragment"
-        android:icon="@drawable/ic_message"
+        android:icon="@drawable/ic_message_unchecked"
         android:title="消息" />
     <item
         android:id="@+id/mineFragment"
-        android:icon="@drawable/ic_mine"
+        android:icon="@drawable/ic_mine_unchecked"
 
         android:title="我的" />
 </menu>

@@ -9,4 +9,22 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+    <string-array name="starting">
+        <item>南门</item>
+        <item>西门</item>
+        <item>北门</item>
+        <item>淮南东站</item>
+        <item>淮南站</item>
+        <item>淮南南站</item>
+        <item>汽车站</item>
+    </string-array>
+    <string-array name="destination">
+        <item>南门</item>
+        <item>西门</item>
+        <item>北门</item>
+        <item>淮南东站</item>
+        <item>淮南站</item>
+        <item>淮南南站</item>
+        <item>汽车站</item>
+    </string-array>
 </resources>

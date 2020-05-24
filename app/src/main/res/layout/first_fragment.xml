@@ -43,16 +43,12 @@
             android:id="@+id/imageButtonNews"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
+            android:background="@color/transparent"
             android:src="@drawable/ic_news"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline20"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline17"
@@ -93,13 +89,57 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.38" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.42" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.56" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.52" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.44" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.58" />
+
 
         <ImageButton
             android:id="@+id/imageButtonClassSchedule"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
-            android:src="@drawable/ic_class_schedle"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_class_schedule"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintStart_toStartOf="@+id/guideline17"
@@ -113,122 +153,174 @@
             android:id="@+id/imageButton5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
+
+            android:background="@color/transparent"
             android:src="@drawable/ic_book"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
-            app:layout_constraintTop_toTopOf="@+id/guideline20"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
         <ImageButton
             android:id="@+id/imageButton6"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
+            android:background="@color/transparent"
             android:src="@drawable/ic_card"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toTopOf="@+id/guideline20"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="431dp"
-            app:layout_constraintGuide_percent="0.46" />
+
 
         <ImageButton
             android:id="@+id/imageButtonFleaMarket"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
+
+            android:background="@color/transparent"
             android:src="@drawable/ic_flea_market"
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline21"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
         <ImageButton
             android:id="@+id/imageButton8"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
-            android:src="@drawable/ic_part_time_jop"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_lose_and_found"
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintStart_toStartOf="@+id/guideline17"
-            app:layout_constraintTop_toTopOf="@+id/guideline21"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
         <ImageButton
-            android:id="@+id/imageButtonTaxi"
+            android:id="@+id/imageButtonCarPool"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
-            android:src="@drawable/ic_taxi"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_car"
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
-            app:layout_constraintTop_toTopOf="@+id/guideline21"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
         <ImageButton
             android:id="@+id/imageButtonContactWay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
+            android:background="@color/transparent"
             android:src="@drawable/ic_contact_way"
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toTopOf="@+id/guideline21"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
         <ImageButton
             android:id="@+id/imageButtonScore"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_selector"
+            android:background="@color/transparent"
             android:src="@drawable/ic_score"
             app:layout_constraintBottom_toTopOf="@+id/guideline23"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline22"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline28"
+            />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline23"
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="515dp"
-            app:layout_constraintGuide_percent="0.54" />
+            android:text="校园新闻"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的课表"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline18"
+            app:layout_constraintStart_toStartOf="@+id/guideline17"
+            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="图书借阅"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintStart_toStartOf="@+id/guideline18"
+            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="校园卡账单"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二手市场"
+            app:layout_constraintEnd_toStartOf="@+id/guideline17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline22"
+            />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="失物招领"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline18"
+            app:layout_constraintStart_toStartOf="@+id/guideline17"
+            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拼车"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintStart_toStartOf="@+id/guideline18"
+            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="校园黄页"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成绩查询"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

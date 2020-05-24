@@ -3,10 +3,12 @@ package swle.xyz.austers.util;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -17,9 +19,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import swle.xyz.austers.myclass.User;
+import swle.xyz.austers.bean.Trip;
+import swle.xyz.austers.bean.User;
+import swle.xyz.austers.myinterface.ContactWayResultCallBack;
 import swle.xyz.austers.myinterface.GetVcodeResultCallBack;
 import swle.xyz.austers.myinterface.LoginResultCallBack;
+import swle.xyz.austers.myinterface.QueryAllTripResultCallBack;
 import swle.xyz.austers.myinterface.SignInResultCallBack;
 
 /**
@@ -139,6 +144,68 @@ public class OkHttpUtil {
 
             }
         });
+    }
+
+    public static void queryContactWay(String name, final ContactWayResultCallBack contactWayResultCallBack){
+        User user = new User(name);
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        System.out.println(json);
+        RequestBody requestBody = RequestBody.create(json,JSON);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(5,TimeUnit.SECONDS)
+                .build();
+        String url = "http://116.62.106.237:8080/austers/querycontactway";
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                System.out.println("查询失败");
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String json = response.body().string();
+                System.out.println(json);
+                Gson gson1 = new Gson();
+                List<User> users = gson1.fromJson(json,new TypeToken<List<User>>(){}.getType());
+                contactWayResultCallBack.success(1,users);
+            }
+        });
+
+    }
+    public static void queryTrip(String initiator,String starting, String destination,int seat_left, int year, int month, int day,
+                                 final QueryAllTripResultCallBack queryAllTripResultCallBack){
+        Trip trip = new Trip(initiator,starting,destination,seat_left,year,month,day);
+        Gson gson =new Gson();
+        String json = gson.toJson(trip);
+        System.out.println("request:"+json);
+        RequestBody requestBody = RequestBody.create(json,JSON);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(5,TimeUnit.SECONDS)
+                .build();
+        String url = "http://116.62.106.237:8080/austers/queryalltrip";
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+            }
+        });
+
     }
 
     public static void Download(){

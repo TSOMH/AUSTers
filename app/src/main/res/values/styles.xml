@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
 
+        <item name="android:datePickerDialogTheme">@style/CustomDatePickerDialogTheme</item>>
         <item name="colorAccent">@color/aust</item>
 
         <!-- AppCompatEditText默认状态状态设置底线颜色 -->
@@ -28,8 +29,19 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CustomDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:colorControlActivated">@color/aust</item>
+        <item name="android:colorAccent">@color/aust</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--NavigationIcon和标题之间的距离-->
+    <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
 
 </resources>

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="设置"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_settingsActivity"
         app:layout_constraintEnd_toEndOf="@+id/toolbar_settingsActivity"

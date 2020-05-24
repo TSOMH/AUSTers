@@ -26,10 +26,12 @@ import com.bumptech.glide.load.MultiTransformation;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import swle.xyz.austers.R;
+import swle.xyz.austers.activity.CarPoolActivity;
+import swle.xyz.austers.activity.ContactWayActivity;
+import swle.xyz.austers.activity.NewsActivity;
 import swle.xyz.austers.activity.ScoreActivity;
 import swle.xyz.austers.adapter.BannerAdapter;
 import swle.xyz.austers.viewmodel.FirstViewModel;
@@ -42,7 +44,11 @@ public class FirstFragment extends Fragment {
     private FirstViewModel mViewModel;
     private View view;
     private LinearLayout linearLayout;
+
     private ImageButton button_score;
+    private ImageButton button_contact_way;
+    private ImageButton button_car_pool;
+    private ImageButton button_news;
     private static FirstFragment newInstance() {
         return new FirstFragment();
     }
@@ -75,6 +81,11 @@ public class FirstFragment extends Fragment {
     }
     private void initView(View view){
         button_score=view.findViewById(R.id.imageButtonScore);
+        button_contact_way = view.findViewById(R.id.imageButtonContactWay);
+        button_car_pool = view.findViewById(R.id.imageButtonCarPool);
+        button_news = view.findViewById(R.id.imageButtonNews);
+
+
         viewPager = view.findViewById(R.id.bannerviewpager);
         linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
     }
@@ -83,6 +94,28 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ScoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_contact_way.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ContactWayActivity.class);
+                startActivity(intent);
+            }
+        });
+        button_news.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+        button_car_pool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CarPoolActivity.class);
                 startActivity(intent);
             }
         });
@@ -96,9 +129,9 @@ public class FirstFragment extends Fragment {
         MultiTransformation<Bitmap> multi = new MultiTransformation<>(
 //                new BlurTransformation(25),
                 new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
-        url[0] = "https://api.dujin.org/bing/1920.php";
-        url[1] = "https://api.dujin.org/bing/1920.php";
-        url[2] = "https://api.dujin.org/bing/1920.php";
+        url[0] = "http://116.62.106.237:8080/school02.jpg";
+        url[1] = "http://116.62.106.237:8080/school03.jpg";
+        url[2] = "http://116.62.106.237:8080/school01.jpg";
         imageViewList = new ArrayList<>();
 
         /**

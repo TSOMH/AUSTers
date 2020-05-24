@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--右侧搜索操作条目-->
+    <item
+        android:id="@+id/action_search"
+        android:title="教师，学院，社团"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always"/>
+
+<!--    &lt;!&ndash;右侧设置条目，收起&ndash;&gt;-->
+<!--    <item-->
+<!--        android:id="@+id/action_setting"-->
+<!--        android:title="设置"-->
+<!--        app:showAsAction="never" />-->
+
+</menu>

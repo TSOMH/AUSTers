@@ -1,4 +1,4 @@
-package swle.xyz.austers.myclass;
+package swle.xyz.austers.bean;
 /**
 *Created by TSOMH on 2020/2/25$
 *Description:
@@ -6,10 +6,51 @@ package swle.xyz.austers.myclass;
 */
 public class User implements java.io.Serializable{
 
+    private String name;
     private String student_id;
     private String password;
     private String emailaddress;
     private String phonenumber;
+    private String qq;
+    private String organization;
+
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+
+
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User(String name,String phonenumber,String qq){
+        this.name = name;
+        this.phonenumber = phonenumber;
+        this.qq = qq;
+    }
+    public User(String name){
+        this.name = name;
+    }
 
     public User(String student_id,String password,String student_name,String phonenumber){
         this.student_id = student_id;

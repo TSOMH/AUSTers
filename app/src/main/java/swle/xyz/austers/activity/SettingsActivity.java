@@ -89,7 +89,10 @@ public class SettingsActivity extends AppCompatActivity {
         button_exit_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SettingsActivity.this, LogInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
+                intent.setClass(SettingsActivity.this,LogInActivity.class);
+                startActivity(intent);
             }
         });
 

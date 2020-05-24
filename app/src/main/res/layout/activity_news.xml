@@ -6,4 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".activity.NewsActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_news_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="校园新闻"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_news_activity"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_news_activity"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_news_activity"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_news_activity" />
+
+    <WebView
+        android:id="@+id/webview_news_activity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_news_activity"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

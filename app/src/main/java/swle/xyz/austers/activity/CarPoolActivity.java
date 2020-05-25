@@ -97,9 +97,9 @@ public class CarPoolActivity extends BaseActivity  {
             public void onClick(View v) {
                 String starting = spinner_starting.getSelectedItem().toString();
                 String destination = spinner_destnitation.getSelectedItem().toString();
-                trips.add(new Trip("小明","南门","淮南东站",3,2020,6,1));
-                trips.add(new Trip("小红","西门","淮南东站",3,2020,6,1));
-                trips.add(new Trip("小蓝","北门","淮南东站",3,2020,6,1));
+                trips.add(new Trip("许跃杰","南门","淮南东站",3,2020,6,1,12));
+                trips.add(new Trip("胡太长","西门","淮南东站",3,2020,6,1,13));
+                trips.add(new Trip("马国涛","北门","淮南东站",3,2020,6,1,14));
                 gridView.setAdapter(new CarPoolGridViewAdapter(CarPoolActivity.this,trips));
 
             }

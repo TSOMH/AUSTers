@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.CarPoolActivity"></activity>
+        <activity android:name=".activity.VirusActivity"></activity>
+        <activity android:name=".activity.CarPoolActivity" />
         <activity android:name=".activity.ContactWayActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

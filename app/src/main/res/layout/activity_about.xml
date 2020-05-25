@@ -74,19 +74,19 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/text_version"
         tools:ignore="RtlSymmetry" />
+
     <Button
         android:id="@+id/button_oos_licenses"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/button_version"
         android:background="@drawable/button_selector"
-        android:text="开源项目"
-        android:textSize="16sp"
         android:gravity="center|start"
         android:paddingStart="20dp"
+        android:text="开源项目"
+        android:textSize="16sp"
 
-        style="?android:attr/borderlessButtonStyle"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/button_version" />
 
 
     <Button
@@ -111,7 +111,15 @@
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-
+    <TextView
+        android:id="@+id/textView93"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="当前已是最新版本"
+        app:layout_constraintBottom_toBottomOf="@+id/button_version"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_version"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -178,9 +178,9 @@ public class OkHttpUtil {
         });
 
     }
-    public static void queryTrip(String initiator,String starting, String destination,int seat_left, int year, int month, int day,
+    public static void queryTrip(String initiator,String starting, String destination,int seat_left, int year, int month, int day,int hour,
                                  final QueryAllTripResultCallBack queryAllTripResultCallBack){
-        Trip trip = new Trip(initiator,starting,destination,seat_left,year,month,day);
+        Trip trip = new Trip(initiator,starting,destination,seat_left,year,month,day,hour);
         Gson gson =new Gson();
         String json = gson.toJson(trip);
         System.out.println("request:"+json);

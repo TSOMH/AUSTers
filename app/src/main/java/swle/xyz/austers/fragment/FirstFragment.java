@@ -33,6 +33,7 @@ import swle.xyz.austers.activity.CarPoolActivity;
 import swle.xyz.austers.activity.ContactWayActivity;
 import swle.xyz.austers.activity.NewsActivity;
 import swle.xyz.austers.activity.ScoreActivity;
+import swle.xyz.austers.activity.VirusActivity;
 import swle.xyz.austers.adapter.BannerAdapter;
 import swle.xyz.austers.viewmodel.FirstViewModel;
 
@@ -49,6 +50,7 @@ public class FirstFragment extends Fragment {
     private ImageButton button_contact_way;
     private ImageButton button_car_pool;
     private ImageButton button_news;
+    private ImageButton button_virus;
     private static FirstFragment newInstance() {
         return new FirstFragment();
     }
@@ -84,6 +86,7 @@ public class FirstFragment extends Fragment {
         button_contact_way = view.findViewById(R.id.imageButtonContactWay);
         button_car_pool = view.findViewById(R.id.imageButtonCarPool);
         button_news = view.findViewById(R.id.imageButtonNews);
+        button_virus = view.findViewById(R.id.imageButton_virus);
 
 
         viewPager = view.findViewById(R.id.bannerviewpager);
@@ -116,6 +119,13 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CarPoolActivity.class);
+                startActivity(intent);
+            }
+        });
+        button_virus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), VirusActivity.class);
                 startActivity(intent);
             }
         });

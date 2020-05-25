@@ -86,7 +86,7 @@ public class CarPoolGridViewAdapter extends BaseAdapter   {
 
         viewHolder.starting.setText(trips.get(position).getStarting());
         viewHolder.destnatination.setText(trips.get(position).getDestination());
-        viewHolder.time.setText("日期："+trips.get(position).getMonth()+"月"+trips.get(position).getDay()+"日");
+        viewHolder.time.setText("日期："+trips.get(position).getMonth()+"月"+trips.get(position).getDay()+"日"+trips.get(position).getHour()+":00");
         viewHolder.seat_left.setText("剩余座位："+trips.get(position).getSeat_left());
         viewHolder.initiator.setText("发起人："+trips.get(position).getInitiator());
         viewHolder.button_get_in.setOnClickListener(new View.OnClickListener() {

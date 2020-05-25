@@ -13,8 +13,11 @@ public class Trip {
     private int year;
     private int month;
     private int day;
+    private int hour;
 
-    public Trip(String initiator, String starting, String destination, int seat_left,int year, int month, int day) {
+
+
+    public Trip(String initiator, String starting, String destination, int seat_left, int year, int month, int day, int hour) {
         this.initiator = initiator;
         this.starting = starting;
         this.destination = destination;
@@ -22,6 +25,7 @@ public class Trip {
         this.year = year;
         this.month = month;
         this.day = day;
+        this.hour = hour;
     }
 
 
@@ -79,6 +83,13 @@ public class Trip {
 
     public void setDay(int day) {
         this.day = day;
+    }
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
     }
 
 

@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "swle.xyz.austers"
         minSdkVersion 23
@@ -26,9 +25,6 @@ android {
 //            }
 //        }
 
-        dataBinding {
-            enabled true
-        }
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -88,9 +84,10 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
 
-    api 'io.jsonwebtoken:jjwt-api:0.11.0'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.0'
-    runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.11.0') {
+    //jwt
+    api 'io.jsonwebtoken:jjwt-api:0.11.1'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1'
+    runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.11.1') {
         exclude group: 'org.json', module: 'json' //provided by Android natively
     }
 

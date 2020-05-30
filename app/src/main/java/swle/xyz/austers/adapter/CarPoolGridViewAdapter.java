@@ -3,6 +3,9 @@ package swle.xyz.austers.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,31 +15,45 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import swle.xyz.austers.R;
 import swle.xyz.austers.bean.Trip;
+import swle.xyz.austers.myinterface.GetInTripCallBack;
+import swle.xyz.austers.util.OkHttpUtil;
 
 /**
 *Created by TSOMH on 2020/5/24$
 *Description:
 *
 */
-public class CarPoolGridViewAdapter extends BaseAdapter   {
+public class CarPoolGridViewAdapter extends BaseAdapter {
 
-    private List<Trip> trips = new ArrayList<>();
-    private Context context = null;
+    private List<Trip> trips;
+    private Context context;
     private LayoutInflater layoutInflater;
     private AlertDialog.Builder builder = null;
+    private AlertDialog.Builder builder1 = null;
+    private AlertDialog.Builder builder2 = null;
     private int size;
+    private Handler handler;
+
+    SharedPreferences.Editor editor = null;
+    SharedPreferences trip_info = null;
 
 
-    public CarPoolGridViewAdapter(Context context,List<Trip> trips){
+
+
+
+    public CarPoolGridViewAdapter(Context context,List<Trip> trips,SharedPreferences trip_info,SharedPreferences.Editor editor){
         this.size = trips.size();
         this.trips = trips;
         this.context = context;
+        this.editor = editor;
+        this.trip_info = trip_info;
         layoutInflater = LayoutInflater.from(context);
+        handler = new Handler();
+
     }
 
 
@@ -56,6 +73,7 @@ public class CarPoolGridViewAdapter extends BaseAdapter   {
     }
 
     static class ViewHolder{
+        int id;
         TextView starting;
         TextView destnatination;
         TextView time;
@@ -67,8 +85,10 @@ public class CarPoolGridViewAdapter extends BaseAdapter   {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
+
+
         if (convertView == null){
             convertView = layoutInflater.inflate(R.layout.tripinfocardviewitem,null);
             viewHolder = new ViewHolder();
@@ -89,21 +109,83 @@ public class CarPoolGridViewAdapter extends BaseAdapter   {
         viewHolder.time.setText("日期："+trips.get(position).getMonth()+"月"+trips.get(position).getDay()+"日"+trips.get(position).getHour()+":00");
         viewHolder.seat_left.setText("剩余座位："+trips.get(position).getSeat_left());
         viewHolder.initiator.setText("发起人："+trips.get(position).getInitiator());
+        final ViewHolder finalViewHolder = viewHolder;
         viewHolder.button_get_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                builder = new AlertDialog.Builder(context);
-                builder.setMessage("搜索结果为空，请重试");
-                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                final AlertDialog dialog = builder.create();
-                dialog.show();
+
+                boolean is_got_in = trip_info.getBoolean(trips.get(position).getId()+"",false);
+                if (is_got_in){
+//                    Toast.makeText(context,"请不要重复乘坐！",Toast.LENGTH_LONG).show();
+                    builder1 = new AlertDialog.Builder(context);
+                    builder1.setMessage("请不要重复乘坐！");
+                    builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    final AlertDialog dialog = builder1.create();
+                    dialog.show();
+
+                }else {
+                    builder = new AlertDialog.Builder(context);
+                    builder.setMessage("是否确认乘坐？");
+
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, int which) {
+                            final int s_left = trips.get(position).getSeat_left();
+                            System.out.println("id="+trips.get(position).getId());
+                            if (s_left > 0){
+                                OkHttpUtil.getInTrip(trips.get(position).getId(), new GetInTripCallBack() {
+                                    @Override
+                                    public void success(int status) {
+                                        //位置减1
+                                        trips.get(position).setSeat_left(s_left-1);
+                                        editor.putBoolean(trips.get(position).getId()+"",true);
+                                        editor.apply();
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                finalViewHolder.seat_left.setText("剩余座位："+(s_left-1));
+                                                if (s_left == 1){
+                                                    finalViewHolder.button_get_in.setEnabled(false);
+                                                }
+                                            }
+                                        });
+                                        builder2 = new AlertDialog.Builder(context);
+                                        builder2.setMessage("乘坐成功！");
+                                        builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
+                                        Looper.prepare();
+                                        final AlertDialog dialog = builder2.create();
+                                        dialog.show();
+                                        Looper.loop();
+                                        finalViewHolder.button_get_in.setEnabled(false);
+
+                                    }
+                                    @Override
+                                    public void failure(int status) {
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
-//        viewHolder.QQ.setText("QQ:"+users.get(position).getQq());
         return convertView;
     }
 }

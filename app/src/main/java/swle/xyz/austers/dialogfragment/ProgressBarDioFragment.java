@@ -17,7 +17,7 @@ import swle.xyz.austers.R;
 public class ProgressBarDioFragment extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         builder.setView(R.layout.dialog_progress_bar)
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {

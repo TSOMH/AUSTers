@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -144,17 +143,12 @@ public class FirstFragment extends Fragment {
         url[2] = "http://116.62.106.237:8080/school01.jpg";
         imageViewList = new ArrayList<>();
 
-        /**
-         * 生成背景图
-         */
-
+        //生成背景图
         if (DayChangedListener()){
             new Thread(){
                 @Override
                 public void run(){
                     Glide.get(requireActivity()).clearDiskCache();
-                    Log.d("day","changed");
-
                 }
             }.start();
         }
@@ -168,9 +162,8 @@ public class FirstFragment extends Fragment {
             imageViewList.add(imageView);
         }
 
-        /**
-         * 生成指示器
-         */
+
+        //生成指示器
         for (int i = 0;i<url.length;i++){
             ImageView dot = new ImageView(getActivity());
             if (i == 0){
@@ -216,9 +209,9 @@ public class FirstFragment extends Fragment {
         });
     }
 
-    /**
-     * 设定轮播时间
-     */
+
+    //设定轮播时间
+
     private class TimerRunnable implements Runnable{
         @Override
         public void run() {
@@ -230,10 +223,7 @@ public class FirstFragment extends Fragment {
         }
     }
 
-    /**
-     * 日期变化监听器
-     * @return
-     */
+    //日期变化监听
     private Boolean DayChangedListener(){
         SharedPreferences sp = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -251,7 +241,7 @@ public class FirstFragment extends Fragment {
                 yesterday = today;
                 editor.putInt("yesterday",yesterday);
                 editor.commit();
-                Glide.get(getActivity()).clearMemory();
+                Glide.get(requireActivity()).clearMemory();
                 return true;
             }
         }else { //第一次使用本应用
@@ -260,7 +250,6 @@ public class FirstFragment extends Fragment {
             editor.commit();
             return false;
         }
-
     }
 }
 

@@ -10,6 +10,8 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+import swle.xyz.austers.activity.CarPoolActivity;
+
 /**
 *Created by TSOMH on 2020/5/24$
 *Description:
@@ -31,6 +33,6 @@ public class TimePickerFragment extends DialogFragment implements
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+        ((CarPoolActivity)requireActivity()).setTime(hourOfDay);
     }
 }

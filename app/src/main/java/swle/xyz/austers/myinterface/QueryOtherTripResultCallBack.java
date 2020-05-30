@@ -8,7 +8,7 @@ import swle.xyz.austers.bean.Trip;
  * Created by TSOMH on 2020/5/25$
  * Description:
  */
-public interface QueryAllTripResultCallBack {
+public interface QueryOtherTripResultCallBack {
     void success(List<Trip> trips);
     void failure(int status_code);
 }

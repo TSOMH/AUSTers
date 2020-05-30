@@ -22,9 +22,11 @@ import okhttp3.Response;
 import swle.xyz.austers.bean.Trip;
 import swle.xyz.austers.bean.User;
 import swle.xyz.austers.myinterface.ContactWayResultCallBack;
+import swle.xyz.austers.myinterface.GetInTripCallBack;
 import swle.xyz.austers.myinterface.GetVcodeResultCallBack;
+import swle.xyz.austers.myinterface.IssueResultCallBack;
 import swle.xyz.austers.myinterface.LoginResultCallBack;
-import swle.xyz.austers.myinterface.QueryAllTripResultCallBack;
+import swle.xyz.austers.myinterface.QueryOtherTripResultCallBack;
 import swle.xyz.austers.myinterface.SignInResultCallBack;
 
 /**
@@ -178,8 +180,8 @@ public class OkHttpUtil {
         });
 
     }
-    public static void queryTrip(String initiator,String starting, String destination,int seat_left, int year, int month, int day,int hour,
-                                 final QueryAllTripResultCallBack queryAllTripResultCallBack){
+    public static void queryOtherTrip(String initiator,String starting, String destination,int seat_left, int year, int month, int day,int hour,
+                                 final QueryOtherTripResultCallBack queryOtherTripResultCallBack){
         Trip trip = new Trip(initiator,starting,destination,seat_left,year,month,day,hour);
         Gson gson =new Gson();
         String json = gson.toJson(trip);
@@ -188,7 +190,70 @@ public class OkHttpUtil {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(5,TimeUnit.SECONDS)
                 .build();
-        String url = "http://116.62.106.237:8080/austers/queryalltrip";
+        String url = "http://116.62.106.237:8080/austers/query_other_trip";
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                queryOtherTripResultCallBack.failure(-1);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String json = response.body().string();
+                System.out.println(json);
+                Gson gson = new Gson();
+                List<Trip> trips = gson.fromJson(json,new TypeToken<List<Trip>>(){}.getType());
+                queryOtherTripResultCallBack.success(trips);
+            }
+        });
+
+    }
+    public static void issueTrip(String initiator, String starting, String destination, int seat_left,
+                                int year, int month, int day, int hour, final IssueResultCallBack issueResultCallBack){
+        Trip trip = new Trip(initiator,starting,destination,seat_left,year,month,day,hour);
+        Gson gson =new Gson();
+        String json = gson.toJson(trip);
+        System.out.println(json);
+        RequestBody requestBody = RequestBody.create(json,JSON);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(5,TimeUnit.SECONDS)
+                .build();
+        String url = "http://116.62.106.237:8080/austers/issue_trip";
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                issueResultCallBack.failure(-1);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String json = response.body().string();
+                if (json.equals("1")){
+                    issueResultCallBack.success(1);
+                }else {
+                    issueResultCallBack.failure(-3);
+                }
+            }
+        });
+    }
+
+    public static void getInTrip(int id, final GetInTripCallBack getInTripCallBack){
+        String json = "{\"id\":"+id+"}";
+        RequestBody requestBody = RequestBody.create(json,JSON);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(5,TimeUnit.SECONDS)
+                .build();
+        String url = "http://116.62.106.237:8080/austers/get_in_trip";
         final Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -202,10 +267,16 @@ public class OkHttpUtil {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String json = response.body().string();
+                System.out.println("乘坐结果："+json);
+                if (json.equals("1")){
+                    getInTripCallBack.success(1);
+                }else {
+                    getInTripCallBack.failure(-1);
+                }
 
             }
         });
-
     }
 
     public static void Download(){

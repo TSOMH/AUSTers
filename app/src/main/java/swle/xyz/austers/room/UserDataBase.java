@@ -7,7 +7,8 @@ import androidx.room.RoomDatabase;
 *Description:
 *
 */
-@Database(entities = {User.class},version = 1,exportSchema = false)
+@Database(entities = {User.class,Trip.class},version = 1,exportSchema = false)
 public abstract class UserDataBase extends RoomDatabase{
     public abstract UserDao getUserDao();
+    public abstract TripsDao getTripDao();
 }

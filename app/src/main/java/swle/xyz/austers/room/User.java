@@ -1,6 +1,5 @@
 package swle.xyz.austers.room;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,29 +11,19 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User{
 
+
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    int uid;
 
-    @ColumnInfo
-    private String student_id;
+    public String student_id;
+    public String phonenumber;
+    public String password;
+    public String organization;
 
-    @ColumnInfo
-    private String password;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(String student_id) {
+    public User(String student_id, String phonenumber, String password, String organization) {
         this.student_id = student_id;
+        this.phonenumber = phonenumber;
+        this.password = password;
+        this.organization = organization;
     }
-
 }

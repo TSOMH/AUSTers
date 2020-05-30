@@ -1,19 +1,21 @@
-package swle.xyz.austers.bean;
+package swle.xyz.austers.room;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 /**
-*Created by TSOMH on 2020/5/24$
+*Created by TSOMH on 2020/5/28$
 *Description:
 *
 */
+@Entity
 public class Trip {
 
-
-    private int id;
+    @PrimaryKey(autoGenerate = true)
+    int uid;
     private String initiator;
     private String starting;
     private String destination;
-
-
-
 
     private int seat_left;
     private int year;
@@ -96,14 +98,6 @@ public class Trip {
 
     public void setHour(int hour) {
         this.hour = hour;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
 

@@ -4,9 +4,11 @@ package swle.xyz.austers.bean;
 *Description:
 *
 */
-public class User implements java.io.Serializable{
+public class User{
 
+    //昵称
     private String name;
+    //学号
     private String student_id;
     private String password;
     private String emailaddress;

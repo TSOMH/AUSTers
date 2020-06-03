@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+//python支持
 //apply plugin: 'com.chaquo.python'
 
 android {
@@ -46,7 +47,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'com.google.android.material:material:1.1.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.navigation:navigation-fragment:2.2.2'
@@ -63,7 +64,7 @@ dependencies {
 
 
     //okHttp
-    implementation("com.squareup.okhttp3:okhttp:4.3.1")
+    implementation('com.squareup.okhttp3:okhttp:4.7.2')
 
 
     //edit_text库
@@ -90,5 +91,13 @@ dependencies {
     runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.11.1') {
         exclude group: 'org.json', module: 'json' //provided by Android natively
     }
+
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+
+
+    implementation 'com.droidninja:filepicker:2.2.4'
+
+    implementation 'com.sl.utakephoto:uTakePhoto:1.1.0'
 
 }

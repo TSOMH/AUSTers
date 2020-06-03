@@ -20,20 +20,21 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/textView36"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="84dp"
+                android:maxEms="5"
+                android:singleLine="false"
                 android:text="姓名"
                 android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/textView65"
+                app:layout_constraintTop_toTopOf="@+id/textView65" />
 
             <TextView
                 android:id="@+id/textView41"
@@ -47,14 +48,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
             <!--            <TextView-->
-<!--                android:id="@+id/textView43"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="QQ"-->
-<!--                android:textSize="15sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/textView41"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/textView42"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/textView41" />-->
+            <!--                android:id="@+id/textView43"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="QQ"-->
+            <!--                android:textSize="15sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/textView41"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/textView42"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/textView41" />-->
 
             <TextView
                 android:id="@+id/textView42"
@@ -66,8 +67,8 @@
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView36"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.663"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toStartOf="@+id/guideline29"
                 app:layout_constraintTop_toTopOf="@+id/textView36"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -82,17 +83,34 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/userpicture" />
 
-<!--            <Button-->
-<!--                android:id="@+id/button"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                -->
-<!--                android:background="@color/transparent"-->
-<!--                android:text="有疑问？"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/textView43"-->
-<!--                />-->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/textView65"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="姓名："
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <!--            <Button-->
+            <!--                android:id="@+id/button"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                -->
+            <!--                android:background="@color/transparent"-->
+            <!--                android:text="有疑问？"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/textView43"-->
+            <!--                />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

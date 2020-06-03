@@ -1,8 +1,8 @@
 package swle.xyz.austers.activity;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +14,12 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
-import swle.xyz.austers.myclass.IdentityAuthenticate;
+import swle.xyz.austers.callback.BasicInfoCallBack;
+import swle.xyz.austers.room.User;
+import swle.xyz.austers.room.UserDao;
+import swle.xyz.austers.room.UserDataBase;
+import swle.xyz.austers.room.UserRoom;
+import swle.xyz.austers.util.JWXT;
 
 
 public class IdentityAuthenticateActivity extends AppCompatActivity {
@@ -25,12 +30,20 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
 
     private AlertDialog.Builder builder = null;
 
+    UserDataBase userDataBase;
+    UserDao userDao;
+
+    SharedPreferences loginInfo = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identity_authenticate);
         initView();
         initEvent();
+        loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        userDataBase = UserRoom.getInstance(getApplicationContext());
+        userDao = userDataBase.getUserDao();
 
     }
 
@@ -49,9 +62,8 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
 
             }
         });
-        getSupportActionBar().setTitle("身份验证");
         getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
-        getSupportActionBar().setDisplayShowTitleEnabled(true);//隐藏toolbar默认显示的label
+        getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏toolbar默认显示的label
 
 
     }
@@ -72,29 +84,43 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run(){
-                        if(!editText_password.getText().toString().equals("") && !editText_student_number.getText().toString().equals("")){
-                            IdentityAuthenticate ia = new IdentityAuthenticate(editText_student_number.getText().toString(),editText_password.getText().toString());
-                            SystemClock.sleep(5200);
-                            String result = ia.getResult();
-                            String name = ia.getStudent_name();
-                            if (result == null){
-                                dialog.setMessage("连接错误");
-                            }else {
-                                switch (result) {
-                                    case "连接内网失败":
-                                        dialog.setMessage("请检查是否开启VPN或使用校园网连接");
-                                        break;
-                                    case "密码错误":
-                                        dialog.setMessage("密码错误，请重试");
-                                        break;
-                                    case "账户不存在":
-                                        dialog.setMessage("账户不存在");
-                                        break;
-                                    case "登陆成功":
-                                        dialog.setMessage(name+"同学,你好!");
-                                        break;
+                        if(!editText_password.getText().toString().equals("") &&
+                                !editText_student_number.getText().toString().equals("")){
+                            JWXT jwxt = new JWXT(editText_student_number.getText().toString(),
+                                    editText_password.getText().toString());
+                            jwxt.getName(new BasicInfoCallBack() {
+                                @Override
+                                public void failure(int status_code) {
+                                    switch (status_code){
+                                        case -1:
+                                            dialog.setMessage("请检查是否开启VPN或使用校园网连接");
+                                            break;
+                                        case -2:
+                                            dialog.setMessage("密码错误，请重试");
+                                            break;
+                                        case -3:
+                                            dialog.setMessage("账户不存在");
+                                            break;
+                                    }
                                 }
-                            }
+
+                                @Override
+                                public void getBasicInfo(String[] info) {
+                                    String phonenumber = loginInfo.getString("current_user","");
+                                    User user = new User();
+                                    user.setStudent_id(editText_student_number.getText().toString());
+                                    user.setPhonenumber(phonenumber);
+                                    user.setStudent_id(info[0]);
+                                    user.setOrganization(info[9]);
+                                    user.setTrue_name(info[1]);
+                                    user.setMajor(info[10]);
+                                    user.setIs_student(true);
+                                    user.setPassword_jwxt(editText_password.getText().toString());
+                                    updateUser(user);
+                                    dialog.setMessage(info[1]+"同学,你好!");
+
+                                }
+                            });
                         }else {
                             dialog.setMessage("请检查用户名和密码是否为空");
                         }
@@ -102,5 +128,14 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
                 }.start();
             }
         });
+    }
+
+    void updateUser(final User user){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.InsertUser(user);
+            }
+        }).start();
     }
 }

@@ -84,8 +84,8 @@ public class MyGridViewAdapter extends BaseAdapter   {
 //
 //            }
 //        });
-        viewHolder.name.setText("姓名:"+users.get(position).getName());
-        viewHolder.organization.setText("学院/机构:"+users.get(position).getOrganization());
+        viewHolder.name.setText(users.get(position).getName());
+        viewHolder.organization.setText("学院/机构："+users.get(position).getOrganization());
         viewHolder.phonenumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +94,7 @@ public class MyGridViewAdapter extends BaseAdapter   {
                 context.startActivity(dialIntent);
             }
         });
-        viewHolder.phonenumber.setText("电话:"+users.get(position).getPhonenumber());
+        viewHolder.phonenumber.setText("电话："+users.get(position).getPhonenumber());
 //        viewHolder.QQ.setText("QQ:"+users.get(position).getQq());
         return convertView;
     }

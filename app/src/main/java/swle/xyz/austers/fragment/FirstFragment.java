@@ -29,11 +29,17 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import swle.xyz.austers.R;
 import swle.xyz.austers.activity.CarPoolActivity;
+import swle.xyz.austers.activity.ClassScheduleActivity;
 import swle.xyz.austers.activity.ContactWayActivity;
+import swle.xyz.austers.activity.GradeActivity;
 import swle.xyz.austers.activity.NewsActivity;
-import swle.xyz.austers.activity.ScoreActivity;
 import swle.xyz.austers.activity.VirusActivity;
 import swle.xyz.austers.adapter.BannerAdapter;
+import swle.xyz.austers.myclass.CurrentUser;
+import swle.xyz.austers.myclass.IsStudentOnClickListener;
+import swle.xyz.austers.room.UserDao;
+import swle.xyz.austers.room.UserDataBase;
+import swle.xyz.austers.room.UserRoom;
 import swle.xyz.austers.viewmodel.FirstViewModel;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
@@ -50,6 +56,7 @@ public class FirstFragment extends Fragment {
     private ImageButton button_car_pool;
     private ImageButton button_news;
     private ImageButton button_virus;
+    private ImageButton button_class_schedule;
     private static FirstFragment newInstance() {
         return new FirstFragment();
     }
@@ -59,12 +66,17 @@ public class FirstFragment extends Fragment {
     private int currentItem = 0;
     private BannerAdapter adapter;
     private Handler handler;
+    CurrentUser currentUser = CurrentUser.getInstance();
+    private UserDataBase userDataBase;
+    private UserDao userDao;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.first_fragment, container,false);
-
+        userDataBase = UserRoom.getInstance(getContext());
+        userDao = userDataBase.getUserDao();
         initView(view);
         initBanner(view);
         initEvent();
@@ -86,23 +98,32 @@ public class FirstFragment extends Fragment {
         button_car_pool = view.findViewById(R.id.imageButtonCarPool);
         button_news = view.findViewById(R.id.imageButtonNews);
         button_virus = view.findViewById(R.id.imageButton_virus);
-
+        button_class_schedule = view.findViewById(R.id.imageButtonClassSchedule);
 
         viewPager = view.findViewById(R.id.bannerviewpager);
         linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
     }
+
+
     private void initEvent(){
-        button_score.setOnClickListener(new View.OnClickListener() {
+        button_class_schedule.setOnClickListener(new IsStudentOnClickListener(getContext()) {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ScoreActivity.class);
+            public void OnClick(View view) {
+                Intent intent = new Intent(getActivity(), ClassScheduleActivity.class);
+                startActivity(intent);
+            }
+        });
+        button_score.setOnClickListener(new IsStudentOnClickListener(getContext()) {
+            @Override
+            public void OnClick(View view) {
+                Intent intent = new Intent(getActivity(), GradeActivity.class);
                 startActivity(intent);
             }
         });
 
-        button_contact_way.setOnClickListener(new View.OnClickListener() {
+        button_contact_way.setOnClickListener(new IsStudentOnClickListener(getContext()) {
             @Override
-            public void onClick(View v) {
+            public void OnClick(View view) {
                 Intent intent = new Intent(getActivity(), ContactWayActivity.class);
                 startActivity(intent);
             }
@@ -114,9 +135,10 @@ public class FirstFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        button_car_pool.setOnClickListener(new View.OnClickListener() {
+
+        button_car_pool.setOnClickListener(new IsStudentOnClickListener(getContext()) {
             @Override
-            public void onClick(View v) {
+            public void OnClick(View view) {
                 Intent intent = new Intent(getActivity(), CarPoolActivity.class);
                 startActivity(intent);
             }
@@ -128,7 +150,6 @@ public class FirstFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
 

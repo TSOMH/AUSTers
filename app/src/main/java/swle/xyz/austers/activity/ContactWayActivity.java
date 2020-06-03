@@ -20,7 +20,7 @@ import java.util.Objects;
 import swle.xyz.austers.R;
 import swle.xyz.austers.adapter.MyGridViewAdapter;
 import swle.xyz.austers.bean.User;
-import swle.xyz.austers.myinterface.ContactWayResultCallBack;
+import swle.xyz.austers.callback.ContactWayResultCallBack;
 import swle.xyz.austers.util.OkHttpUtil;
 
 public class ContactWayActivity extends BaseActivity {

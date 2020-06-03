@@ -38,9 +38,8 @@ public class OSLicensesActivity extends AppCompatActivity {
 
             }
         });
-        getSupportActionBar().setTitle("开源项目");
         getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
-        getSupportActionBar().setDisplayShowTitleEnabled(true);//隐藏toolbar默认显示的label
+        getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏toolbar默认显示的label
 
         textView = findViewById(R.id.textView5);
     }

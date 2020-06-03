@@ -13,11 +13,14 @@ import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
+import swle.xyz.austers.callback.LoginResultCallBack;
+import swle.xyz.austers.myclass.CurrentUser;
 import swle.xyz.austers.myclass.OnMultiClickListener;
-import swle.xyz.austers.myinterface.LoginResultCallBack;
 import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
@@ -31,12 +34,12 @@ public class LogInActivity extends BaseActivity {
     private MaterialEditText user_password;
     private Button button_sign_in;
     private Button button_forgot_password;
-    UserDataBase userDataBase;
-    UserDao userDao;
+
 
     SharedPreferences loginInfo = null;
     SharedPreferences.Editor editor = null;
 
+    CurrentUser currentUser;
 
 
 
@@ -49,14 +52,10 @@ public class LogInActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_log_in);
-//
-        userDataBase = UserRoom.getInstance(getApplicationContext());
-        userDao = userDataBase.getUserDao();
-
+        currentUser = CurrentUser.getInstance();
         initView();
-        initLoginInfo();
-
         initEvent();
+        initLoginInfo();
     }
 
     @Override
@@ -87,11 +86,19 @@ public class LogInActivity extends BaseActivity {
     @Override
     public void initEvent() {
 
+        Intent intent = getIntent();
+        if (!Objects.equals(intent.getStringExtra("phonenumber"), "")){
+            user_id.setText(intent.getStringExtra("phonenumber"));
+            user_password.setText(intent.getStringExtra("password"));
+        }
+
+
 
 
         button_log_in.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {//禁止频繁点击
+
 
                 final String phonenumber = Objects.requireNonNull(user_id.getText()).toString();
                 final String password = Objects.requireNonNull(user_password.getText()).toString();
@@ -105,13 +112,11 @@ public class LogInActivity extends BaseActivity {
                             Log.d("code",""+result);
                             switch (result){
                                 case 1:
-                                    User user = new User(null,phonenumber,password,null);
-                                    insertOne(user);
                                     editor.putString("current_user",phonenumber);
                                     editor.putString("current_password",password);
                                     editor.apply();
-                                    String current_user = loginInfo.getString("current_user",null);
-
+                                    InsertOneUser(phonenumber,password);
+                                    currentUser.phonenumber = phonenumber;
                                     Intent intent = new Intent(LogInActivity.this, Main2Activity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
                                     intent.setClass(LogInActivity.this,Main2Activity.class);
@@ -167,12 +172,23 @@ public class LogInActivity extends BaseActivity {
 
     }
 
-    private void insertOne(final User user){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                userDao.InsertUser(user);
-            }
-        }).start();
+    void InsertOneUser(String phonenumber,String password){
+
+        UserDataBase userDataBase = UserRoom.getInstance(getApplicationContext());
+        final UserDao userDao = userDataBase.getUserDao();
+
+        List<User> users = new ArrayList<>();
+        if (users.size() == 0){
+            final User user = new User();
+            user.setPhonenumber(phonenumber);
+            user.setPassword(password);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+//                    userDao.InsertUser(user);
+                }
+            }).start();
+        }
     }
+
 }

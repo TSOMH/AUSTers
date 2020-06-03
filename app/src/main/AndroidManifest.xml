@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.VirusActivity"></activity>
+        <activity android:name=".activity.ClassScheduleActivity"></activity>
+        <activity android:name=".activity.VirusActivity" />
         <activity android:name=".activity.CarPoolActivity" />
         <activity android:name=".activity.ContactWayActivity">
             <intent-filter>
@@ -41,7 +42,7 @@
         <activity android:name=".activity.MyTripActivity" />
         <activity android:name=".activity.OSLicensesActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ScoreActivity" />
+        <activity android:name=".activity.GradeActivity" />
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.NewsActivity" />
         <activity android:name=".activity.IdentityAuthenticateActivity" />

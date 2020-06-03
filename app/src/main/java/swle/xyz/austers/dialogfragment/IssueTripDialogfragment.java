@@ -9,7 +9,7 @@ import android.os.Looper;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import swle.xyz.austers.myinterface.IssueResultCallBack;
+import swle.xyz.austers.callback.IssueResultCallBack;
 import swle.xyz.austers.util.OkHttpUtil;
 
 /**

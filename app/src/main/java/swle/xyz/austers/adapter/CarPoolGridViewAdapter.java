@@ -19,7 +19,7 @@ import java.util.List;
 
 import swle.xyz.austers.R;
 import swle.xyz.austers.bean.Trip;
-import swle.xyz.austers.myinterface.GetInTripCallBack;
+import swle.xyz.austers.callback.GetInTripCallBack;
 import swle.xyz.austers.util.OkHttpUtil;
 
 /**
@@ -35,18 +35,16 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
     private AlertDialog.Builder builder = null;
     private AlertDialog.Builder builder1 = null;
     private AlertDialog.Builder builder2 = null;
-    private int size;
     private Handler handler;
 
-    SharedPreferences.Editor editor = null;
-    SharedPreferences trip_info = null;
+    SharedPreferences.Editor editor;
+    SharedPreferences trip_info;
 
 
 
 
 
     public CarPoolGridViewAdapter(Context context,List<Trip> trips,SharedPreferences trip_info,SharedPreferences.Editor editor){
-        this.size = trips.size();
         this.trips = trips;
         this.context = context;
         this.editor = editor;
@@ -59,7 +57,7 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return size;
+        return trips.size();
     }
 
     @Override
@@ -86,7 +84,7 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
 
 
         if (convertView == null){
@@ -95,7 +93,7 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
 //            viewHolder.button = convertView.findViewById(R.id.button);
             viewHolder.starting = convertView.findViewById(R.id.textView35);
             viewHolder.destnatination = convertView.findViewById(R.id.textView37);
-            viewHolder.time = convertView.findViewById(R.id.textView39);
+            viewHolder.time = convertView.findViewById(R.id.textView66);
             viewHolder.seat_left = convertView.findViewById(R.id.textView38);
             viewHolder.initiator = convertView.findViewById(R.id.textView40);
             viewHolder.button_get_in = convertView.findViewById(R.id.button_get_in);
@@ -106,9 +104,9 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
 
         viewHolder.starting.setText(trips.get(position).getStarting());
         viewHolder.destnatination.setText(trips.get(position).getDestination());
-        viewHolder.time.setText("日期："+trips.get(position).getMonth()+"月"+trips.get(position).getDay()+"日"+trips.get(position).getHour()+":00");
+        viewHolder.time.setText(trips.get(position).getMonth()+"月"+trips.get(position).getDay()+"日"+trips.get(position).getHour()+":00");
         viewHolder.seat_left.setText("剩余座位："+trips.get(position).getSeat_left());
-        viewHolder.initiator.setText("发起人："+trips.get(position).getInitiator());
+        viewHolder.initiator.setText(trips.get(position).getInitiator());
         final ViewHolder finalViewHolder = viewHolder;
         viewHolder.button_get_in.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
+import swle.xyz.austers.callback.GetVcodeResultCallBack;
 import swle.xyz.austers.myclass.OnMultiClickListener;
-import swle.xyz.austers.myinterface.GetVcodeResultCallBack;
 import swle.xyz.austers.util.OkHttpUtil;
 
 public class SignInActivity extends BaseActivity {
@@ -35,12 +35,17 @@ public class SignInActivity extends BaseActivity {
     private Button button_getCode;
     private Button button_next_step;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+
         initView();
         initEvent();
+
+
     }
 
     @Override
@@ -147,6 +152,7 @@ public class SignInActivity extends BaseActivity {
                 //                System.out.println(result[0]);
                 String vcode = code[0]+"";
                 if (vcode.equals(Objects.requireNonNull(editText_code.getText()).toString())){
+
                     Intent intent = new Intent(SignInActivity.this,SetPwActivity.class);
                     intent.putExtra("phonenumber",editText_phonenumber.getText().toString()+"");
                     startActivity(intent);
@@ -189,6 +195,7 @@ public class SignInActivity extends BaseActivity {
             t = 60;
         }
     }
+
 
 
 }

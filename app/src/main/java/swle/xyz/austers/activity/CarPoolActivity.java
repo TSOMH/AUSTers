@@ -27,7 +27,7 @@ import swle.xyz.austers.bean.Trip;
 import swle.xyz.austers.dialogfragment.DatePickerFragment;
 import swle.xyz.austers.dialogfragment.IssueTripDialogfragment;
 import swle.xyz.austers.dialogfragment.TimePickerFragment;
-import swle.xyz.austers.myinterface.QueryOtherTripResultCallBack;
+import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
 import swle.xyz.austers.util.OkHttpUtil;
 
 public class CarPoolActivity extends BaseActivity  {

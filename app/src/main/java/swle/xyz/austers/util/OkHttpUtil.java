@@ -21,13 +21,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import swle.xyz.austers.bean.Trip;
 import swle.xyz.austers.bean.User;
-import swle.xyz.austers.myinterface.ContactWayResultCallBack;
-import swle.xyz.austers.myinterface.GetInTripCallBack;
-import swle.xyz.austers.myinterface.GetVcodeResultCallBack;
-import swle.xyz.austers.myinterface.IssueResultCallBack;
-import swle.xyz.austers.myinterface.LoginResultCallBack;
-import swle.xyz.austers.myinterface.QueryOtherTripResultCallBack;
-import swle.xyz.austers.myinterface.SignInResultCallBack;
+import swle.xyz.austers.callback.ContactWayResultCallBack;
+import swle.xyz.austers.callback.GetInTripCallBack;
+import swle.xyz.austers.callback.GetVcodeResultCallBack;
+import swle.xyz.austers.callback.IssueResultCallBack;
+import swle.xyz.austers.callback.LoginResultCallBack;
+import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
+import swle.xyz.austers.callback.SignInResultCallBack;
 
 /**
 *Created by TSOMH on 2020/2/27$

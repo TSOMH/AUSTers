@@ -21,9 +21,9 @@
         android:id="@+id/textView12"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="昵称"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
+        android:text="昵称"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="@+id/textView20"
         app:layout_constraintEnd_toStartOf="@+id/textView13"
@@ -33,65 +33,36 @@
     <TextView
         android:id="@+id/textView13"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="swle"
+        android:layout_height="50dp"
         android:background="@color/white"
-        android:paddingStart="20dp"
         android:gravity="center|start"
-        app:layout_constraintBottom_toBottomOf="@+id/button_change_name"
+        android:paddingStart="20dp"
+        android:text="swle"
 
-        app:layout_constraintEnd_toStartOf="@+id/button_change_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/button_change_name" />
-
-    <Button
-        android:id="@+id/button_change_name"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
-        android:background="@drawable/button_selector"
-        android:text="@string/change"
-        android:paddingEnd="20dp"
-        android:textSize="@dimen/textsize"
-        app:layout_constraintEnd_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/button6"
-        style="?android:attr/borderlessButtonStyle"/>
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
-        android:background="@drawable/button_selector"
-        android:text="@string/change"
-        android:textSize="@dimen/textsize"
-        android:paddingEnd="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/button_change_name"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button_change_name"
-        app:layout_constraintTop_toBottomOf="@+id/button_change_name"
-        style="?android:attr/borderlessButtonStyle"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="男"
+        android:layout_height="50dp"
         android:background="@color/white"
-        android:paddingStart="20dp"
         android:gravity="center|start"
-        app:layout_constraintBottom_toBottomOf="@+id/button4"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:paddingStart="20dp"
+        android:text="男"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
         tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="性别"
         android:background="@color/white"
         android:gravity="center"
+        android:text="性别"
         app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/textView16"
@@ -100,54 +71,23 @@
         app:layout_constraintTop_toTopOf="@+id/textView16"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
-        android:background="@drawable/button_selector"
-        android:text="修改"
-        android:textSize="@dimen/textsize"
-        android:paddingEnd="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/button4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        style="?android:attr/borderlessButtonStyle"/>
-
     <TextView
         android:id="@+id/textView18"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="生日"
         android:background="@color/white"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/textView19"
-        app:layout_constraintEnd_toEndOf="@+id/textView17"
-        app:layout_constraintEnd_toStartOf="@+id/textView19"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="2000年1月1日"
-        android:background="@color/white"
-        android:paddingStart="20dp"
-        android:gravity="center|start"
-        app:layout_constraintBottom_toBottomOf="@+id/button5"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/button5"
-        tools:ignore="RtlSymmetry" />
+        android:text="生日"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="50dp"
         android:layout_height="0dp"
-        android:text="签名"
         android:background="@color/white"
         android:gravity="center"
+        android:text="签名"
         app:layout_constraintBottom_toBottomOf="@+id/textView21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView21" />
@@ -155,49 +95,36 @@
     <TextView
         android:id="@+id/textView21"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="I'm an auster"
-        android:background="@color/white"
-        android:paddingStart="20dp"
-        android:gravity="start|center"
-        app:layout_constraintBottom_toBottomOf="@+id/button6"
-        app:layout_constraintEnd_toStartOf="@+id/button6"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/button6" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_selector"
-        android:text="修改"
-        android:paddingEnd="20dp"
-        style="?android:attr/borderlessButtonStyle"
-        android:textSize="@dimen/textsize"
+        android:background="@color/white"
+        android:gravity="start|center"
+        android:paddingStart="20dp"
+        android:text="I'm an auster"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_personal_info_activity" />
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:layout_marginTop="30dp"
-        android:text="@string/isshow"
-        android:paddingEnd="20dp"
+        android:layout_marginTop="80dp"
         android:background="@color/white"
+        android:paddingEnd="20dp"
+        android:text="@string/isshow"
         android:thumbTint="@color/aust"
         android:trackTint="@color/aust"
-        app:layout_constraintEnd_toEndOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Switch
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:text="@string/isshow"
-        android:paddingEnd="20dp"
         android:background="@color/white"
+        android:paddingEnd="20dp"
+        android:text="@string/isshow"
         android:thumbTint="@color/aust"
         android:trackTint="@color/aust"
         app:layout_constraintEnd_toEndOf="@+id/switch1"
@@ -207,9 +134,9 @@
         android:id="@+id/switch3"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:text="@string/isshow"
-        android:paddingEnd="20dp"
         android:background="@color/white"
+        android:paddingEnd="20dp"
+        android:text="@string/isshow"
         android:thumbTint="@color/aust"
         android:trackTint="@color/aust"
         app:layout_constraintEnd_toEndOf="@+id/switch2"
@@ -219,24 +146,24 @@
         android:id="@+id/textView23"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="胡太长"
-        android:paddingStart="20dp"
         android:background="@color/white"
         android:gravity="center|start"
+        android:paddingStart="20dp"
+        android:text="胡太长"
         app:layout_constraintBottom_toBottomOf="@+id/switch1"
         app:layout_constraintEnd_toStartOf="@+id/switch1"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toTopOf="@+id/switch1" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="姓名"
         android:background="@color/white"
         android:gravity="center"
+        android:text="姓名"
         app:layout_constraintBottom_toBottomOf="@+id/textView23"
-        app:layout_constraintEnd_toStartOf="@+id/textView23"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/textView18"
         app:layout_constraintTop_toTopOf="@+id/textView23" />
 
@@ -244,22 +171,22 @@
         android:id="@+id/textView25"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="计算机科学与工程学院"
-        android:paddingStart="20dp"
         android:background="@color/white"
         android:gravity="start|center"
+        android:paddingStart="20dp"
+        android:text="计算机科学与工程学院"
         app:layout_constraintBottom_toBottomOf="@+id/switch2"
-        app:layout_constraintStart_toStartOf="@+id/textView23"
         app:layout_constraintEnd_toStartOf="@+id/switch2"
+        app:layout_constraintStart_toStartOf="@+id/textView23"
         app:layout_constraintTop_toTopOf="@+id/switch2" />
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         android:gravity="center"
         android:text="院系"
-        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView25"
         app:layout_constraintEnd_toEndOf="@+id/textView20"
         app:layout_constraintStart_toStartOf="parent"
@@ -269,27 +196,50 @@
         android:id="@+id/textView27"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center|start"
-        android:text="计算机科学与技术"
         android:background="@color/white"
+        android:gravity="center|start"
         android:paddingStart="20dp"
+        android:text="计算机科学与技术"
         app:layout_constraintBottom_toBottomOf="@+id/switch3"
         app:layout_constraintEnd_toStartOf="@+id/switch3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView25"
-        app:layout_constraintTop_toTopOf="@+id/switch3" />
+        app:layout_constraintTop_toTopOf="@+id/switch3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="专业"
         android:background="@color/white"
         android:gravity="center"
+        android:text="专业"
         app:layout_constraintBottom_toBottomOf="@+id/textView27"
         app:layout_constraintEnd_toEndOf="@+id/textView26"
         app:layout_constraintEnd_toStartOf="@+id/textView27"
         app:layout_constraintStart_toStartOf="@+id/textView26"
         app:layout_constraintTop_toTopOf="@+id/textView27" />
+
+    <TextView
+        android:id="@+id/textView96"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="21dp"
+        android:text="个人信息"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_personal_info_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_personal_info_activity" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

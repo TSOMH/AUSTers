@@ -27,4 +27,15 @@
         <item>淮南南站</item>
         <item>汽车站</item>
     </string-array>
+    
+    <string-array name="semester">
+        <item>2016_2017_1</item>
+        <item>2016_2017_2</item>
+        <item>2017_2018_1</item>
+        <item>2017_2018_2</item>
+        <item>2018_2019_1</item>
+        <item>2018_2019_2</item>
+        <item>2019_2020_1</item>
+        <item>2019_2020_2</item>
+    </string-array>
 </resources>

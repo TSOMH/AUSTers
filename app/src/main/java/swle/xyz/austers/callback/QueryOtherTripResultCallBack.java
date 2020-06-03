@@ -1,4 +1,4 @@
-package swle.xyz.austers.myinterface;
+package swle.xyz.austers.callback;
 
 import java.util.List;
 

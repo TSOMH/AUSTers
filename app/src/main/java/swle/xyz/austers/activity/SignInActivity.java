@@ -20,7 +20,7 @@ import java.util.Objects;
 import swle.xyz.austers.R;
 import swle.xyz.austers.callback.GetVcodeResultCallBack;
 import swle.xyz.austers.myclass.OnMultiClickListener;
-import swle.xyz.austers.util.OkHttpUtil;
+import swle.xyz.austers.httputil.OkHttpUtil;
 
 public class SignInActivity extends BaseActivity {
 

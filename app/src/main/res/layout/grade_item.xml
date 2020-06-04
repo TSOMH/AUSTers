@@ -11,11 +11,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="科目"
+        android:maxEms="10"
         android:textSize="18sp"
         android:gravity="center_horizontal"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <View
+        app:layout_constraintTop_toBottomOf="@id/textView_course"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/gray"
+        android:layout_height="1dp">
+
+    </View>
 
     <TextView
         android:id="@+id/textView_score"
@@ -32,12 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7
-" />
+        app:layout_constraintGuide_percent="0.7"/>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
 </androidx.constraintlayout.widget.ConstraintLayout>

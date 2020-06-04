@@ -15,5 +15,5 @@ package swle.xyz.austers.callback;
 
 public interface BasicInfoCallBack {
     void failure(int status_code);
-    void getBasicInfo(String[] basic_info);
+    void success(String[] basic_info);
 }

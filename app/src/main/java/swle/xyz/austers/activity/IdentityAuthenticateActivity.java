@@ -19,7 +19,7 @@ import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.util.JWXT;
+import swle.xyz.austers.httputil.JWXT;
 
 
 public class IdentityAuthenticateActivity extends AppCompatActivity {
@@ -105,7 +105,7 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void getBasicInfo(String[] info) {
+                                public void success(String[] info) {
                                     String phonenumber = loginInfo.getString("current_user","");
                                     User user = new User();
                                     user.setStudent_id(editText_student_number.getText().toString());

@@ -7,4 +7,5 @@ package swle.xyz.austers.callback;
 public interface GradeCallBack {
     void failure(int status_code);
     void success(String[][] score);
+    void noResult();
 }

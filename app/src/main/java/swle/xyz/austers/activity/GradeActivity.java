@@ -1,5 +1,6 @@
 package swle.xyz.austers.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.util.JWXT;
+import swle.xyz.austers.httputil.JWXT;
 
 public class GradeActivity extends BaseActivity {
 
@@ -32,6 +34,8 @@ public class GradeActivity extends BaseActivity {
     UserDataBase userDataBase;
     UserDao userDao;
     Handler handler;
+    AlertDialog.Builder builder = null;
+    AlertDialog dialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,17 @@ public class GradeActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                builder = new AlertDialog.Builder(GradeActivity.this);
+                builder.setTitle("提示");
+                builder.setMessage("正在查询，请稍后");
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                dialog = builder.create();
+                dialog.show();
                 switch (spinner.getSelectedItemPosition()){
                     case 0:
                         getGrade("9");
@@ -98,7 +113,6 @@ public class GradeActivity extends BaseActivity {
                         getGrade("81");
                         break;
                 }
-
             }
         });
     }
@@ -113,35 +127,41 @@ public class GradeActivity extends BaseActivity {
                 jwxt.getGrade(new GradeCallBack() {
                     @Override
                     public void failure(int status_code) {
-
+                        dialog.setMessage("查询失败，请重试！");
                     }
                     @Override
                     public void success(String[][] score) {
 
+                        System.out.println("score的长度为"+score.length);
                         final List<Grade> grades = new ArrayList<>();
-                        for (int i = 0; i< score.length;i++){
+                        for (int i = 1; i< score.length;i++){
                             String[] row = score[i];
                             Grade grade = new Grade();
-                            for (int j = 3; j < row.length; j+=3){
+
+                            for (int j = 3; j < row.length; j++){
                                 if (j == 3){
                                     grade.setCourse(row[j]);
-                                }else {
+                                }else if (j == row.length-2){
                                     grade.setScore(row[j]);
                                 }
                             }
                             grades.add(grade);
                         }
-                        if (grades.size() > 0){
+                        if (grades.size() > 1){
+                            System.out.println("科目数量="+grades.size());
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     gridView.setAdapter(new GradeAdapter(grades,getApplicationContext()));
+                                    dialog.dismiss();
                                 }
                             });
-
-                        }else {
-                            System.out.println("结果为空");
                         }
+                    }
+
+                    @Override
+                    public void noResult() {
+                        dialog.setMessage("查询结果为空");
                     }
                 },semesterId);
             }

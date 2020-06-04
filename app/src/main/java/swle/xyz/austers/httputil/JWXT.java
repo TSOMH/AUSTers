@@ -1,4 +1,4 @@
-package swle.xyz.austers.util;
+package swle.xyz.austers.httputil;
 
 import android.os.SystemClock;
 import android.util.Log;
@@ -229,7 +229,7 @@ public class JWXT {
                    x++;
                 }
              }
-             callBack.getBasicInfo(basic_info);
+             callBack.success(basic_info);
           }
        });
    }
@@ -290,7 +290,7 @@ public class JWXT {
       HashMap<String,String> params = new HashMap<>();
       params.put("semesterId",semesterId);
       params.put("projectType","");
-      HttpUrl.Builder builder =HttpUrl.parse(url_grade).newBuilder();
+      HttpUrl.Builder builder = Objects.requireNonNull(HttpUrl.parse(url_grade)).newBuilder();
       builder.setQueryParameter("semesterId",params.get("semesterId"));
 //              .setQueryParameter("projectType","");
       final Request request = new Request.Builder()
@@ -308,22 +308,36 @@ public class JWXT {
          public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
             String html = Objects.requireNonNull(response.body()).string();
+            System.out.println(html);
+            System.out.println("=========");
             Document document = Jsoup.parse(html);
-            Elements trs = document.select("tr");
-            Elements ths = document.select("th");
+            Elements trs = document.select("tr");//tr用来确认行数
+            System.out.println("tr的大小"+trs.size());
+            Elements ths = document.select("th");//th用来确认列数
+            System.out.println("ths的大小"+ths.size());
             String[][] grade = new String[trs.size()][ths.size()];
-            for (int i = 1; i < trs.size(); i++){ // i=1是因为tbody上方有个thead
-               Elements tds = trs.get(i).select("td");
-               if (tds!=null){
-                  System.out.println("tds的大小为"+tds.size());
-                  for (int j = 0; j < tds.size(); ++j){
+            if (trs.size() == 2){
+               gradeCallBack.noResult();
+            }
+            for (int i = 0; i < trs.size(); i++){ // i=1是因为第一行为列表头
+               if (i==0 && ths.size() > 0){//表头
+                  for (int j = 0;j < ths.size();j++){
+                     grade[i][j] = ths.get(j).text();
+                     System.out.println("第"+j+"此添加");
+                  }
+               }else {//表体
+                  Elements tds = trs.get(i).select("td");//每一行的具体内容
+                  System.out.println("tds的大小"+tds.size());
+                  System.out.println("行的大小为"+tds.size());
+                  for (int j = 0; j < tds.size(); j++){
                      System.out.println(tds.get(j).text());
-                     if (tds.get(j).text()!=null){
-                        grade[i-1][j] = tds.get(j).text();
+                     if (tds.get(j).text()!=null && tds.size() > 0){
+                        grade[i][j] = tds.get(j).text();
+                        System.out.println("第"+j+"此添加");
                      }
-
                   }
                }
+
 
             }
             gradeCallBack.success(grade);

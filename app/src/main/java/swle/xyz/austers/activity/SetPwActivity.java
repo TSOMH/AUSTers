@@ -18,7 +18,7 @@ import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.util.OkHttpUtil;
+import swle.xyz.austers.httputil.OkHttpUtil;
 
 public class SetPwActivity extends BaseActivity {
 

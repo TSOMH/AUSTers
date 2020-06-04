@@ -7,7 +7,8 @@ import androidx.room.Room;
 /**
 *Created by TSOMH on 2020/5/30$
 *Description:
-*
+ * 单例模式
+ * 双检锁/双重校验锁（DCL，即 double-checked locking）
 */
 public class UserRoom{
    private volatile static UserDataBase userDataBase = null;

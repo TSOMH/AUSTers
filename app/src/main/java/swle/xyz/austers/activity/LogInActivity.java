@@ -25,7 +25,7 @@ import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.util.OkHttpUtil;
+import swle.xyz.austers.httputil.OkHttpUtil;
 
 
 public class LogInActivity extends BaseActivity {
@@ -117,9 +117,9 @@ public class LogInActivity extends BaseActivity {
                                     editor.apply();
                                     InsertOneUser(phonenumber,password);
                                     currentUser.phonenumber = phonenumber;
-                                    Intent intent = new Intent(LogInActivity.this, Main2Activity.class);
+                                    Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
-                                    intent.setClass(LogInActivity.this,Main2Activity.class);
+                                    intent.setClass(LogInActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     break;
                                 case -1:

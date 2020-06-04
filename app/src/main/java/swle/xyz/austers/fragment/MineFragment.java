@@ -54,7 +54,6 @@ import swle.xyz.austers.viewmodel.MineViewModel;
 
 public class MineFragment extends Fragment {
 
-    private MineViewModel mViewModel;
     private Button button_my_trip;
     private Button button_my_release;
     private Button button_my_dynamic;
@@ -93,7 +92,7 @@ public class MineFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MineViewModel.class);
+        MineViewModel mViewModel = ViewModelProviders.of(this).get(MineViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -122,7 +121,7 @@ public class MineFragment extends Fragment {
         return f;
     }
     void upLoadAccountImage(Bitmap bitmap){
-        MediaType MEDIA_TYPE_JPEG = MediaType.parse("image/jpeg");
+        MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
         OkHttpClient client=new OkHttpClient();
 //                        MultipartBody body = new MultipartBody.Builder("AaB03x")
 //                                .setType(MultipartBody.FORM)
@@ -135,7 +134,7 @@ public class MineFragment extends Fragment {
 //                                .build();
         Request request = new Request.Builder()
                 .url("http://116.62.106.237:8080/accountimg")
-                .post(RequestBody.create(convertBitmapToFile(bitmap),MEDIA_TYPE_JPEG))
+                .post(RequestBody.create(convertBitmapToFile(bitmap),MEDIA_TYPE_PNG))
                 .build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
@@ -175,11 +174,19 @@ public class MineFragment extends Fragment {
                                     .placeholder(R.drawable.userpicture)
                                     .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                                     .into(imageView);
+                            final Bitmap finalBitmap = bitmap;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    upLoadAccountImage(finalBitmap);
+                                }
+                            }).start();
 
 
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
 
 
 
@@ -240,6 +247,10 @@ public class MineFragment extends Fragment {
         textView_name = view.findViewById(R.id.textView_true_name);
         textView_organization = view.findViewById(R.id.textView_organization);
         imageView = view.findViewById(R.id.imageView_user_image);
+        Glide.with(requireActivity())
+                .load(R.drawable.userpicture)
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(imageView);
 
 
     }

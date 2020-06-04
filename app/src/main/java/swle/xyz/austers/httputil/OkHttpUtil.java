@@ -1,4 +1,4 @@
-package swle.xyz.austers.util;
+package swle.xyz.austers.httputil;
 
 import android.util.Log;
 

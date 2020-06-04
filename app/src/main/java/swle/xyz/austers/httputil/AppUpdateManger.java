@@ -1,4 +1,4 @@
-package swle.xyz.austers.util;
+package swle.xyz.austers.httputil;
 
 import com.google.gson.Gson;
 

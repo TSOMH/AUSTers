@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,19 +12,17 @@ import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
-import swle.xyz.austers.callback.LoginResultCallBack;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.UserHttpUtil;
 import swle.xyz.austers.myclass.CurrentUser;
 import swle.xyz.austers.myclass.OnMultiClickListener;
 import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.httputil.OkHttpUtil;
 
 
 public class LogInActivity extends BaseActivity {
@@ -104,18 +101,23 @@ public class LogInActivity extends BaseActivity {
                 final String password = Objects.requireNonNull(user_password.getText()).toString();
 
                 if (!phonenumber.equals("") && !password.equals("")){
-                    OkHttpUtil.Login(phonenumber, password, new LoginResultCallBack() { //生成LoginResultCallBack接口，目的是拿到OkHttpUtil
-                                                                               //的Response返回内容
+                    UserHttpUtil.Login(phonenumber, password, new ResponseCallBack() {
+                        @Override
+                        public void failure() {
+                            Looper.prepare();
+                            Toast.makeText(LogInActivity.this,"网络错误，请重试",Toast.LENGTH_LONG).show();
+                            Looper.loop();
+                        }
 
                         @Override
-                        public void success(int result) {
-                            Log.d("code",""+result);
-                            switch (result){
+                        public void success(int code, String message, Object data) {
+                            switch (code){
                                 case 1:
                                     editor.putString("current_user",phonenumber);
                                     editor.putString("current_password",password);
                                     editor.apply();
-                                    InsertOneUser(phonenumber,password);
+                                    InsertOneUser(phonenumber,password, (String) data);
+
                                     currentUser.phonenumber = phonenumber;
                                     Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
@@ -124,31 +126,68 @@ public class LogInActivity extends BaseActivity {
                                     break;
                                 case -1:
                                     Looper.prepare();
-                                    Toast.makeText(LogInActivity.this,"密码错误,请重新登录",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LogInActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
                                     Looper.loop();
                                     break;
                                 case -2:
                                     Looper.prepare();
-                                    Toast.makeText(LogInActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
-                                    Looper.loop();
-                                    break;
-                                case -3:
-                                    Looper.prepare();
-                                    Toast.makeText(LogInActivity.this,"服务器异常,请重试",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LogInActivity.this,"密码错误,请重新登录",Toast.LENGTH_SHORT).show();
                                     Looper.loop();
                                     break;
                             }
                         }
-
-                        @Override
-                        public void failure(int result) {
-                            Log.d("code",""+ result);
-                        }
                     });
-
                 }else {
+                    Looper.prepare();
                     Toast.makeText(LogInActivity.this,"请检查用户名和密码是否为空",Toast.LENGTH_LONG).show();
+                    Looper.loop();
                 }
+//                if (!phonenumber.equals("") && !password.equals("")){
+//                    OkHttpUtil.Login(phonenumber, password, new LoginResultCallBack() { //生成LoginResultCallBack接口，目的是拿到OkHttpUtil
+//                                                                               //的Response返回内容
+//
+//                        @Override
+//                        public void success(int result) {
+//                            Log.d("code",""+result);
+//                            switch (result){
+//                                case 1:
+//                                    editor.putString("current_user",phonenumber);
+//                                    editor.putString("current_password",password);
+//                                    editor.apply();
+//                                    InsertOneUser(phonenumber,password);
+//                                    currentUser.phonenumber = phonenumber;
+//                                    Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
+//                                    intent.setClass(LogInActivity.this, MainActivity.class);
+//                                    startActivity(intent);
+//                                    break;
+//                                case -1:
+//                                    Looper.prepare();
+//                                    Toast.makeText(LogInActivity.this,"密码错误,请重新登录",Toast.LENGTH_SHORT).show();
+//                                    Looper.loop();
+//                                    break;
+//                                case -2:
+//                                    Looper.prepare();
+//                                    Toast.makeText(LogInActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
+//                                    Looper.loop();
+//                                    break;
+//                                case -3:
+//                                    Looper.prepare();
+//                                    Toast.makeText(LogInActivity.this,"服务器异常,请重试",Toast.LENGTH_SHORT).show();
+//                                    Looper.loop();
+//                                    break;
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void failure(int result) {
+//                            Log.d("code",""+ result);
+//                        }
+//                    });
+//
+//                }else {
+//                    Toast.makeText(LogInActivity.this,"请检查用户名和密码是否为空",Toast.LENGTH_LONG).show();
+//                }
 
             }
         });
@@ -172,22 +211,36 @@ public class LogInActivity extends BaseActivity {
 
     }
 
-    void InsertOneUser(String phonenumber,String password){
+    void InsertOneUser(String phonenumber, String password, final String token){
 
         UserDataBase userDataBase = UserRoom.getInstance(getApplicationContext());
         final UserDao userDao = userDataBase.getUserDao();
 
-        List<User> users = new ArrayList<>();
-        if (users.size() == 0){
-            final User user = new User();
+        User user = userDao.queryUser(phonenumber);
+        if (user == null){
+            System.out.println("yonghukong");
+            user = new User();
             user.setPhonenumber(phonenumber);
             user.setPassword(password);
+            user.setToken(token);
+            final User finalUser = user;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-//                    userDao.InsertUser(user);
+                    userDao.InsertUser(finalUser);
                 }
             }).start();
+        }else {
+            System.out.println("yonghubukong");
+            final User finalUser1 = user;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    finalUser1.setToken(token);
+                    userDao.updateUser(finalUser1);
+                }
+            }).start();
+
         }
     }
 

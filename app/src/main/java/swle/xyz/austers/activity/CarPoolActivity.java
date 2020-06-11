@@ -28,7 +28,7 @@ import swle.xyz.austers.dialogfragment.DatePickerFragment;
 import swle.xyz.austers.dialogfragment.IssueTripDialogfragment;
 import swle.xyz.austers.dialogfragment.TimePickerFragment;
 import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
-import swle.xyz.austers.httputil.OkHttpUtil;
+import swle.xyz.austers.http.OkHttpUtil;
 
 public class CarPoolActivity extends BaseActivity  {
     Calendar calendar = Calendar.getInstance();

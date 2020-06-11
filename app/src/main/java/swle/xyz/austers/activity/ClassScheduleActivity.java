@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 
 import swle.xyz.austers.R;
-import swle.xyz.austers.httputil.JWXT;
+import swle.xyz.austers.http.JWXT;
 
 public class ClassScheduleActivity extends BaseActivity {
 

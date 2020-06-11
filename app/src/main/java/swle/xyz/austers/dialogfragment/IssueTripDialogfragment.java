@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import swle.xyz.austers.callback.IssueResultCallBack;
-import swle.xyz.austers.httputil.OkHttpUtil;
+import swle.xyz.austers.http.OkHttpUtil;
 
 /**
 *Created by TSOMH on 2020/5/28$

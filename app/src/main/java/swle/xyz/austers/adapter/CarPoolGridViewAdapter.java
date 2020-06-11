@@ -20,7 +20,7 @@ import java.util.List;
 import swle.xyz.austers.R;
 import swle.xyz.austers.bean.Trip;
 import swle.xyz.austers.callback.GetInTripCallBack;
-import swle.xyz.austers.httputil.OkHttpUtil;
+import swle.xyz.austers.http.OkHttpUtil;
 
 /**
 *Created by TSOMH on 2020/5/24$

@@ -1,4 +1,4 @@
-package swle.xyz.austers.httputil;
+package swle.xyz.austers.http;
 
 import android.os.SystemClock;
 import android.util.Log;

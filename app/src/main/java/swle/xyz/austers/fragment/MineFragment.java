@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -174,14 +175,27 @@ public class MineFragment extends Fragment {
                                     .placeholder(R.drawable.userpicture)
                                     .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                                     .into(imageView);
-                            final Bitmap finalBitmap = bitmap;
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    upLoadAccountImage(finalBitmap);
+                            try {
+                                File PICTURES = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                                File imageFileDirctory = new File(PICTURES + "/accountimg");
+                                if (imageFileDirctory.exists()) {
+                                    File imageFile = new File(PICTURES + "/accountimg"+ "/" +currentUser.phonenumber+".jpeg");
+                                    FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 30, fileOutputStream);
+                                    fileOutputStream.flush();
+                                    fileOutputStream.close();
+                                } else if (imageFileDirctory.mkdir()) {//如果该文件夹不存在，则新建
+                                    //new一个文件
+                                    File imageFile = new File(PICTURES + "/accountimg" + "/" + currentUser.phonenumber+".jpeg");
+                                    //通过流将图片写入
+                                    FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 30, fileOutputStream);
+                                    fileOutputStream.flush();
+                                    fileOutputStream.close();
                                 }
-                            }).start();
+                            }catch (Exception ignored){
 
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -247,10 +261,22 @@ public class MineFragment extends Fragment {
         textView_name = view.findViewById(R.id.textView_true_name);
         textView_organization = view.findViewById(R.id.textView_organization);
         imageView = view.findViewById(R.id.imageView_user_image);
-        Glide.with(requireActivity())
-                .load(R.drawable.userpicture)
-                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                .into(imageView);
+
+        File PICTURES = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File img = new File(PICTURES + "/accountimg"+"/"+currentUser.phonenumber+".jpeg");
+        if (img.exists()){
+            Glide.with(requireActivity())
+                    .load(img)
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .into(imageView);
+        }else {
+            Glide.with(requireActivity())
+                    .load(R.drawable.userpicture)
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .into(imageView);
+        }
+
+
 
 
     }

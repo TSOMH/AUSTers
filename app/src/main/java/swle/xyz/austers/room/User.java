@@ -25,6 +25,7 @@ public class User{
     private String major;
     private String name;  //昵称
     private String true_name;
+    private String token;
     private boolean is_student;
 
 
@@ -105,5 +106,13 @@ public class User{
 
     public void setPassword_jwxt(String password_jwxt) {
         this.password_jwxt = password_jwxt;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

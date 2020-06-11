@@ -19,7 +19,7 @@ import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.httputil.JWXT;
+import swle.xyz.austers.http.JWXT;
 
 
 public class IdentityAuthenticateActivity extends AppCompatActivity {

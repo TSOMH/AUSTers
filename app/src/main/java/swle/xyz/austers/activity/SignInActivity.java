@@ -18,9 +18,9 @@ import java.util.Map;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
-import swle.xyz.austers.callback.GetVcodeResultCallBack;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.UserHttpUtil;
 import swle.xyz.austers.myclass.OnMultiClickListener;
-import swle.xyz.austers.httputil.OkHttpUtil;
 
 public class SignInActivity extends BaseActivity {
 
@@ -64,7 +64,7 @@ public class SignInActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-        final int[] code = {0};
+        final String[] vcode = {""};
         editText_phonenumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,25 +118,54 @@ public class SignInActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-//                result[0] = OkHttpUtil.getAuthCode(editText_phonenumber.getText().toString(),editText_phonenumber.getText().toString());
-                OkHttpUtil.getAuthCode(editText_phonenumber.getText().toString(), new GetVcodeResultCallBack() {
+//
+//                OkHttpUtil.getAuthCode(editText_phonenumber.getText().toString(), new GetVcodeResultCallBack() {
+//                    @Override
+//                    public void success(int status_code, int vcode) {
+//                        System.out.println("status_code"+status_code);
+//                        System.out.println("vcode"+vcode);
+//                        if (status_code == -1){
+//                            code[0] = vcode;
+//                            new Thread(new CountDownTimer()).start();
+//                        }else if (status_code == 1){
+//                            Looper.prepare();
+//                            Toast.makeText(SignInActivity.this,"此账号已被注册！",Toast.LENGTH_LONG).show();
+//                            Looper.loop();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void failure(int status_code, int vcode) {
+//                        Toast.makeText(SignInActivity.this,"获取验证码失败，请重试",Toast.LENGTH_LONG).show();
+//                    }
+//                });
+
+                UserHttpUtil.getAuthCode(Objects.requireNonNull(editText_phonenumber.getText()).toString(), new ResponseCallBack() {
                     @Override
-                    public void success(int status_code, int vcode) {
-                        System.out.println("status_code"+status_code);
-                        System.out.println("vcode"+vcode);
-                        if (status_code == -1){
-                            code[0] = vcode;
-                            new Thread(new CountDownTimer()).start();
-                        }else if (status_code == 1){
-                            Looper.prepare();
-                            Toast.makeText(SignInActivity.this,"此账号已被注册！",Toast.LENGTH_LONG).show();
-                            Looper.loop();
-                        }
+                    public void failure() {
+                        Looper.prepare();
+                        Toast.makeText(SignInActivity.this,"获取验证码失败，请重试",Toast.LENGTH_LONG).show();
+                        Looper.loop();
                     }
 
                     @Override
-                    public void failure(int status_code, int vcode) {
-                        Toast.makeText(SignInActivity.this,"获取验证码失败，请重试",Toast.LENGTH_LONG).show();
+                    public void success(int code, String message, Object data) {
+                        switch (code){
+                            case 1:
+                                vcode[0] = data.toString();
+                                new Thread(new CountDownTimer()).start();
+                                break;
+                            case -1:
+                                Looper.prepare();
+                                Toast.makeText(SignInActivity.this,"获取验证码失败，请重试", Toast.LENGTH_LONG).show();
+                                Looper.loop();
+                                break;
+                            case -2:
+                                Looper.prepare();
+                                Toast.makeText(SignInActivity.this,"此账号已被注册", Toast.LENGTH_LONG).show();
+                                Looper.loop();
+                                break;
+                        }
                     }
                 });
 
@@ -150,8 +179,10 @@ public class SignInActivity extends BaseActivity {
             @Override
             public void onMultiClick(View v) {
                 //                System.out.println(result[0]);
-                String vcode = code[0]+"";
-                if (vcode.equals(Objects.requireNonNull(editText_code.getText()).toString())){
+                String vcode1 = vcode[0]+"";
+                System.out.println("vcode"+vcode1);
+                System.out.println(editText_code.getText().toString());
+                if (vcode1.equals(Objects.requireNonNull(editText_code.getText()).toString())){
 
                     Intent intent = new Intent(SignInActivity.this,SetPwActivity.class);
                     intent.putExtra("phonenumber",editText_phonenumber.getText().toString()+"");

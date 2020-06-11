@@ -12,13 +12,15 @@ import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.Objects;
+
 import swle.xyz.austers.R;
-import swle.xyz.austers.callback.SignInResultCallBack;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.UserHttpUtil;
 import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
-import swle.xyz.austers.httputil.OkHttpUtil;
 
 public class SetPwActivity extends BaseActivity {
 
@@ -76,16 +78,21 @@ public class SetPwActivity extends BaseActivity {
             public void onClick(View v) {
                 final Intent intent = getIntent();
                 final String phonenumber = intent.getStringExtra("phonenumber");
-                final String password = editText_pw_again.getText().toString();
-                OkHttpUtil.SignIn(phonenumber, password, new SignInResultCallBack() {
+                final String password = Objects.requireNonNull(editText_pw_again.getText()).toString();
+                UserHttpUtil.SignIn(phonenumber, password, new ResponseCallBack() {
                     @Override
-                    public void success(int result) {
-                        switch (result){
+                    public void failure() {
+                        Looper.prepare();
+                        Toast.makeText(SetPwActivity.this,"注册失败!请重试",Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+
+                    @Override
+                    public void success(int code, String message, Object data) {
+                        switch (code){
                             case 1:
                                 Looper.prepare();
                                 Toast.makeText(SetPwActivity.this,"注册成功!",Toast.LENGTH_LONG).show();
-
-
                                 User user = new User();
                                 user.setPhonenumber(phonenumber);
                                 user.setPassword(password);
@@ -97,19 +104,47 @@ public class SetPwActivity extends BaseActivity {
                                 startActivity(intent1);
                                 Looper.loop();
                                 break;
-                            case -3:
+                            case -1:
                                 Looper.prepare();
                                 Toast.makeText(SetPwActivity.this,"注册失败!请重试",Toast.LENGTH_LONG).show();
                                 Looper.loop();
                                 break;
                         }
                     }
-
-                    @Override
-                    public void failure(int result) {
-
-                    }
                 });
+//                OkHttpUtil.SignIn(phonenumber, password, new SignInResultCallBack() {
+//                    @Override
+//                    public void success(int result) {
+//                        switch (result){
+//                            case 1:
+//                                Looper.prepare();
+//                                Toast.makeText(SetPwActivity.this,"注册成功!",Toast.LENGTH_LONG).show();
+//
+//
+//                                User user = new User();
+//                                user.setPhonenumber(phonenumber);
+//                                user.setPassword(password);
+//                                System.out.println("密码为"+password);
+//                                insertOne(user);
+//                                Intent intent1 = new Intent(SetPwActivity.this,LogInActivity.class);
+//                                intent1.putExtra("phonenumber",phonenumber);
+//                                intent1.putExtra("password",password);
+//                                startActivity(intent1);
+//                                Looper.loop();
+//                                break;
+//                            case -3:
+//                                Looper.prepare();
+//                                Toast.makeText(SetPwActivity.this,"注册失败!请重试",Toast.LENGTH_LONG).show();
+//                                Looper.loop();
+//                                break;
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void failure(int result) {
+//
+//                    }
+//                });
             }
         });
     }

@@ -21,7 +21,7 @@ import swle.xyz.austers.R;
 import swle.xyz.austers.adapter.MyGridViewAdapter;
 import swle.xyz.austers.bean.User;
 import swle.xyz.austers.callback.ContactWayResultCallBack;
-import swle.xyz.austers.httputil.OkHttpUtil;
+import swle.xyz.austers.http.OkHttpUtil;
 
 public class ContactWayActivity extends BaseActivity {
     private Toolbar toolbar;

@@ -32,6 +32,7 @@ public class AboutActivity extends AppCompatActivity {
         button_oslicenses = findViewById(R.id.button_oos_licenses);
         button_feedback = findViewById(R.id.button_feedback);
 
+
         toolbar = findViewById(R.id.toolbar_about_activity);
         setSupportActionBar(toolbar); //将toolbar设置为当前activity的操作栏
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
@@ -70,6 +71,7 @@ public class AboutActivity extends AppCompatActivity {
 
             }
         });
+
 //        text="本项目采取MIT开源协议\n"
 //                +"[开源地址](https://github.com/TSOMH/AUSTers)";
 //        RichText.fromMarkdown(text).into(textView);

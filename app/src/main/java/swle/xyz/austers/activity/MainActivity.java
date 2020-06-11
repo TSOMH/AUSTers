@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
         initFragment(savedInstanceState);
         bottomNavigationView = findViewById(R.id.bottomNavigationView2);
         bottomNavigationView.setItemIconTintList(null);
@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
                     if (discoveryFragment == null) {
                         discoveryFragment = new DiscoveryFragment();
                     }
-                    item.setIcon(R.drawable.ic_search);
+                    item.setIcon(R.drawable.ic_discovery);
                     switchContent(isFragment, discoveryFragment);
                     return true;
                 case R.id.messageFragment:

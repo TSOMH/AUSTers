@@ -97,14 +97,6 @@ public class ContactWayActivity extends BaseActivity {
                 return true;
             }
         });
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(ContactWayActivity.this,users0.get(position).getQq(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
         return super.onCreateOptionsMenu(menu);
     }
 

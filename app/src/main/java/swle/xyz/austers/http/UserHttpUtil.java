@@ -30,6 +30,8 @@ public class UserHttpUtil{
    private static final MediaType JSON = MediaType.parse("application/json;charset=utf-8");
    private static ResponseBean responseBean = new ResponseBean(0,null,null);
 
+   static final String test_url = "http://10.0.2.2:8081";
+   static final String url = "http://116.62.106.237:8080";
 
    public static void getAuthCode(String phonenumber,final ResponseCallBack responseCallBack){
 
@@ -42,9 +44,8 @@ public class UserHttpUtil{
       OkHttpClient okHttpClient = new OkHttpClient.Builder()
               .connectTimeout(5,TimeUnit.SECONDS)
               .build();
-      String url = "http://10.0.2.2:8081/users/getsms";
       final Request request = new Request.Builder()
-              .url(url)
+              .url(test_url+"/users/getsms")
               .post(requestBody)
               .build();
 
@@ -76,9 +77,8 @@ public class UserHttpUtil{
       OkHttpClient okHttpClient = new OkHttpClient.Builder()
               .connectTimeout(5,TimeUnit.SECONDS)
               .build();
-      String url = "http://10.0.2.2:8081/users/signin";
       Request request =new Request.Builder()
-              .url(url)
+              .url(test_url+"/users/signin")
               .post(requestBody)
               .build();
       Call call = okHttpClient.newCall(request);
@@ -111,9 +111,8 @@ public class UserHttpUtil{
       OkHttpClient okHttpClient = new OkHttpClient.Builder()
               .connectTimeout(3, TimeUnit.SECONDS)
               .build();
-      String url = "http://10.0.2.2:8081/users/login";
       Request request = new Request.Builder()
-              .url(url)
+              .url(test_url+"/users/login")
               .post(body)
               .build();
 

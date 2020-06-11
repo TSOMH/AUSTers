@@ -32,6 +32,7 @@ import swle.xyz.austers.activity.CarPoolActivity;
 import swle.xyz.austers.activity.ClassScheduleActivity;
 import swle.xyz.austers.activity.ContactWayActivity;
 import swle.xyz.austers.activity.GradeActivity;
+import swle.xyz.austers.activity.LoseAndFindActivity;
 import swle.xyz.austers.activity.NewsActivity;
 import swle.xyz.austers.activity.VirusActivity;
 import swle.xyz.austers.adapter.BannerAdapter;
@@ -57,13 +58,13 @@ public class FirstFragment extends Fragment {
     private ImageButton button_news;
     private ImageButton button_virus;
     private ImageButton button_class_schedule;
+    private ImageButton button_lost_and_found;
     private static FirstFragment newInstance() {
         return new FirstFragment();
     }
     private List<ImageView> imageViewList;
     private String[] url = new String[3];
     private int oldPosition = 0;
-    private int currentItem = 0;
     private BannerAdapter adapter;
     private Handler handler;
     CurrentUser currentUser = CurrentUser.getInstance();
@@ -99,7 +100,7 @@ public class FirstFragment extends Fragment {
         button_news = view.findViewById(R.id.imageButtonNews);
         button_virus = view.findViewById(R.id.imageButton_virus);
         button_class_schedule = view.findViewById(R.id.imageButtonClassSchedule);
-
+        button_lost_and_found = view.findViewById(R.id.imageButton_lost_and_found);
         viewPager = view.findViewById(R.id.bannerviewpager);
         linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
     }
@@ -147,6 +148,14 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), VirusActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_lost_and_found.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoseAndFindActivity.class);
                 startActivity(intent);
             }
         });
@@ -220,7 +229,6 @@ public class FirstFragment extends Fragment {
                 old_indicator.setImageResource(R.drawable.banner_unchecked);
 
                 oldPosition = position;
-                currentItem = position;
             }
 
             @Override

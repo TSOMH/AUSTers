@@ -29,15 +29,16 @@ import com.sl.utakephoto.manager.UTakePhoto;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -71,6 +72,7 @@ public class MineFragment extends Fragment {
     public static MineFragment newInstance() {
         return new MineFragment();
     }
+    static final String test_url = "http://10.0.2.2:8081";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -98,58 +100,8 @@ public class MineFragment extends Fragment {
     }
 
 
-    // convert bitmap to file
-    private File convertBitmapToFile(Bitmap bitmap) {
-        File f = null;
-        try {
-            // create a file to write bitmap data
-            f = new File(requireActivity().getCacheDir(), "portrait");
-            f.createNewFile();
 
-            // convert bitmap to byte array
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-            byte[] bitmapdata = bos.toByteArray();
 
-            // write the bytes in file
-            FileOutputStream fos = new FileOutputStream(f);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (Exception e) {
-
-        }
-        return f;
-    }
-    void upLoadAccountImage(Bitmap bitmap){
-        MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
-        OkHttpClient client=new OkHttpClient();
-//                        MultipartBody body = new MultipartBody.Builder("AaB03x")
-//                                .setType(MultipartBody.FORM)
-//                                .addPart(
-//                                        Headers.of("Content-Disposition", "form-data; name=\"title\""),
-//                                        RequestBody.create(convertBitmapToFile(bitmap),MEDIA_TYPE_PNG))
-//                                .addPart(
-//                                        Headers.of("Content-Disposition", "form-data; name=\"image\""),
-//                                        RequestBody.create(MEDIA_TYPE_PNG, new File("website/static/logo-square.png")))
-//                                .build();
-        Request request = new Request.Builder()
-                .url("http://116.62.106.237:8080/accountimg")
-                .post(RequestBody.create(convertBitmapToFile(bitmap),MEDIA_TYPE_PNG))
-                .build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                System.out.println("失败");
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                System.out.println(response.body().string());
-            }
-        });
-    }
     private void initEvent(){
 
 
@@ -161,6 +113,8 @@ public class MineFragment extends Fragment {
                 UTakePhoto.with(requireActivity()).openAlbum(intent).build(new ITakePhotoResult() {
                     @Override
                     public void takeSuccess(List<Uri> uriList) {
+
+
 
                         Bitmap bitmap = null;
                         try {
@@ -193,9 +147,20 @@ public class MineFragment extends Fragment {
                                     fileOutputStream.flush();
                                     fileOutputStream.close();
                                 }
+                                //上传图片
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        File PICTURES = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                                        File imageFile = new File(PICTURES + "/accountimg"+ "/" +currentUser.phonenumber+".jpeg");
+                                        uploadfile(imageFile);
+                                    }
+                                }).start();
                             }catch (Exception ignored){
 
                             }
+
+
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -335,4 +300,34 @@ public class MineFragment extends Fragment {
         }
     }
 
+
+    void uploadfile(File file){
+        MediaType mediaType = MediaType.parse("img/jpeg; charset=utf-8");
+        OkHttpClient client = new OkHttpClient.Builder()
+
+                .connectTimeout(5, TimeUnit.SECONDS)//设置连接超时时间
+                .build();
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("filename","123.jpg")//请求参数，和服务端约定好
+                .addFormDataPart("file",file.getName(),RequestBody.create(file,mediaType))
+                .build();
+        Request request = new Request.Builder()
+                .url(test_url+"/upload_file/img")
+                .post(requestBody)
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                e.printStackTrace();
+                System.out.println("失败");
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                System.out.println(response.body().string());
+            }
+        });
+    }
 }
+

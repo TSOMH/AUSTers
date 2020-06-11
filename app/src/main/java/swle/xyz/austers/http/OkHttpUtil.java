@@ -32,7 +32,7 @@ import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
 public class OkHttpUtil {
 
 
-    private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
+    private static final MediaType JSON = MediaType.parse("application/json;charset=utf-8");
 
     private static SignInResult signInResult = new SignInResult();
     private static LoginResult loginResult = new LoginResult();

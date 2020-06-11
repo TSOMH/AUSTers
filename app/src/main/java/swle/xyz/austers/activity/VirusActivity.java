@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -118,6 +119,7 @@ public class VirusActivity extends BaseActivity {
             @Override
             public void onRefresh() {
                 initData();
+                Toast.makeText(VirusActivity.this,"刷新成功！",Toast.LENGTH_SHORT).show();
             }
         });
     }

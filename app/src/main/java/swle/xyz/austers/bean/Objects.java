@@ -1,13 +1,29 @@
 package swle.xyz.austers.bean;
 
-import java.sql.Date;
-
-
 public class Objects {
+    private String currentHost; // 当前主人
+    private String host; // 原主人
     private String kind;
     private String info;
-    private Date date;
-    private String imgAddress;
+    private String date;
+    private String imgaddress;
+    private int tag;//1为丢失，0为捡到
+
+    public String getCurrentHost() {
+        return currentHost;
+    }
+
+    public void setCurrentHost(String currentHost) {
+        this.currentHost = currentHost;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
 
     public String getKind() {
         return kind;
@@ -25,29 +41,28 @@ public class Objects {
         this.info = info;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getImgAddress() {
-        return imgAddress;
+    public String getImgaddress() {
+        return imgaddress;
     }
 
-    public void setImgAddress(String imgAddress) {
-        this.imgAddress = imgAddress;
+    public void setImgaddress(String imgaddress) {
+        this.imgaddress = imgaddress;
     }
 
-    @Override
-    public String toString() {
-        return "Objects{" +
-                "kind='" + kind + '\'' +
-                ", info='" + info + '\'' +
-                ", date=" + date +
-                ", imgAddress='" + imgAddress + '\'' +
-                '}';
+    public int getTag() {
+        return tag;
     }
+
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
+
 }

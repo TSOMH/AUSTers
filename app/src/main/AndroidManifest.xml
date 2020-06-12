@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.IssueLostActivity"></activity>
+        <activity android:name=".activity.IssueObjectsActivity"></activity>
         <activity android:name=".activity.LoseAndFindActivity" />
         <activity android:name=".activity.ClassScheduleActivity" />
         <activity android:name=".activity.VirusActivity" />

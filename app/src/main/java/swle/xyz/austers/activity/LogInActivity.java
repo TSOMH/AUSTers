@@ -35,13 +35,7 @@ public class LogInActivity extends BaseActivity {
 
     SharedPreferences loginInfo = null;
     SharedPreferences.Editor editor = null;
-
     CurrentUser currentUser;
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +54,7 @@ public class LogInActivity extends BaseActivity {
         button_log_in = findViewById(R.id.button_log_in);
         button_sign_in = findViewById(R.id.button_sign_in);
         user_id = findViewById(R.id.user_id);
-
-
         user_password =findViewById(R.id.user_password);
-
         button_forgot_password = findViewById(R.id.button_forgot_password);
     }
 
@@ -88,15 +79,9 @@ public class LogInActivity extends BaseActivity {
             user_id.setText(intent.getStringExtra("phonenumber"));
             user_password.setText(intent.getStringExtra("password"));
         }
-
-
-
-
         button_log_in.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {//禁止频繁点击
-
-
                 final String phonenumber = Objects.requireNonNull(user_id.getText()).toString();
                 final String password = Objects.requireNonNull(user_password.getText()).toString();
 
@@ -142,52 +127,6 @@ public class LogInActivity extends BaseActivity {
                     Toast.makeText(LogInActivity.this,"请检查用户名和密码是否为空",Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
-//                if (!phonenumber.equals("") && !password.equals("")){
-//                    OkHttpUtil.Login(phonenumber, password, new LoginResultCallBack() { //生成LoginResultCallBack接口，目的是拿到OkHttpUtil
-//                                                                               //的Response返回内容
-//
-//                        @Override
-//                        public void success(int result) {
-//                            Log.d("code",""+result);
-//                            switch (result){
-//                                case 1:
-//                                    editor.putString("current_user",phonenumber);
-//                                    editor.putString("current_password",password);
-//                                    editor.apply();
-//                                    InsertOneUser(phonenumber,password);
-//                                    currentUser.phonenumber = phonenumber;
-//                                    Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //禁止回跳SignInActivity
-//                                    intent.setClass(LogInActivity.this, MainActivity.class);
-//                                    startActivity(intent);
-//                                    break;
-//                                case -1:
-//                                    Looper.prepare();
-//                                    Toast.makeText(LogInActivity.this,"密码错误,请重新登录",Toast.LENGTH_SHORT).show();
-//                                    Looper.loop();
-//                                    break;
-//                                case -2:
-//                                    Looper.prepare();
-//                                    Toast.makeText(LogInActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
-//                                    Looper.loop();
-//                                    break;
-//                                case -3:
-//                                    Looper.prepare();
-//                                    Toast.makeText(LogInActivity.this,"服务器异常,请重试",Toast.LENGTH_SHORT).show();
-//                                    Looper.loop();
-//                                    break;
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void failure(int result) {
-//                            Log.d("code",""+ result);
-//                        }
-//                    });
-//
-//                }else {
-//                    Toast.makeText(LogInActivity.this,"请检查用户名和密码是否为空",Toast.LENGTH_LONG).show();
-//                }
 
             }
         });
@@ -240,7 +179,6 @@ public class LogInActivity extends BaseActivity {
                     userDao.updateUser(finalUser1);
                 }
             }).start();
-
         }
     }
 

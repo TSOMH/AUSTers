@@ -24,11 +24,15 @@ import java.util.Objects;
 import swle.xyz.austers.R;
 import swle.xyz.austers.adapter.CarPoolGridViewAdapter;
 import swle.xyz.austers.bean.Trip;
+import swle.xyz.austers.callback.ResponseCallBack;
 import swle.xyz.austers.dialogfragment.DatePickerFragment;
 import swle.xyz.austers.dialogfragment.IssueTripDialogfragment;
 import swle.xyz.austers.dialogfragment.TimePickerFragment;
-import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
-import swle.xyz.austers.http.OkHttpUtil;
+import swle.xyz.austers.http.TripHttpUtil;
+import swle.xyz.austers.myclass.CurrentUser;
+import swle.xyz.austers.room.UserDao;
+import swle.xyz.austers.room.UserDataBase;
+import swle.xyz.austers.room.UserRoom;
 
 public class CarPoolActivity extends BaseActivity  {
     Calendar calendar = Calendar.getInstance();
@@ -56,6 +60,10 @@ public class CarPoolActivity extends BaseActivity  {
     private int month = calendar.get(Calendar.MONTH)+1;
     private int day = calendar.get(Calendar.DAY_OF_MONTH);
     private int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    CurrentUser currentUser = CurrentUser.getInstance();
+
+    UserDataBase userDataBase;
+    UserDao userDao;
 
     private List<Trip> trips0=new ArrayList<>();
 
@@ -63,7 +71,8 @@ public class CarPoolActivity extends BaseActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_pool);
-
+        userDataBase = UserRoom.getInstance(getApplicationContext());
+        userDao = userDataBase.getUserDao();
         handler = new Handler();
         initView();
         initEvent();
@@ -139,13 +148,10 @@ public class CarPoolActivity extends BaseActivity  {
 
                 String starting = spinner_starting.getSelectedItem().toString();
                 String destination = spinner_destnitation.getSelectedItem().toString();
-                String initiator = loginInfo.getString("current_user",null);
+                String initiator = currentUser.phonenumber;
 
                 IssueTripDialogfragment issueTripDialogfragment = new IssueTripDialogfragment(starting,destination,initiator,year,month,day,hour,CarPoolActivity.this);
                 issueTripDialogfragment.show(getSupportFragmentManager(),"tag");
-
-
-
 
 
             }
@@ -156,18 +162,46 @@ public class CarPoolActivity extends BaseActivity  {
                 String starting = spinner_starting.getSelectedItem().toString();
                 String destination = spinner_destnitation.getSelectedItem().toString();
                 String initiator = loginInfo.getString("current_user",null);
-                OkHttpUtil.queryOtherTrip(initiator, starting, destination, 0, year, month, day, hour, new QueryOtherTripResultCallBack() {
+                TripHttpUtil.queryOtherTrip(initiator, starting, destination, 0, year, month, day, hour, new ResponseCallBack() {
                     @Override
-                    public void success(final List<Trip> trips) {
+                    public void failure() {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                trips0 = trips;
+                                builder = new AlertDialog.Builder(CarPoolActivity.this);
+                                builder.setMessage("网络错误，请重试");
+                                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                final AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void success(int code, String message, final Object data) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                trips0 = (List<Trip>) data;
                                 if (trips0.size() > 0){
                                     gridView.setAdapter(new CarPoolGridViewAdapter(CarPoolActivity.this,trips0,loginInfo,editor));
+                                    builder = new AlertDialog.Builder(CarPoolActivity.this);
+                                    builder.setMessage("查询成功！");
+                                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                                    final AlertDialog dialog = builder.create();
+                                    dialog.show();
                                 }else {
                                     builder = new AlertDialog.Builder(CarPoolActivity.this);
-                                    builder.setMessage("搜索结果为空，请重试");
+                                    builder.setMessage("查询结果为空，请重试");
                                     builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -179,12 +213,36 @@ public class CarPoolActivity extends BaseActivity  {
                             }
                         });
                     }
-
-                    @Override
-                    public void failure(int status_code) {
-
-                    }
                 });
+//                OkHttpUtil.queryOtherTrip(initiator, starting, destination, 0, year, month, day, hour, new QueryOtherTripResultCallBack() {
+//                    @Override
+//                    public void success(final List<Trip> trips) {
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                trips0 = trips;
+//                                if (trips0.size() > 0){
+//                                    gridView.setAdapter(new CarPoolGridViewAdapter(CarPoolActivity.this,trips0,loginInfo,editor));
+//                                }else {
+//                                    builder = new AlertDialog.Builder(CarPoolActivity.this);
+//                                    builder.setMessage("搜索结果为空，请重试");
+//                                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                        }
+//                                    });
+//                                    final AlertDialog dialog = builder.create();
+//                                    dialog.show();
+//                                }
+//                            }
+//                        });
+//                    }
+//
+//                    @Override
+//                    public void failure(int status_code) {
+//
+//                    }
+//                });
             }
         });
     }

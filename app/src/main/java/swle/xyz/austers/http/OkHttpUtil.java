@@ -31,7 +31,7 @@ import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
 public class OkHttpUtil {
 
     //    static final String test_url = "http://10.0.2.2:8081";
-    static final String url = "http://116.62.106.237:8081";
+    static final String url = "https://116.62.106.237:8081";
 
     private static final MediaType JSON = MediaType.parse("application/json;charset=utf-8");
 

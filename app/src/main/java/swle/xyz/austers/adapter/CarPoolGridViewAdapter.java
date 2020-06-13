@@ -19,8 +19,8 @@ import java.util.List;
 
 import swle.xyz.austers.R;
 import swle.xyz.austers.bean.Trip;
-import swle.xyz.austers.callback.GetInTripCallBack;
-import swle.xyz.austers.http.OkHttpUtil;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.TripHttpUtil;
 
 /**
 *Created by TSOMH on 2020/5/24$
@@ -141,24 +141,46 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
                             final int s_left = trips.get(position).getSeat_left();
                             System.out.println("id="+trips.get(position).getId());
                             if (s_left > 0){
-                                OkHttpUtil.getInTrip(trips.get(position).getId(), new GetInTripCallBack() {
+//                                OkHttpUtil.getInTrip(trips.get(position).getId(), new GetInTripCallBack() {
+//                                    @Override
+//                                    public void success(int status) {
+//                                        //位置减1
+//                                        trips.get(position).setSeat_left(s_left-1);
+//                                        editor.putBoolean(trips.get(position).getId()+"",true);
+//                                        editor.apply();
+//                                        handler.post(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                finalViewHolder.seat_left.setText("剩余座位："+(s_left-1));
+//                                                if (s_left == 1){
+//                                                    finalViewHolder.button_get_in.setEnabled(false);
+//                                                }
+//                                            }
+//                                        });
+//                                        builder2 = new AlertDialog.Builder(context);
+//                                        builder2.setMessage("乘坐成功！");
+//                                        builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                            }
+//                                        });
+//                                        Looper.prepare();
+//                                        final AlertDialog dialog = builder2.create();
+//                                        dialog.show();
+//                                        Looper.loop();
+//                                        finalViewHolder.button_get_in.setEnabled(false);
+//
+//                                    }
+//                                    @Override
+//                                    public void failure(int status) {
+//                                    }
+//                                });
+                                TripHttpUtil.getInTrip(trips.get(position).getId(), new ResponseCallBack() {
                                     @Override
-                                    public void success(int status) {
-                                        //位置减1
-                                        trips.get(position).setSeat_left(s_left-1);
-                                        editor.putBoolean(trips.get(position).getId()+"",true);
-                                        editor.apply();
-                                        handler.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                finalViewHolder.seat_left.setText("剩余座位："+(s_left-1));
-                                                if (s_left == 1){
-                                                    finalViewHolder.button_get_in.setEnabled(false);
-                                                }
-                                            }
-                                        });
+                                    public void failure() {
                                         builder2 = new AlertDialog.Builder(context);
-                                        builder2.setMessage("乘坐成功！");
+                                        builder2.setMessage("网络错误，请重试");
                                         builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -166,14 +188,56 @@ public class CarPoolGridViewAdapter extends BaseAdapter {
                                             }
                                         });
                                         Looper.prepare();
-                                        final AlertDialog dialog = builder2.create();
+                                        AlertDialog dialog = builder2.create();
                                         dialog.show();
                                         Looper.loop();
-                                        finalViewHolder.button_get_in.setEnabled(false);
-
                                     }
+
                                     @Override
-                                    public void failure(int status) {
+                                    public void success(int code, String message, Object data) {
+                                        switch (code){
+                                            case 1:
+                                                //位置减1
+                                                trips.get(position).setSeat_left(s_left-1);
+                                                editor.putBoolean(trips.get(position).getId()+"",true);
+                                                editor.apply();
+                                                handler.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        finalViewHolder.seat_left.setText("剩余座位："+(s_left-1));
+                                                        if (s_left == 1){
+                                                            finalViewHolder.button_get_in.setEnabled(false);
+                                                        }
+                                                    }
+                                                });
+                                                builder2 = new AlertDialog.Builder(context);
+                                                builder2.setMessage("乘坐成功！");
+                                                builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+
+                                                    }
+                                                });
+                                                Looper.prepare();
+                                                AlertDialog dialog = builder2.create();
+                                                dialog.show();
+                                                Looper.loop();
+                                                finalViewHolder.button_get_in.setEnabled(false);
+                                                break;
+                                            case -1:
+                                                builder2 = new AlertDialog.Builder(context);
+                                                builder2.setMessage("网络错误，请重试");
+                                                builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+
+                                                    }
+                                                });
+                                                Looper.prepare();
+                                                AlertDialog dialog1 = builder2.create();
+                                                dialog1.show();
+                                                Looper.loop();
+                                        }
                                     }
                                 });
                             }

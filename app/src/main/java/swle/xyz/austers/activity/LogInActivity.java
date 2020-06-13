@@ -123,9 +123,7 @@ public class LogInActivity extends BaseActivity {
                         }
                     });
                 }else {
-                    Looper.prepare();
                     Toast.makeText(LogInActivity.this,"请检查用户名和密码是否为空",Toast.LENGTH_LONG).show();
-                    Looper.loop();
                 }
 
             }
@@ -176,6 +174,7 @@ public class LogInActivity extends BaseActivity {
                 @Override
                 public void run() {
                     finalUser1.setToken(token);
+                    currentUser.token = token;
                     userDao.updateUser(finalUser1);
                 }
             }).start();

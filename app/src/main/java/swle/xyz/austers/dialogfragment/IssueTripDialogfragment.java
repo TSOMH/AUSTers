@@ -9,8 +9,11 @@ import android.os.Looper;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import swle.xyz.austers.callback.IssueResultCallBack;
-import swle.xyz.austers.http.OkHttpUtil;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.TripHttpUtil;
+import swle.xyz.austers.room.UserDao;
+import swle.xyz.austers.room.UserDataBase;
+import swle.xyz.austers.room.UserRoom;
 
 /**
 *Created by TSOMH on 2020/5/28$
@@ -27,6 +30,8 @@ public class IssueTripDialogfragment extends DialogFragment {
     private int month;
     private int day;
     private int hour;
+    UserDataBase userDataBase = UserRoom.getInstance(getContext());
+    UserDao userDao = userDataBase.getUserDao();
 
     private Context context;
 
@@ -63,24 +68,9 @@ public class IssueTripDialogfragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                OkHttpUtil.issueTrip(initiator, starting, destination, seat_left, year, month, day, hour, new IssueResultCallBack() {
+                TripHttpUtil.issueTrip(initiator, starting, destination, seat_left, year, month, day, hour, new ResponseCallBack() {
                     @Override
-                    public void success(int status_code) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setMessage("发起成功");
-                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User clicked OK button
-                            }
-                        });
-                        Looper.prepare();
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        Looper.loop();
-
-                    }
-                    @Override
-                    public void failure(int status_code) {
+                    public void failure() {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setMessage("发起失败，请重试");
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -91,9 +81,69 @@ public class IssueTripDialogfragment extends DialogFragment {
                         AlertDialog dialog = builder.create();
                         dialog.show();
                         Looper.loop();
+                    }
 
+                    @Override
+                    public void success(int code, String message, Object data) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        switch (code){
+
+                            case 1:
+                                builder.setMessage("发起成功");
+                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                // User clicked OK button
+                                    }
+                                });
+                                Looper.prepare();
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                                Looper.loop();
+                            case -1:
+                                builder.setMessage("发起失败，请重试");
+                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                    }
+                                });
+                                Looper.prepare();
+                                AlertDialog dialog1 = builder.create();
+                                dialog1.show();
+                                Looper.loop();
+                        }
                     }
                 });
+
+//                OkHttpUtil.issueTrip(initiator, starting, destination, seat_left, year, month, day, hour, new IssueResultCallBack() {
+//                    @Override
+//                    public void success(int status_code) {
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                        builder.setMessage("发起成功");
+//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                // User clicked OK button
+//                            }
+//                        });
+//                        Looper.prepare();
+//                        AlertDialog dialog = builder.create();
+//                        dialog.show();
+//                        Looper.loop();
+//
+//                    }
+//                    @Override
+//                    public void failure(int status_code) {
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                        builder.setMessage("发起失败，请重试");
+//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                            }
+//                        });
+//                        Looper.prepare();
+//                        AlertDialog dialog = builder.create();
+//                        dialog.show();
+//                        Looper.loop();
+//
+//                    }
+//                });
 
 
             }

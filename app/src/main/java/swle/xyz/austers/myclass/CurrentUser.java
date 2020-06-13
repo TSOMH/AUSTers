@@ -8,6 +8,7 @@ package swle.xyz.austers.myclass;
 public class CurrentUser{
 
    public String phonenumber;
+   public String token;
    private static volatile CurrentUser currentUser = null;
 
 

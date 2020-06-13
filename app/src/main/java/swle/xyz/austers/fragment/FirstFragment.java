@@ -168,9 +168,9 @@ public class FirstFragment extends Fragment {
         MultiTransformation<Bitmap> multi = new MultiTransformation<>(
 //                new BlurTransformation(25),
                 new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
-        url[0] = "http://116.62.106.237:8080/school02.jpg";
-        url[1] = "http://116.62.106.237:8080/school03.jpg";
-        url[2] = "http://116.62.106.237:8080/school01.jpg";
+        url[0] = "https://hbimg.huabanimg.com/7090efe43ccd38111112603d00eab5747fb37fd91e7e3-RqsMAQ_fw658/format/webp";
+        url[1] = "https://hbimg.huabanimg.com/be49768a4d7ec60c9508ce8a0043f5e7fc7e353d47bb8-C5RsLe_fw658/format/webp";
+        url[2] = "https://hbimg.huabanimg.com/09a1e59c3b4b98e03e9cefe2a65e4f0111a9efc618edb-oKz8Cc_fw658/format/webp";
         imageViewList = new ArrayList<>();
 
         //生成背景图

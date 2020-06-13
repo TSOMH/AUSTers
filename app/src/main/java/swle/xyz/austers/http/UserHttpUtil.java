@@ -31,7 +31,7 @@ public class UserHttpUtil{
    private static ResponseBean responseBean = new ResponseBean(0,null,null);
 
 //   static final String test_url = "http://10.0.2.2:8081";
-   static final String url = "http://116.62.106.237:8081";
+   static final String url = "https://swle.top:8081";
 
    public static void getAuthCode(String phonenumber,final ResponseCallBack responseCallBack){
 
@@ -122,6 +122,7 @@ public class UserHttpUtil{
          @Override
          public void onFailure(@NotNull Call call, @NotNull IOException e) {
             responseCallBack.failure();
+            e.printStackTrace();
          }
 
          @Override

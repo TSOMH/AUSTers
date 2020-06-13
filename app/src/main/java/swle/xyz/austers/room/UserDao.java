@@ -27,6 +27,8 @@ public interface UserDao {
     String queryTrueName(String phonenumber);
     @Query("SELECT organization from user where phonenumber = :phonenumber")
     String queryOrganization(String phonenumber);
+    @Query("SELECT token from user where phonenumber = :phonenumber")
+    String queryToken(String phonenumber);
 
     @Insert(onConflict = REPLACE)
     void InsertUser(User user);

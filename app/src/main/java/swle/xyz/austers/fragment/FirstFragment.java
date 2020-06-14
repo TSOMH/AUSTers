@@ -31,6 +31,7 @@ import swle.xyz.austers.R;
 import swle.xyz.austers.activity.CarPoolActivity;
 import swle.xyz.austers.activity.ClassScheduleActivity;
 import swle.xyz.austers.activity.ContactWayActivity;
+import swle.xyz.austers.activity.FleasMarketActivity;
 import swle.xyz.austers.activity.GradeActivity;
 import swle.xyz.austers.activity.LoseAndFindActivity;
 import swle.xyz.austers.activity.NewsActivity;
@@ -59,6 +60,8 @@ public class FirstFragment extends Fragment {
     private ImageButton button_virus;
     private ImageButton button_class_schedule;
     private ImageButton button_lost_and_found;
+    ImageButton button_fleas_market;
+
     private static FirstFragment newInstance() {
         return new FirstFragment();
     }
@@ -101,6 +104,7 @@ public class FirstFragment extends Fragment {
         button_virus = view.findViewById(R.id.imageButton_virus);
         button_class_schedule = view.findViewById(R.id.imageButtonClassSchedule);
         button_lost_and_found = view.findViewById(R.id.imageButton_lost_and_found);
+        button_fleas_market = view.findViewById(R.id.imageButtonFleaMarket);
         viewPager = view.findViewById(R.id.bannerviewpager);
         linearLayout = view.findViewById(R.id.linearLayout);//dot所在布局
     }
@@ -156,6 +160,14 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoseAndFindActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_fleas_market.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FleasMarketActivity.class);
                 startActivity(intent);
             }
         });

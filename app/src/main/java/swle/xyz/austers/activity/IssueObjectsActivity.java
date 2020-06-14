@@ -1,5 +1,6 @@
 package swle.xyz.austers.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
@@ -38,7 +40,8 @@ public class IssueObjectsActivity extends BaseActivity {
     EditText editText_info;
     EditText editText_date;
     ImageButton imageButton;
-    Button button;
+    Button button_confirm;
+    AlertDialog.Builder builder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class IssueObjectsActivity extends BaseActivity {
         editText_info = findViewById(R.id.editTextText_lost_info);
         editText_date = findViewById(R.id.editTextDate);
         imageButton = findViewById(R.id.imageButtonAddLostImg);
-        button = findViewById(R.id.button_issue_lost);
+        button_confirm = findViewById(R.id.button_issue_lost);
         toolbar = findViewById(R.id.toolbar_issue_objects);
         setSupportActionBar(toolbar); //将toolbar设置为当前activity的操作栏
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
@@ -109,7 +112,7 @@ public class IssueObjectsActivity extends BaseActivity {
                 });
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
+        button_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CurrentUser currentUser = CurrentUser.getInstance();
@@ -118,7 +121,8 @@ public class IssueObjectsActivity extends BaseActivity {
                 objects.setKind(editText_kind.getText().toString());
                 objects.setInfo(editText_info.getText().toString());
                 objects.setCurrentHost(currentUser.phonenumber);
-                objects.setDate(editText_date.getText().toString());
+                objects.setLostOrFoundDate(editText_date.getText().toString());
+                System.out.println(editText_date.getText().toString());
                 String s = intent.getStringExtra("lostOrFound");
                 assert s != null;
                 if (s.equals("lost")){
@@ -126,6 +130,17 @@ public class IssueObjectsActivity extends BaseActivity {
                 }else {
                     objects.setTag(0);
                 }
+                builder = new AlertDialog.Builder(IssueObjectsActivity.this);
+                builder.setMessage("正在提交，请稍后");
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+
 
                 //上传图片
                 new Thread(new Runnable() {
@@ -144,15 +159,18 @@ public class IssueObjectsActivity extends BaseActivity {
                                 switch (code){
                                     case 1:
                                         Looper.prepare();
-                                        Toast.makeText(IssueObjectsActivity.this,message,Toast.LENGTH_LONG).show();
-                                        finish();
+                                        dialog.setMessage("提交成功");
                                         Looper.loop();
                                         break;
                                     case -1:
                                         Looper.prepare();
-                                        Toast.makeText(IssueObjectsActivity.this,message,Toast.LENGTH_LONG).show();
+                                        dialog.setMessage("提交失败，请重试");
                                         Looper.loop();
                                         break;
+                                    default:
+                                        Looper.prepare();
+                                        dialog.setMessage("网络错误，请重试");
+                                        Looper.loop();
                                 }
                             }
                         });

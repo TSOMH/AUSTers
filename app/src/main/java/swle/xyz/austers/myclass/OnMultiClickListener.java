@@ -2,7 +2,7 @@ package swle.xyz.austers.myclass;
 import android.view.View;
 
 /**
-*Created by TSOMH on 2020/2/13$
+*Created by TSOMH on 2020/2/13
 *Description:防止过快点击
 *
 */

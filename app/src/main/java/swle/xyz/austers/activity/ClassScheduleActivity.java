@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.widget.Toolbar;
+
+import java.util.Objects;
+
 import swle.xyz.austers.R;
-import swle.xyz.austers.http.JWXT;
 
 public class ClassScheduleActivity extends BaseActivity {
 
     Button button_get;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,16 +24,21 @@ public class ClassScheduleActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-        button_get.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JWXT jwxt = new JWXT("2018304008","122274");
-            }
-        });
     }
 
     @Override
     public void initView() {
-        button_get = findViewById(R.id.button_get);
+        toolbar = findViewById(R.id.toolbar_class_schedule);
+        setSupportActionBar(toolbar); //将toolbar设置为当前activity的操作栏
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
+        getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
+        getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏toolbar默认显示的label
     }
 }

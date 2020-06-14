@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import swle.xyz.austers.R;
-import swle.xyz.austers.myclass.Grade;
+import swle.xyz.austers.bean.Grade;
 
 /**
 *Created by TSOMH on 2020/6/2$

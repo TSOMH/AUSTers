@@ -18,7 +18,7 @@ import swle.xyz.austers.R;
 import swle.xyz.austers.adapter.GradeAdapter;
 import swle.xyz.austers.callback.GradeCallBack;
 import swle.xyz.austers.myclass.CurrentUser;
-import swle.xyz.austers.myclass.Grade;
+import swle.xyz.austers.bean.Grade;
 import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;

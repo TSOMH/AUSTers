@@ -15,6 +15,8 @@ import java.util.Objects;
 
 import swle.xyz.austers.R;
 import swle.xyz.austers.callback.BasicInfoCallBack;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.UserHttpUtil;
 import swle.xyz.austers.room.User;
 import swle.xyz.austers.room.UserDao;
 import swle.xyz.austers.room.UserDataBase;
@@ -116,7 +118,13 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
                                     user.setMajor(info[10]);
                                     user.setIs_student(true);
                                     user.setPassword_jwxt(editText_password.getText().toString());
-                                    updateUser(user);
+
+                                    swle.xyz.austers.bean.User user1 = new swle.xyz.austers.bean.User();
+                                    user1.setIsStudent(1);
+                                    user1.setPhonenumber(phonenumber);
+                                    updateUser(user,user1);
+
+
                                     dialog.setMessage(info[1]+"同学,你好!");
 
                                 }
@@ -130,7 +138,18 @@ public class IdentityAuthenticateActivity extends AppCompatActivity {
         });
     }
 
-    void updateUser(final User user){
+    void updateUser(final User user, swle.xyz.austers.bean.User user1){
+        UserHttpUtil.update(user1, new ResponseCallBack() {
+            @Override
+            public void failure() {
+
+            }
+
+            @Override
+            public void success(int code, String message, Object data) {
+
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {

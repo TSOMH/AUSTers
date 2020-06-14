@@ -15,6 +15,11 @@ public class User{
     private String phonenumber;
     private String qq;
     private String organization;
+    private int isStudent;
+
+    public User() {
+
+    }
 
     public String getOrganization() {
         return organization;
@@ -104,5 +109,11 @@ public class User{
         this.password = password;
     }
 
+    public int getIsStudent() {
+        return isStudent;
+    }
 
+    public void setIsStudent(int isStudent) {
+        this.isStudent = isStudent;
+    }
 }

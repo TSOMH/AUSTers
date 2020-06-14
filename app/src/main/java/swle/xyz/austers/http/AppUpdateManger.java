@@ -15,7 +15,7 @@ import okhttp3.Response;
 import swle.xyz.austers.BuildConfig;
 
 /**
-*Created by TSOMH on 2020/5/15$
+*Created by TSOMH on 2020/5/15
 *Description:
 *
 */

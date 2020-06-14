@@ -96,13 +96,7 @@ dependencies {
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
 
-    implementation 'com.droidninja:filepicker:2.2.4'
 
     implementation 'com.sl.utakephoto:uTakePhoto:1.1.0'
-
-
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    implementation(group: 'org.projectlombok', name: 'lombok', version: '1.18.12')
-
 
 }

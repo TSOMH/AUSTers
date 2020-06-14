@@ -29,10 +29,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 import swle.xyz.austers.BuildConfig;
 import swle.xyz.austers.R;
+import swle.xyz.austers.bean.User;
+import swle.xyz.austers.callback.ResponseCallBack;
 import swle.xyz.austers.fragment.DiscoveryFragment;
 import swle.xyz.austers.fragment.FirstFragment;
 import swle.xyz.austers.fragment.MessageFragment;
 import swle.xyz.austers.fragment.MineFragment;
+import swle.xyz.austers.http.UserHttpUtil;
+import swle.xyz.austers.myclass.CurrentUser;
 
 public class MainActivity extends BaseActivity {
 
@@ -53,6 +57,7 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initEvent();
+        initInfo();
     }
 
     public void initFragment(Bundle savedInstanceState){
@@ -113,8 +118,8 @@ public class MainActivity extends BaseActivity {
         MenuItem message = bottomNavigationView.getMenu().findItem(R.id.messageFragment);
         MenuItem mine = bottomNavigationView.getMenu().findItem(R.id.mineFragment);
         home.setIcon(R.drawable.ic_home_unchecked);
-        search.setIcon(R.drawable.ic_search_unchecked);
-        message.setIcon(R.drawable.ic_message_unchecked);
+//        search.setIcon(R.drawable.ic_search_unchecked);
+//        message.setIcon(R.drawable.ic_message_unchecked);
         mine.setIcon(R.drawable.ic_mine_unchecked);
     }
 
@@ -215,6 +220,22 @@ public class MainActivity extends BaseActivity {
         public int versionCode;
         public String versionDes;
         public String versionName;
+    }
+    void initInfo(){
+        CurrentUser currentUser = CurrentUser.getInstance();
+        User user = new User();
+        user.setPhonenumber(currentUser.phonenumber);
+        UserHttpUtil.getInfo(user, new ResponseCallBack() {
+            @Override
+            public void failure() {
+
+            }
+
+            @Override
+            public void success(int code, String message, Object data) {
+
+            }
+        });
     }
 
 }

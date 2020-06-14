@@ -17,7 +17,7 @@ import swle.xyz.austers.room.UserDataBase;
 import swle.xyz.austers.room.UserRoom;
 
 /**
-*Created by TSOMH on 2020/6/2$
+*Created by TSOMH on 2020/6/2
 *Description:
 *
 */

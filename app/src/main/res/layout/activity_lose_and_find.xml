@@ -23,7 +23,7 @@
         android:layout_marginStart="20dp"
         android:background="@color/transparent"
         app:defaultQueryHint="请输入丢失物品种类"
-        app:iconifiedByDefault="true"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

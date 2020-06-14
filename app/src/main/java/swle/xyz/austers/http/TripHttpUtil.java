@@ -23,7 +23,7 @@ import swle.xyz.austers.callback.ResponseCallBack;
 import swle.xyz.austers.myclass.CurrentUser;
 
 /**
-*Created by TSOMH on 2020/6/13$
+*Created by TSOMH on 2020/6/13
 *Description:
 *
 */

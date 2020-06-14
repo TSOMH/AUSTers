@@ -5,15 +5,15 @@
         android:icon="@drawable/ic_home"
         android:title="首页" />
 
-    <item
-        android:id="@+id/discoveryFragment"
-        android:icon="@drawable/ic_search_unchecked"
-        android:title="发现" />
+<!--    <item-->
+<!--        android:id="@+id/discoveryFragment"-->
+<!--        android:icon="@drawable/ic_search_unchecked"-->
+<!--        android:title="发现" />-->
 
-    <item
-        android:id="@+id/messageFragment"
-        android:icon="@drawable/ic_message_unchecked"
-        android:title="消息" />
+<!--    <item-->
+<!--        android:id="@+id/messageFragment"-->
+<!--        android:icon="@drawable/ic_message_unchecked"-->
+<!--        android:title="消息" />-->
     <item
         android:id="@+id/mineFragment"
         android:icon="@drawable/ic_mine_unchecked"

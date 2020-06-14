@@ -20,8 +20,8 @@ import java.util.Objects;
 import swle.xyz.austers.R;
 import swle.xyz.austers.adapter.MyGridViewAdapter;
 import swle.xyz.austers.bean.User;
-import swle.xyz.austers.callback.ContactWayResultCallBack;
-import swle.xyz.austers.http.OkHttpUtil;
+import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.http.ContactWayHttpUtil;
 
 public class ContactWayActivity extends BaseActivity {
     private Toolbar toolbar;
@@ -55,13 +55,53 @@ public class ContactWayActivity extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                OkHttpUtil.queryContactWay(query, new ContactWayResultCallBack() {
+//                ContactWayHttpUtil.query(query, new ContactWayResultCallBack() {
+//                    @Override
+//                    public void success(int status_code, final List<User> users) {
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                users0 = users;
+//                                if (users.size() == 0){
+//                                    gridView.setAdapter(new MyGridViewAdapter(ContactWayActivity.this,users));
+//                                    builder = new AlertDialog.Builder(ContactWayActivity.this);
+//                                    builder.setMessage("搜索结果为空，请重试");
+//                                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                        }
+//                                    });
+//                                    final AlertDialog dialog = builder.create();
+//                                    dialog.show();
+//                                }else {
+//                                    gridView.setAdapter(new MyGridViewAdapter(ContactWayActivity.this,users));
+//                                }
+//
+//                            }
+//                        });
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void failure(int status_code) {
+//
+//                    }
+//                });
+
+                ContactWayHttpUtil.query(query, new ResponseCallBack() {
                     @Override
-                    public void success(int status_code, final List<User> users) {
-                        handler.post(new Runnable() {
+                    public void failure() {
+
+                    }
+
+                    @Override
+                    public void success(int code, String message, Object data) {
+                        if (code == 1){
+                            final List<User> users = (List<User>) data;
+                            handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                users0 = users;
                                 if (users.size() == 0){
                                     gridView.setAdapter(new MyGridViewAdapter(ContactWayActivity.this,users));
                                     builder = new AlertDialog.Builder(ContactWayActivity.this);
@@ -79,13 +119,7 @@ public class ContactWayActivity extends BaseActivity {
 
                             }
                         });
-
-
-                    }
-
-                    @Override
-                    public void failure(int status_code) {
-
+                        }
                     }
                 });
                 return true;

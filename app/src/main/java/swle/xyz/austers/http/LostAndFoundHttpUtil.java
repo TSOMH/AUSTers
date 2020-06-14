@@ -21,6 +21,7 @@ import okhttp3.Response;
 import swle.xyz.austers.bean.Objects;
 import swle.xyz.austers.bean.ResponseBean;
 import swle.xyz.austers.callback.ResponseCallBack;
+import swle.xyz.austers.myclass.CurrentUser;
 
 /**
 *Created by TSOMH on 2020/6/11$
@@ -29,11 +30,12 @@ import swle.xyz.austers.callback.ResponseCallBack;
 */
 public class LostAndFoundHttpUtil {
 
-//    static final String test_url = "http://10.0.2.2:8081";
+//    static final String url = "http://10.0.2.2:8081";
     static final String url = "https://swle.top:8081";
     private static final MediaType JSON = MediaType.parse("application/json;charset=utf-8");
     private static final MediaType mediaType = MediaType.parse("img/jpeg;charset=utf-8");
     public static void lost(File file, Objects objects, final ResponseCallBack callBack){
+        CurrentUser currentUser = CurrentUser.getInstance();
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.SECONDS)//设置连接超时时间
@@ -47,6 +49,7 @@ public class LostAndFoundHttpUtil {
                 .build();
         Request request = new Request.Builder()
                 .url(url+"/objects/lost")
+                .addHeader("Authorization",currentUser.token)
                 .post(requestBody)
                 .build();
         Call call = client.newCall(request);
@@ -62,21 +65,20 @@ public class LostAndFoundHttpUtil {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String json = java.util.Objects.requireNonNull(response.body()).string();
+                System.out.println("lost--"+json);
                 Gson gson1 = new Gson();
                 ResponseBean responseBean = gson1.fromJson(json,ResponseBean.class);
-                switch (responseBean.getCode()){
-                    case 1:
-                        callBack.success(1,"发布成功",null);
-                        break;
-                    case -1:
-                        callBack.success(-1,"发布失败，请重试",null);
-                        break;
+                if (responseBean.getCode() == 1){
+                    callBack.success(1,"发布成功",null);
+                }else if (responseBean.getCode() == -1){
+                    callBack.success(-1,"发布失败，请重试",null);
                 }
             }
         });
     }
 
     public static void query(final Objects objects, final ResponseCallBack callBack){
+        CurrentUser currentUser = CurrentUser.getInstance();
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.SECONDS)//设置连接超时时间
                 .build();
@@ -85,6 +87,7 @@ public class LostAndFoundHttpUtil {
         RequestBody body = RequestBody.create(json,JSON);
         Request request = new Request.Builder()
                 .post(body)
+                .addHeader("Authorization",currentUser.token)
                 .url(url+"/objects/query")
                 .build();
         Call call = client.newCall(request);

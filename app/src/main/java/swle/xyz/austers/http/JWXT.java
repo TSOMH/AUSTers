@@ -32,7 +32,7 @@ import swle.xyz.austers.callback.GradeCallBack;
 import swle.xyz.austers.myclass.SHA1;
 
 /**
-*Created by TSOMH on 2020/5/31$
+*Created by TSOMH on 2020/5/31
 *Description:
 *
 */
@@ -213,7 +213,6 @@ public class JWXT {
           @Override
           public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
              String html = Objects.requireNonNull(response.body()).string();
-             System.out.println(html);
              Document document = Jsoup.parse(html);
 //             Elements table = document.getElementsByClass("infoTable");
 //             Document document1 = Jsoup.parse(table.toString());

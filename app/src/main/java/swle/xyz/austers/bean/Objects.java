@@ -5,7 +5,7 @@ public class Objects {
     private String host; // 原主人
     private String kind;
     private String info;
-    private String date;
+    private String lostOrFoundDate;
     private String imgaddress;
     private int tag;//1为丢失，0为捡到
 
@@ -41,12 +41,12 @@ public class Objects {
         this.info = info;
     }
 
-    public String getDate() {
-        return date;
+    public String getLostOrFoundDate() {
+        return lostOrFoundDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setLostOrFoundDate(String lostOrFoundDate) {
+        this.lostOrFoundDate = lostOrFoundDate;
     }
 
     public String getImgaddress() {

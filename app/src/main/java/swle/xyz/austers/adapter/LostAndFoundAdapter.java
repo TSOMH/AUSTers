@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import swle.xyz.austers.R;
@@ -75,7 +76,9 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LostAndFoundAdapte
       holder.textView_kind.setText("种类："+objectsList.get(position).getKind());
       holder.textView_info.setText("信息："+objectsList.get(position).getInfo());
       holder.textView_contact_way.setText("联系方式："+objectsList.get(position).getCurrentHost());
-      holder.textView_date.setText("时间："+objectsList.get(position).getDate());
+      SimpleDateFormat sdf = new SimpleDateFormat( " MM-dd-yyyy HH:mm:ss " );
+//      String s = sdf.format();
+      holder.textView_date.setText("时间："+objectsList.get(position).getLostOrFoundDate());
       Glide.with(context)
               .load(objectsList.get(position).getImgaddress())
               .placeholder(R.drawable.ic_placeholder)

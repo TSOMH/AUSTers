@@ -24,7 +24,7 @@ import swle.xyz.austers.callback.IssueResultCallBack;
 import swle.xyz.austers.callback.QueryOtherTripResultCallBack;
 
 /**
-*Created by TSOMH on 2020/2/27$
+*Created by TSOMH on 2020/2/27
 *Description:
 *
 */

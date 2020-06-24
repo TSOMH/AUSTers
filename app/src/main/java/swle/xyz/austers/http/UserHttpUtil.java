@@ -99,10 +99,6 @@ public class UserHttpUtil{
       });
    }
    public static void Login(String phonenumber, String password, final ResponseCallBack responseCallBack){
-
-
-
-
       User user = new User(null,password,null,phonenumber);
 
       Gson gson = new Gson();
@@ -119,13 +115,11 @@ public class UserHttpUtil{
 
       Call call = okHttpClient.newCall(request);
       call.enqueue(new Callback() {
-
          @Override
          public void onFailure(@NotNull Call call, @NotNull IOException e) {
             responseCallBack.failure();
             e.printStackTrace();
          }
-
          @Override
          public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
             String json = Objects.requireNonNull(response.body()).string();

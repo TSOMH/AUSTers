@@ -79,7 +79,6 @@ public class TripHttpUtil{
       Trip trip = new Trip(initiator,starting,destination,seat_left,year,month,day,hour);
       Gson gson =new Gson();
       String json = gson.toJson(trip);
-      System.out.println("request:"+json);
       RequestBody requestBody = RequestBody.create(json,JSON);
       OkHttpClient okHttpClient = new OkHttpClient.Builder()
               .connectTimeout(5,TimeUnit.SECONDS)
@@ -89,6 +88,7 @@ public class TripHttpUtil{
               .addHeader("Authorization",currentUser.token)
               .post(requestBody)
               .build();
+
       Call call = okHttpClient.newCall(request);
       call.enqueue(new Callback() {
          @Override
@@ -98,7 +98,7 @@ public class TripHttpUtil{
 
          @Override
          public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-            String json = response.body().string();
+            String json = Objects.requireNonNull(response.body()).string();
             System.out.println(json);
             Gson gson = new Gson();
             ResponseBean responseBean = gson.fromJson(json,ResponseBean.class);

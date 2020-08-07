@@ -112,39 +112,6 @@ public class SetPwActivity extends BaseActivity {
                         }
                     }
                 });
-//                OkHttpUtil.SignIn(phonenumber, password, new SignInResultCallBack() {
-//                    @Override
-//                    public void success(int result) {
-//                        switch (result){
-//                            case 1:
-//                                Looper.prepare();
-//                                Toast.makeText(SetPwActivity.this,"注册成功!",Toast.LENGTH_LONG).show();
-//
-//
-//                                User user = new User();
-//                                user.setPhonenumber(phonenumber);
-//                                user.setPassword(password);
-//                                System.out.println("密码为"+password);
-//                                insertOne(user);
-//                                Intent intent1 = new Intent(SetPwActivity.this,LogInActivity.class);
-//                                intent1.putExtra("phonenumber",phonenumber);
-//                                intent1.putExtra("password",password);
-//                                startActivity(intent1);
-//                                Looper.loop();
-//                                break;
-//                            case -3:
-//                                Looper.prepare();
-//                                Toast.makeText(SetPwActivity.this,"注册失败!请重试",Toast.LENGTH_LONG).show();
-//                                Looper.loop();
-//                                break;
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void failure(int result) {
-//
-//                    }
-//                });
             }
         });
     }

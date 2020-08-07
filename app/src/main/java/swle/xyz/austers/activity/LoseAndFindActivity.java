@@ -164,7 +164,6 @@ public class LoseAndFindActivity extends BaseActivity {
                 });
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;

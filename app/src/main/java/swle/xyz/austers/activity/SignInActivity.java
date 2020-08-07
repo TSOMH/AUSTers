@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 import swle.xyz.austers.R;
@@ -24,10 +22,8 @@ import swle.xyz.austers.myclass.OnMultiClickListener;
 
 public class SignInActivity extends BaseActivity {
 
-    Map<String , String> result_map= new HashMap<>();
 
     private int t = 60;
-    private int vcode = 0;
     private Handler handler = new Handler();
 
     private MaterialEditText editText_phonenumber;
@@ -117,8 +113,6 @@ public class SignInActivity extends BaseActivity {
         button_getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//
 //                OkHttpUtil.getAuthCode(editText_phonenumber.getText().toString(), new GetVcodeResultCallBack() {
 //                    @Override
 //                    public void success(int status_code, int vcode) {
@@ -168,9 +162,6 @@ public class SignInActivity extends BaseActivity {
                         }
                     }
                 });
-
-
-
             }
         });
 
@@ -181,7 +172,7 @@ public class SignInActivity extends BaseActivity {
                 //                System.out.println(result[0]);
                 String vcode1 = vcode[0]+"";
                 System.out.println("vcode"+vcode1);
-                System.out.println(editText_code.getText().toString());
+                System.out.println(Objects.requireNonNull(editText_code.getText()).toString());
                 if (vcode1.equals(Objects.requireNonNull(editText_code.getText()).toString())){
 
                     Intent intent = new Intent(SignInActivity.this,SetPwActivity.class);
@@ -215,7 +206,6 @@ public class SignInActivity extends BaseActivity {
                 }
                 t--;
             }
-
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -226,9 +216,6 @@ public class SignInActivity extends BaseActivity {
             t = 60;
         }
     }
-
-
-
 }
 
 

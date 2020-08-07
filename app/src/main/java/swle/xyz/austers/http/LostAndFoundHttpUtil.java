@@ -1,36 +1,36 @@
 package swle.xyz.austers.http;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+        import com.google.gson.Gson;
+        import com.google.gson.reflect.TypeToken;
 
-import org.jetbrains.annotations.NotNull;
+        import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+        import java.io.File;
+        import java.io.IOException;
+        import java.util.List;
+        import java.util.concurrent.TimeUnit;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import swle.xyz.austers.bean.Objects;
-import swle.xyz.austers.bean.ResponseBean;
-import swle.xyz.austers.callback.ResponseCallBack;
-import swle.xyz.austers.myclass.CurrentUser;
+        import okhttp3.Call;
+        import okhttp3.Callback;
+        import okhttp3.MediaType;
+        import okhttp3.MultipartBody;
+        import okhttp3.OkHttpClient;
+        import okhttp3.Request;
+        import okhttp3.RequestBody;
+        import okhttp3.Response;
+        import swle.xyz.austers.bean.Objects;
+        import swle.xyz.austers.bean.ResponseBean;
+        import swle.xyz.austers.callback.ResponseCallBack;
+        import swle.xyz.austers.myclass.CurrentUser;
 
 /**
-*Created by TSOMH on 2020/6/11$
-*Description:
-*
-*/
+ *Created by TSOMH on 2020/6/11$
+ *Description:
+ *
+ */
 public class LostAndFoundHttpUtil {
 
-//    static final String url = "http://10.0.2.2:8081";
+    //    static final String url = "http://10.0.2.2:8081";
     static final String url = "https://swle.top:8081";
     private static final MediaType JSON = MediaType.parse("application/json;charset=utf-8");
     private static final MediaType mediaType = MediaType.parse("img/jpeg;charset=utf-8");
@@ -47,6 +47,7 @@ public class LostAndFoundHttpUtil {
                 .addFormDataPart("file",objects.getCurrentHost()+
                         "_"+System.currentTimeMillis()+".jpeg",RequestBody.create(file,mediaType))
                 .build();
+        System.out.println(currentUser.token);
         Request request = new Request.Builder()
                 .url(url+"/objects/lost")
                 .addHeader("Authorization",currentUser.token)

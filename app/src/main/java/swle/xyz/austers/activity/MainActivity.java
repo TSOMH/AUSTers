@@ -117,6 +117,7 @@ public class MainActivity extends BaseActivity {
         MenuItem search = bottomNavigationView.getMenu().findItem(R.id.discoveryFragment);
         MenuItem message = bottomNavigationView.getMenu().findItem(R.id.messageFragment);
         MenuItem mine = bottomNavigationView.getMenu().findItem(R.id.mineFragment);
+
         home.setIcon(R.drawable.ic_home_unchecked);
 //        search.setIcon(R.drawable.ic_search_unchecked);
 //        message.setIcon(R.drawable.ic_message_unchecked);

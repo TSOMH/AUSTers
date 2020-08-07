@@ -31,7 +31,7 @@ public class UserHttpUtil{
    private static final MediaType JSON = MediaType.parse("application/json;charset=utf-8");
    private static ResponseBean responseBean = new ResponseBean(0,null,null);
 
-//   static final String url = "http://10.0.2.2:8081";
+//   static final String url = "https://10.0.2.2:8081";
    static final String url = "https://swle.top:8081";
 
    public static void getAuthCode(String phonenumber,final ResponseCallBack responseCallBack){
@@ -55,6 +55,7 @@ public class UserHttpUtil{
          @Override
          public void onFailure(@NotNull Call call, @NotNull IOException e) {
             Log.d("signin","failure");
+            System.out.println(e);
             responseCallBack.failure();
          }
          @Override
@@ -124,8 +125,8 @@ public class UserHttpUtil{
          public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
             String json = Objects.requireNonNull(response.body()).string();
             System.out.println(json);
-            Gson gson1 = new Gson();
-            responseBean = gson1.fromJson(json,ResponseBean.class);
+            Gson gson = new Gson();
+            responseBean = gson.fromJson(json,ResponseBean.class);
             responseCallBack.success(responseBean.getCode(),responseBean.getMsg(),responseBean.getData());
          }
       });
